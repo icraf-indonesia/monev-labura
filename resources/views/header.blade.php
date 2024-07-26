@@ -9,7 +9,7 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
     <!-- Favicons -->
-    <link href="{{ url('') }}/dist/assets/img/lutra-small.png" rel="icon">
+    <link href="{{ url('') }}/dist/assets/img/labura-small.png" rel="icon">
     <!-- Bootstrap CSS File -->
     <link href="{{ url('') }}/dist/assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Libraries CSS Files -->
