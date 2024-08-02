@@ -17,11 +17,18 @@ use App\Http\Controllers\SessionController;
 
 // Home & Main Page
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/beranda/pelaksanaan', [HomeController::class, 'pelaksanaan']);
+Route::get('/beranda/monitoring', [HomeController::class, 'monitoring']);
+Route::get('/beranda/dampak', [HomeController::class, 'dampak']);
+
 Route::get('/perencanaan', [HomeController::class, 'perencanaan']);
+
 Route::get('/pembelajaran', [HomeController::class, 'pembelajaran']);
 
 Route::get('/session', [SessionController::class, 'index'])->name('login');
 Route::post('/session/login', [SessionController::class, 'login']);
+
+
 
 
 // Route::get('/', function () {

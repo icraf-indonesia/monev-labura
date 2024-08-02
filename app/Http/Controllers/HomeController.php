@@ -20,4 +20,19 @@ class HomeController extends Controller
     {
         return view('pages.pembelajaran');
     }
+
+    public function pelaksanaan(Request $request)
+    {
+        return view('pages.beranda_pelaksanaan');
+    }
+
+    public function monitoring(Request $request)
+    {
+        return view('pages.beranda_monitoring');
+    }
+
+    public function dampak(Request $request)
+    {
+        return view('pages.beranda_dampak');
+    }
 }

@@ -9,19 +9,27 @@
     <p align="center">
         <img src="dist/assets/img/grafikbatang.png" alt="">
     </p>
-    <h6 align="center"><i>Grafik Batang distribusi luas hutan dan deforestrasi tahun 2010-2016 (kiri) dan 2016-2021 (kanan)</i></h6>
-    <p>Dalam analisis dinamika tutupan lahan kakao di Kabupaten Luwu Utara, terlihat bahwa kelas kakao agroforestri dan monokultur tidak mengalami perubahan signifikan dalam hal luas lahan. Namun, terdapat peningkatan sebesar 9% pada tutupan lahan kebun campuran, dengan luas area mencapai 11.704 hektar dalam rentang waktu 2016-2021. Di sisi lain, kelapa sawit monokultur, sawah, sagu, dan kopi agroforestri mengalami penurunan luas lahan.</p>
-    <p align="center"><img src="dist/assets/img/grafikbatang2.png" alt="" style="max-width: 80%;"></p>
-    <p>Dalam jangka waktu yang akan datang, komoditas kakao diperkirakan akan terus menghadapi tekanan akibat pertumbuhan komoditas lainnya. Penurunan produktivitas kakao juga menjadi faktor yang memicu perubahan penggunaan lahan. Salah satu penyebab penurunan produktivitas adalah keberadaan kebun kakao yang sudah tua. Kakao tua didefinisikan sebagai tanaman kakao yang melebihi usia produktifnya, yaitu antara 7 hingga 25 tahun.</p>
-    <p>Walaupun demikian, Kabupaten Luwu Utara memiliki kesesuaian lahan yang cukup baik untuk komoditas kakao. Dengan kesesuaian lahan yang baik, pertanian kakao di Kabupaten Luwu Utara memiliki potensi yang besar untuk berkembang dan memberikan kontribusi yang signifikan dalam perekonomian daerah. Penanaman kakao dalam sistem agroforestri dapat memberikan manfaat tambahan dalam menjaga keberlanjutan lingkungan dan keseimbangan ekosistem.</p>
-    <p>Meskipun petani memiliki potensi dalam sektor pertanian, namun kapasitas mereka dalam menerapkan praktik pertanian yang baik (<i>good agricultural practices</i>) masih terbatas. Keterampilan teknis dan pengetahuan mengenai praktik pertanian yang baik menjadi kendala utama yang dihadapi oleh petani di Luwu Utara.</p>
-    <p>Penyuluhan dan pelatihan merupakan upaya yang telah dilakukan oleh berbagai pihak, seperti pemerintah, swasta, perguruan tinggi, dan organisasi non-pemerintah/LSM, untuk memberikan pengetahuan dan keterampilan kepada petani kakao. Namun, diperlukan pendampingan yang lebih terencana guna meningkatkan efektivitasnya dalam mengatasi persoalan yang dihadapi oleh petani.</p>
-    <p>Pendampingan tersebut harus mampu mengakomodasi kebutuhan individual petani dan menghadirkan solusi yang sesuai dengan kondisi mereka. Materi pelatihan juga perlu diperbarui dan disesuaikan dengan perkembangan teknologi terbaru serta tantangan yang dihadapi dalam pertanian kakao.</p>
-    <p>Di beberapa kecamatan sentra kakao, masih terdapat keterbatasan dalam penyediaan saprodi, seperti bibit dan pupuk. Untuk itu petani mulai didorong untuk melakukan pembibitan sendiri dengan memperhatikan faktor-faktor seperti intensitas cahaya, durasi penyiraman, pemupukan, pengendalian hama, dan penjarangan yang dilakukan secara berkala.</p>
-    <p>Namun, petani menghadapi tantangan dalam mendapatkan bibit unggul karena kurangnya izin distribusi. Masalah ini menjadi kendala dalam memperoleh bibit berkualitas yang diperlukan untuk meningkatkan produktivitas dan kualitas kakao yang dihasilkan.</p>
-    <p>Petani kakao di Luwu Utara masih belum melakukan proses fermentasi pada tahap pasca panen. Salah satu alasan utamanya adalah kurangnya insentif harga untuk produk kakao yang telah melalui proses fermentasi. Keterbatasan dalam mencapai kualitas fermentasi standar internasional (ISO 2451-2014) juga menjadi kendala, mengingat proses fermentasi yang membutuhkan penanganan kompleks seperti fermentasi yang sempurna, menghasilkan aroma khas kakao, dan tidak mengandung kotoran fisik, serangga, atau jamur. Praktik penjualan produk kakao oleh petani saat ini masih bersifat konvensional. </p>
-    <p align="center"><img src="dist/assets/img/flowchartgreen.png" alt="" style="max-width: 80%;"></p>
-    <h6 align="center"><i>Illustrasi tata kelola rantai pasok kakao di Kabupaten Luwu Utara</i></h6>
-    <p>Dalam upaya mencapai keberlanjutan, perlu dilakukan pengelolaan yang bijaksana terhadap sumber daya alam, perlindungan terhadap lingkungan hidup, dan peningkatan ketahanan terhadap bencana. Dengan demikian, pengelolaan kakao yang lestari akan memberikan manfaat jangka panjang bagi petani, lingkungan, dan masyarakat secara keseluruhan.</p>
+    <div class="table-responsive">
+        <table id="tabel-data" class="table table-bordered table-striped"
+            style="width:100%; border:0; font-size:12;">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Kegiatan</th>
+                    <th>Kegiatan</th>
+                    <th>Sub kegiatan</th>
+                    <th>Indikator Keluaran</th>
+                    <th>Waktu Pelaksanaan</th>
+                    <th>Instansi/Lembaga Penanggung Jawab</th>
+                    <th>Pembiayaan</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-body" style="background-color:#cbcbcb; border-radius: 15px; padding: 20px;">
+        <h3 align="center" style="color:#000000; margin-top:10px;"><b>Unduh Dokumen</b></h3>
+    </div>
 </div>
 @stop
