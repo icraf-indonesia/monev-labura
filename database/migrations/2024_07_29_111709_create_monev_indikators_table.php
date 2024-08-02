@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('id_komponen');
             $table->string('target')->nullable();
             $table->string('satuan')->nullable();
-            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignId('id_indikator');
             $table->string('tahun')->nullable();
             $table->string('aktual')->nullable();
-            $table->string('dokumen')->nullable();
+            $table->string('dokumen_pendukung')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }
