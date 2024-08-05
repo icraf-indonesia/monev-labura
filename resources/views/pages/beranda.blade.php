@@ -78,7 +78,7 @@
     <div class="container-fluid" style="max-width: 1170px; margin: auto;">
         <div class="row">
             <h1 align="center" style="color:#80b441; padding-bottom:30px;"><b>Monitoring dan Evaluasi Labuhan Batu Utara</b></h1>
-            <div
+            {{-- <div
                 class="swiffy-slider slider-nav-visible slider-nav-autoplay slider-nav-autopause slider-nav-animation slider-nav-animation-fadein slider-nav-animation-slow" data-slider-nav-autoplay-interval="7000">
                 <ul class="slider-container">
                     <li class="slide-visible">
@@ -98,9 +98,9 @@
                     <li class=""></li>
                     <li class=""></li>
                 </ul>
-            </div>
+            </div> --}}
             <div class="hidden-xs hidden-sm">
-                <h2 style="padding-bottom:20px;">Selayang Pandang</h2>
+                <h2 style="padding-bottom:20px;">Pelaksanaan Rencana Aksi</h2>
                 <p>Kakao merupakan salah satu komoditas unggulan perkebunan di Indonesia yang menempati peringkat kelima dalam produksi terbesar setelah kelapa sawit, karet, kopi, dan kelapa (BPS, 2019). Sebagai komoditas ekspor yang penting, produksi kakao memberikan kontribusi yang signifikan terhadap perekonomian sektor pertanian. Indonesia merupakan eksportir terbesar ketiga kakao di dunia setelah Ghana dan Pantai Gading. Namun, dalam rentang waktu 2013 hingga 2017, produksi kakao di Indonesia mengalami penurunan baik dari segi luas lahan maupun volume ekspor. Penurunan ini disebabkan oleh pengelolaan kebun yang belum optimal, serangan hama yang tinggi, serta penurunan produksi dan pendapatan petani kakao (Wijayanto, 2019).
                 </p>
                 <p>
@@ -111,28 +111,64 @@
                 </p>
             </div>
             <div class="dct-dashbd-lft hidden-xs hidden-sm">
-                <h2 style="padding-bottom:20px;">Monev Labuhan Batu Utara</h2>
-                <p>
-                    Monitoring dan Evaluasi (Monev) Pengembangan Kakao Luwu Utara adalah alat bantu dan sistem yang digunakan untuk memantau dan mengevaluasi kemajuan pelaksanaan strategi dan intervensi yang direncanakan melalui peta jalan kakao lestari. Proses monitoring dan evaluasi  diperlukan untuk mengukur tingkat keberlanjutan pengelolaan kakao di Kabupaten Luwu Utara, yang juga mencakup kriteria dan indikator keberlanjutan di tingkat komoditas kakao maupun lanskap.
-                </p>
-                <p>
-                    Monev peta jalan kakao lestari di Kabupaten Luwu Utara dibangun dengan pendekatan jurisdiksi. Pendekatan jurisdiksi disini adalah pengelolaan komoditas di tingkat kabupaten yang menggabungkan perencanaan wilayah, di mana pemerintah menentukan area lindung dan budidaya (<i>go or no-go area</i>), serta sertifikasi komoditas berkelanjutan.
-                </p>
-                <p>
-                    Pendekatan jurisdiksi ini meliputi pelibatan perusahaan yang berkomitmen untuk membeli komoditas berkelanjutan; Peran pemerintah dalam menetapkan area lindung dan budidaya; Adanya insentif bagi produsen untuk mematuhi aturan secara kolektif; dan Jika jurisdiksi terbukti memiliki pengelolaan komoditas berkelanjutan, maka seluruh produsen di dalamnya akan memiliki predikat serupa.
-                </p>
-                <p>
-                    Dalam membangun sistem monev pengembangan kakao Luwu Utara, disusun seperangkat prinsip, kriteria, dan indikator yang dirumuskan bersama oleh pemerintah daerah, <i>Civil Society Organization</i> (CSO), petani, masyarakat, perguruan tinggi, serta perwakilan sektor swasta.
-                </p>
-                <p>
-                    Indikator yang digunakan juga terintegrasi dengan indikator kinerja daerah (Indikator Kinerja Utama (IKU) dan Indikator Kinerja Kunci (IKK)) dan standar keberlanjutan seperti Terpercaya, LandScale, SourceUp, dan Kerangka Daya Saing Daerah (KDSD). Dengan demikian, sistem dan alat bantu monev dapat memfasilitasi pemerintah untuk memenuhi berbagai standar keberlanjutan yang berlaku.
-                </p>
-                <p>
-                    Sistem dan alat bantu monev juga mempermudah pemerintah dan pemangku kepentingan dalam  pengumpulan dan penyampaian data pengembangan komoditas kakao berkelanjutan yang terukur secara berkala.
-                </p>
+                <h2 style="padding-bottom:20px;">Monitoring Rencana Aksi</h2>
+                <table id="tabel-data" class="table table-bordered table-striped"
+                                        style="width:100%; border:0; font-size:12;">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Program</th>
+                                                <th>Kegiatan</th>
+                                                <th>Subkegiatan</th>
+                                                <th>Indikator Keluaran</th>
+                                                <th>% (2020) (Sem 1)</th>
+                                                <th>Kategori (2020) (Sem 1)</th>
+                                                <th>Nilai (2020) (Sem 1)</th>
+                                                <th>% (2020) (Sem 2)</th>
+                                                <th>Kategori (2020) (Sem 2)</th>
+                                                <th>Nilai (2020) (Sem 2)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{-- @if (count($tables))
+                                                @foreach ($tables as $table)
+                                                    <tr>
+                                                        <td width="1%">{{ (($tables->currentPage() * 10) - 10) + $loop->iteration }}</td>
+                                                        <td width="10%">{{ $table->indikator }}</td>
+                                                        <td width="1%">{{ $table->tahun }}</td>
+                                                        <td width="1%">{{ $table->target }}</td>
+                                                        <td width="2%">{{ $table->capaian }}</td>
+                                                        <td width="2%">{{ $table->satuan }}</td>
+                                                        @if (empty($table->dokumen))
+                                                            <td width="2%">Belum ada dokumen</td>
+                                                        @else
+                                                            <td width="2%"><a href="{{url('/dokumen/'.$table->dokumen)}}" target="_blank">{{$table->dokumen}}</a></td>
+                                                        @endif
+                                                        <td width="1%">
+                                                            @if($table->status === 0)
+                                                                <span class="badge rounded-pill" style="background-color: #0d6efd !important;color: #fff;">Menunggu</span>
+                                                            @elseif($table->status === 1)
+                                                                <span class="badge rounded-pill" style="background-color: #198754 !important;color: #fff;">Diterima</span>
+                                                            @else
+                                                                <a class="custom-badge status-green text-right" href="/kontributor/capaian/{{ $table->id }}">
+                                                                    Revisi
+                                                                </a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Tidak ada data</td>
+                                                    </tr>
+                                                </tbody>
+                                            @endif --}}
+                                        </tbody>
+                                    </table>
             </div>
             <div class="hidden-xs hidden-sm">
-                <h2 style="padding-bottom:20px;">Peta Intervensi Kabupaten Labuhan Batu Utara</h2>
+                <h2 style="padding-bottom:20px;">Monitoring Dampak</h2>
                 <div id='map'></div>
             </div>
 
