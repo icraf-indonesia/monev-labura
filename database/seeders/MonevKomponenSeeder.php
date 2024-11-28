@@ -19,9 +19,9 @@ class MonevKomponenSeeder extends Seeder
     {
         // Komponen
 
-        DB::table('komponens')->delete();
+        DB::table('monev_komponens')->delete();
 
-        DB::table('komponens')->insert(array (
+        DB::table('monev_komponens')->insert(array (
             0 => array ('id' => 1, 'komponen' => 'Penguatan data, penguatan koordinasi, dan infrastruktur'),
             1 => array ('id' => 2, 'komponen' => 'Peningkatan kapasitas dan kapabilitas pekebun'),
             2 => array ('id' => 3, 'komponen' => 'Pengelolaan dan pemantauan lingkungan'),

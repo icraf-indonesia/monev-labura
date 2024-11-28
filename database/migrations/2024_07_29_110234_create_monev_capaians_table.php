@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('monev_capaians', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_subkegiatan');
+            $table->foreignId('id_keluaran');
             $table->string('tahun')->nullable();
             $table->string('semester')->nullable();
             $table->string('capaian')->nullable();

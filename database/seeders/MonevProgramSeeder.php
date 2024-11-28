@@ -18,9 +18,9 @@ class MonevProgramSeeder extends Seeder
     public function run()
     {
         //Program
-        DB::table('programs')->delete();
+        DB::table('monev_programs')->delete();
 
-        DB::table('programs')->insert(array (
+        DB::table('monev_programs')->insert(array (
             0 => array ('id' => 1, 'program' => 'Penguatan data dasar Perkebunan Kelapa Sawit untuk dukungan tata kelola perkebunan yang lebih baik', 'id_komponen' => 1),
             1 => array ('id' => 2, 'program' => 'Pembinaan penyelenggaraan Informasi Geospasial Tematik (IGT) tutupan kebun kelapa sawit', 'id_komponen' => 1),
             2 => array ('id' => 3, 'program' => 'Peningkatan sosialisasi regulasi dan kebijakan terkait usaha perkebunan kelapa sawit berkelanjutan bagi pekebun dan pemangku kepentingan lainnya', 'id_komponen' => 1),

@@ -16,9 +16,9 @@ class MonevIndikatorSeeder extends Seeder
     public function run()
     {
         //Indikator
-        DB::table('indikators')->delete();
+        DB::table('monev_indikators')->delete();
 
-        DB::table('indikators')->insert(array (
+        DB::table('monev_indikators')->insert(array (
             0 => array (
                 'id' => 1, 
                 'indikator' => 'Indikator 1',

@@ -16,9 +16,9 @@ class MonevInstansiSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('instansis')->delete();
+        DB::table('monev_instansis')->delete();
 
-        DB::table('instansis')->insert(array (
+        DB::table('monev_instansis')->insert(array (
             0 => array ('id' => 1, 'instansi' => 'Bappeda'),
             1 => array ('id' => 2, 'instansi' => 'BPBD'),
             2 => array ('id' => 3, 'instansi' => 'BPS'),

@@ -121,25 +121,29 @@
                                                 <th>Kegiatan</th>
                                                 <th>Subkegiatan</th>
                                                 <th>Indikator Keluaran</th>
-                                                <th>% (2020) (Sem 1)</th>
+                                                <th>Target</th>
+                                                {{-- <th>% (2020) (Sem 1)</th>
                                                 <th>Kategori (2020) (Sem 1)</th>
                                                 <th>Nilai (2020) (Sem 1)</th>
                                                 <th>% (2020) (Sem 2)</th>
                                                 <th>Kategori (2020) (Sem 2)</th>
-                                                <th>Nilai (2020) (Sem 2)</th>
+                                                <th>Nilai (2020) (Sem 2)</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {{-- @if (count($tables))
-                                                @foreach ($tables as $table)
+                                            @if (count($keluaran_tables))
+                                                @foreach ($keluaran_tables as $keluaran_table)
                                                     <tr>
-                                                        <td width="1%">{{ (($tables->currentPage() * 10) - 10) + $loop->iteration }}</td>
-                                                        <td width="10%">{{ $table->indikator }}</td>
-                                                        <td width="1%">{{ $table->tahun }}</td>
-                                                        <td width="1%">{{ $table->target }}</td>
-                                                        <td width="2%">{{ $table->capaian }}</td>
-                                                        <td width="2%">{{ $table->satuan }}</td>
-                                                        @if (empty($table->dokumen))
+                                                        {{-- <td width="1%">{{ (($keluaran_tables->currentPage() * 10) - 10) + $loop->iteration }}</td> --}}
+                                                        <td width="1%">{{ (($keluaran_tables->currentPage() - 1) * $keluaran_tables->perPage()) + $loop->iteration }}</td>
+                                                        <td width="10%">{{ $keluaran_table->program }}</td>
+                                                        <td width="10%">{{ $keluaran_table->kegiatan }}</td>
+                                                        <td width="10%">{{ $keluaran_table->subkegiatan }}</td>
+                                                        <td width="10%">{{ $keluaran_table->indikator_keluaran }}</td>
+                                                        <td width="10%">{{ $keluaran_table->target }}</td>
+                                                        {{-- <td width="2%">{{ $keluaran_table->capaian }}</td>
+                                                        <td width="2%">{{ $keluaran_table->satuan }}</td>
+                                                        @if (empty($keluaran_table->dokumen))
                                                             <td width="2%">Belum ada dokumen</td>
                                                         @else
                                                             <td width="2%"><a href="{{url('/dokumen/'.$table->dokumen)}}" target="_blank">{{$table->dokumen}}</a></td>
@@ -154,7 +158,7 @@
                                                                     Revisi
                                                                 </a>
                                                             @endif
-                                                        </td>
+                                                        </td> --}}
                                                     </tr>
                                                 @endforeach
                                             @else
@@ -163,10 +167,19 @@
                                                         <td>Tidak ada data</td>
                                                     </tr>
                                                 </tbody>
-                                            @endif --}}
+                                            @endif
                                         </tbody>
                                     </table>
             </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->url($keluaran_tables->onFirstPage()) }}">First</a></li>
+                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->previousPageUrl() }}">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">{{ $keluaran_tables->currentPage() }}</a></li>
+                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->nextPageUrl() }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->url($keluaran_tables->lastPage()) }}">Last</a></li>
+                </ul>
+            </nav>
             <div class="hidden-xs hidden-sm">
                 <h2 style="padding-bottom:20px;">Monitoring Dampak</h2>
                 <div id='map'></div>

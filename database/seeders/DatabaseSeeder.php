@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+       /***** UPDATE *****/
+       $this->call(MonevCapaianSeeder::class);
+       $this->call(MonevIndikatorKeluaranSeeder::class);
+       $this->call(MonevIndikatorSeeder::class);
+       $this->call(MonevInstansiSeeder::class);
+       $this->call(MonevKegiatanSeeder::class);
+       $this->call(MonevSubkegiatanSeeder::class);
+       $this->call(MonevProgramSeeder::class);
+       $this->call(MonevKomponenSeeder::class);
+       $this->call(MonevAktualSeeder::class);
+       /***** END UPDATE *****/
     }
 }

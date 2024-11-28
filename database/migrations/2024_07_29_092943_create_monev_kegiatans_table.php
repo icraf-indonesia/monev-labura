@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('monev_kegiatans', function (Blueprint $table) {
             $table->id();
             $table->string('kegiatan')->nullable();
-            $table->foreignId('id_program');
+            // $table->foreignId('id_program');
             $table->timestamps();
         });
     }

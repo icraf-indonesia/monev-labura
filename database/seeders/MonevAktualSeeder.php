@@ -16,15 +16,15 @@ class MonevAktualSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('kegiatans')->delete();
+        DB::table('monev_aktuals')->delete();
 
-        DB::table('kegiatans')->insert(array (
+        DB::table('monev_aktuals')->insert(array (
             0 => array (
                 'id' => 1, 
                 'id_indikator' => 1, 
                 'tahun' => '2023', 
                 'aktual' => '0', 
-                'dokumen pendukung' => '',
+                'dokumen_pendukung' => '',
                 'keterangan' => 'Baseline' 
             ),
             1 => array (
@@ -32,7 +32,7 @@ class MonevAktualSeeder extends Seeder
                 'id_indikator' => 2, 
                 'tahun' => '2023', 
                 'aktual' => '1000', 
-                'dokumen pendukung' => '',
+                'dokumen_pendukung' => '',
                 'keterangan' => 'Baseline'
             ),
             2 => array (
@@ -40,31 +40,31 @@ class MonevAktualSeeder extends Seeder
                 'id_indikator' => 3, 
                 'tahun' => '2023', 
                 'aktual' => '65', 
-                'dokumen pendukung' => '',
+                'dokumen_pendukung' => '',
                 'keterangan' => 'Baseline'
             ),
             3 => array (
-                'id' => 1, 
+                'id' => 4, 
                 'id_indikator' => 1, 
                 'tahun' => '2024', 
                 'aktual' => '0', 
-                'dokumen pendukung' => '',
+                'dokumen_pendukung' => '',
                 'keterangan' => 'Aktual' 
             ),
             4 => array (
-                'id' => 2, 
+                'id' => 5, 
                 'id_indikator' => 2, 
                 'tahun' => '2024', 
                 'aktual' => '2400', 
-                'dokumen pendukung' => '',
+                'dokumen_pendukung' => '',
                 'keterangan' => 'Aktual'
             ),
             5 => array (
-                'id' => 3, 
+                'id' => 6, 
                 'id_indikator' => 3, 
                 'tahun' => '2024', 
                 'aktual' => '65', 
-                'dokumen pendukung' => '',
+                'dokumen_pendukung' => '',
                 'keterangan' => 'Aktual'
             ),
         ));
