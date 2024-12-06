@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
        $this->call(MonevProgramSeeder::class);
        $this->call(MonevKomponenSeeder::class);
        $this->call(MonevAktualSeeder::class);
+       $this->call(UsersTableSeeder::class);
        /***** END UPDATE *****/
     }
 }

@@ -3,21 +3,16 @@
 @section('content')
     <div class="container-fluid" style="max-width: 1170px; margin: auto;">
         <h2 style="padding-bottom:20px;">Halaman Perencanaan</h2>
-        <p>Luas lahan kakao di Kabupaten Luwu Utara mengalami penurunan yang signifikan dalam rentang waktu tahun 2012
-            hingga 2021. Berdasarkan data dari Badan Pusat Statistik (BPS) tahun 2021, luas lahan kakao yang awalnya
-            mencapai 46.185 hektar pada tahun 2012, kini telah berkurang menjadi 38.435 hektar. Penurunan ini menunjukkan
-            adanya permasalahan dalam pengelolaan kakao di wilayah tersebut.</p>
-        <p>Salah satu faktor yang menyebabkan penurunan ini adalah berkurangnya daya dukung lingkungan. Perubahan lingkungan
-            yang tidak terjaga dengan baik dapat menghambat pertumbuhan dan produktivitas tanaman kakao. Selain itu, ancaman
-            bencana alam juga berperan penting dalam penurunan luas lahan kakao. Banyak kebun masyarakat yang sering
-            tergenang air secara berkala saat musim penghujan, sehingga tanaman kakao tidak dapat tumbuh dan berproduksi
-            secara optimal.</p>
-        <p>Dalam analisis tutupan lahan di Kabupaten Luwu Utara, telah dilakukan interpretasi untuk mengidentifikasi sebaran
-            kakao dan penggunaan lahan lainnya. Hasilnya menunjukkan adanya tren penurunan luas hutan sejak 2010 hingga
-            2021. Penurunan tutupan lahan hutan pada periode 2016-2021 lebih signifikan dibandingkan periode 2010-2016. Pada
-            periode 2010-2016, tercatat luas degradasi dan deforestasi hutan sebesar 5.593 hektar dan 723 hektar, namun
-            angka tersebut meningkat secara drastis pada periode 2016-2020 menjadi 12.036 hektar dan 12.370 hektar. Hal ini
-            menunjukkan adanya tantangan serius dalam pelestarian hutan di Kabupaten Luwu Utara.</p>
+        <p>Kabupaten Labuhanbatu Utara memiliki luas lahan perkebunan yang signifikan, terutama untuk komoditas kelapa sawit. Berdasarkan hasil pemetaan tutupan lahan, sejak tahun 2010 hingga 2022 terjadi peningkatan luas lahan kelapa sawit, baik dalam bentuk monokultur maupun agroforestri. Di sisi lain, luas lahan untuk komoditas karet, baik agroforestri maupun monokultur, serta sawah cenderung mengalami penurunan selama periode tersebut. Pada tahun 2022, luas perkebunan kelapa sawit mencapai 61,10% dari total luas tutupan lahan di wilayah ini.</p>
+        <p>Pengelolaan kelapa sawit berkelanjutan di Kabupaten Labuhanbatu Utara menghadapi berbagai tantangan strategis, seperti infrastruktur perkebunan yang belum memadai, alih fungsi lahan menjadi lahan terbuka dan penggunaan lain, serta keterbatasan penyediaan bibit unggul. Untuk mengatasi tantangan ini, Rencana Aksi Daerah Kelapa Sawit Berkelanjutan (RAD KSB) Kabupaten Labuhanbatu Utara dirancang sebagai pedoman dalam pengelolaan perkebunan kelapa sawit yang berkelanjutan. RAD KSB mencakup lima komponen utama berdasarkan arahan Rencana Aksi Nasional Kelapa Sawit Berkelanjutan, yaitu:</p>
+        <ul>
+            <li>Komponen A: Penguatan data, koordinasi, dan infrastruktur.</li>
+            <li>Komponen B: Peningkatan kapasitas dan kapabilitas pekebun.</li>
+            <li>Komponen C: Pengelolaan dan pemantauan lingkungan.</li>
+            <li>Komponen D: Tata kelola perkebunan dan penanganan sengketa.</li>
+            <li>Komponen E: Dukungan percepatan pelaksanaan sertifikasi ISPO dan peningkatan akses pasar produk kelapa sawit.</li>
+        </ul>
+        <p>Dokumen RAD KSB disusun secara partisipatif dengan melibatkan berbagai pemangku kepentingan, termasuk pemerintah pusat, pemerintah provinsi, pemerintah kabupaten, lembaga swadaya masyarakat (NGO), perusahaan, dan universitas. Setiap pihak memiliki peran penting dalam mendukung implementasi program dan kegiatan yang tercantum di dalamnya. Dengan sinergi dari berbagai pihak, RAD KSB diharapkan mampu menjadi dasar yang kuat untuk mewujudkan pengelolaan kelapa sawit yang berkelanjutan di Kabupaten Labuhanbatu Utara.</p>
         <p align="center">
             <img src="dist/assets/img/grafikbatang.png" alt="">
         </p>

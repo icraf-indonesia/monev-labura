@@ -1,6 +1,6 @@
 @extends('header')
 
-@section('page_title', 'Daftar Capaian')
+@section('page_title', 'Daftar Indikator Dampak')
 
 @section('content')
     <div class="row" style="max-width: 1600px; margin: auto;">
@@ -69,22 +69,61 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @if (count($indikator_dampaks))
+                                            @foreach ($indikator_dampaks as $indikator_dampak)
+                                                <tr>
+                                                    <td width="1%">
+                                                        {{ ($indikator_dampaks->currentPage() - 1) * $indikator_dampaks->perPage() + $loop->iteration }}
+                                                    </td>
+                                                    <td width="10%">{{ $indikator_dampak->indikator }}</td>
+                                                    <td width="10%">{{ $indikator_dampak->tahun }}</td>
+                                                    <td width="10%">{{ $indikator_dampak->target }}</td>
+                                                    <td width="10%">{{ $indikator_dampak->capaian }}</td>
+                                                    <td width="10%">{{ $indikator_dampak->satuan }}</td>
+                                                    <td width="10%">{{ $indikator_dampak->dokumen_pendukung }}</td>
+                                                    <td width="10%">
+                                                        @if ($indikator_dampak->keterangan === 'Baseline')
+                                                            <span class="badge rounded-pill"
+                                                                style="background-color: #ebebe2 !important;color: #000;">Baseline</span>
+                                                        @elseif($indikator_dampak->keterangan === 'Aktual')
+                                                            <span class="badge rounded-pill"
+                                                                style="background-color: #198754 !important;color: #fff;">Aktual</span>
+                                                        @else
+                                                            <a class="custom-badge status-green text-right"
+                                                                href="/kontributor/capaian/{{ $table->id }}">
+                                                                Revisi
+                                                            </a>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                    <tbody>
                                         <tr>
                                             <td>Tidak ada data</td>
                                         </tr>
                                     </tbody>
+                                    @endif
+                                    </tbody>
                                 </table>
                             </div>
                             <br />
-                            {{-- <nav aria-label="Page navigation">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="{{ $tables->url($tables->onFirstPage()) }}">First</a></li>
-                                        <li class="page-item"><a class="page-link" href="{{ $tables->previousPageUrl() }}">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">{{ $tables->currentPage() }}</a></li>
-                                        <li class="page-item"><a class="page-link" href="{{ $tables->nextPageUrl() }}">Next</a></li>
-                                        <li class="page-item"><a class="page-link" href="{{ $tables->url($tables->lastPage()) }}">Last</a></li>
-                                    </ul>
-                                </nav> --}}
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $indikator_dampaks->url($indikator_dampaks->onFirstPage()) }}">First</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $indikator_dampaks->previousPageUrl() }}">Previous</a></li>
+                                    <li class="page-item"><a class="page-link"
+                                            href="#">{{ $indikator_dampaks->currentPage() }}</a></li>
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $indikator_dampaks->nextPageUrl() }}">Next</a></li>
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $indikator_dampaks->url($indikator_dampaks->lastPage()) }}">Last</a>
+                                    </li>
+                                </ul>
+                            </nav>
 
                         </div>
 

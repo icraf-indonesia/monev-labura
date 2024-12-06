@@ -77,7 +77,7 @@
 @section('content')
     <div class="container-fluid" style="max-width: 1170px; margin: auto;">
         <div class="row">
-            <h1 align="center" style="color:#80b441; padding-bottom:30px;"><b>Monitoring dan Evaluasi Labuhan Batu Utara</b></h1>
+            <h1 align="center" style="color:#80b441; padding-bottom:30px;"><b>Monitoring dan evaluasi Rencana Aksi Daerah Kelapa Sawit Berkelanjutan (RAD KSB) di Kabupaten Labuhanbatu Utara</b></h1>
             {{-- <div
                 class="swiffy-slider slider-nav-visible slider-nav-autoplay slider-nav-autopause slider-nav-animation slider-nav-animation-fadein slider-nav-animation-slow" data-slider-nav-autoplay-interval="7000">
                 <ul class="slider-container">
@@ -101,13 +101,13 @@
             </div> --}}
             <div class="hidden-xs hidden-sm">
                 <h2 style="padding-bottom:20px;">Pelaksanaan Rencana Aksi</h2>
-                <p>Kakao merupakan salah satu komoditas unggulan perkebunan di Indonesia yang menempati peringkat kelima dalam produksi terbesar setelah kelapa sawit, karet, kopi, dan kelapa (BPS, 2019). Sebagai komoditas ekspor yang penting, produksi kakao memberikan kontribusi yang signifikan terhadap perekonomian sektor pertanian. Indonesia merupakan eksportir terbesar ketiga kakao di dunia setelah Ghana dan Pantai Gading. Namun, dalam rentang waktu 2013 hingga 2017, produksi kakao di Indonesia mengalami penurunan baik dari segi luas lahan maupun volume ekspor. Penurunan ini disebabkan oleh pengelolaan kebun yang belum optimal, serangan hama yang tinggi, serta penurunan produksi dan pendapatan petani kakao (Wijayanto, 2019).
+                <p>Kelapa sawit merupakan komoditas strategis yang berperan penting dalam perekonomian Indonesia, tidak hanya sebagai sumber devisa negara tetapi juga sebagai penyedia lapangan pekerjaan bagi jutaan masyarakat. Kabupaten Labuhanbatu Utara, sebagai salah satu sentra perkebunan kelapa sawit di Sumatera Utara, memiliki luas tanaman kelapa sawit mencapai 93.221 hektar, yang memberikan kontribusi signifikan terhadap produksi kelapa sawit. Dengan dominasi tutupan lahan kelapa sawit, sektor ini menjadi tulang punggung perekonomian dan sumber penghidupan utama masyarakat. Namun, pengelolaan kelapa sawit di Indonesia, termasuk di Labuhanbatu Utara, masih menghadapi berbagai tantangan yang memerlukan perbaikan tata kelola dan praktik yang berkelanjutan.
                 </p>
                 <p>
-                    Di Indonesia, salah satu provinsi dengan produksi kakao terbesar adalah Sulawesi Selatan, dan Luwu Utara menjadi salah satu kabupaten yang berkontribusi signifikan dalam produksi kakao. Sebagai kabupaten terluas di Sulawesi Selatan, Luwu Utara sangat bergantung pada sektor ekonomi berbasis lahan, termasuk kakao yang menyumbang sekitar 47,02% terhadap PDRB tahun 2020.
+                    Merespon Instruksi Presiden Nomor 6 Tahun 2019 tentang Rencana Aksi Nasional Perkebunan Kelapa Sawit Berkelanjutan (RAN KSB) 2019-2024, Kabupaten Labuhanbatu Utara menunjukkan komitmen dalam pengelolaan perkebunan yang berkelanjutan dengan menyusun Dokumen Rencana Aksi Daerah Perkebunan Kelapa Sawit Berkelanjutan (RAD KSB). Dokumen ini dirancang untuk mengintegrasikan prinsip keberlanjutan ke dalam perencanaan pembangunan daerah, mengedepankan sinergi antara aspek ekonomi, sosial budaya, dan ekologi. 
                 </p>
                 <p>
-                    Kejayaan kakao Luwu Utara mencapai puncaknya pada tahun 2011 ketika diresmikan sebagai daerah sentra kakao Indonesia. Pada tahun 2009, luas lahan kakao di Kabupaten Luwu Utara mencapai 56.000 hektar, namun saat ini luas lahan kakao berkurang menjadi 38.435 hektar. Namun, kakao tetap menjadi sumber penghidupan utama bagi sebagian besar petani.
+                    Untuk memastikan implementasi RAD KSB berjalan sesuai rencana, diperlukan sebuah sistem monitoring dan evaluasi (Monev) yang andal dan kolaboratif. Sistem Monev ini bertujuan untuk memantau efektivitas pelaksanaan program, mengevaluasi dampaknya, dan mengidentifikasi peluang perbaikan berkelanjutan. Dengan melibatkan semua pemangku kepentingan, termasuk pemerintah, pelaku usaha, dan masyarakat, sistem ini diharapkan mampu memberikan rekomendasi berbasis data guna mendorong pengelolaan kelapa sawit yang lebih berkelanjutan di Kabupaten Labuhanbatu Utara.
                 </p>
             </div>
             <div class="dct-dashbd-lft hidden-xs hidden-sm">

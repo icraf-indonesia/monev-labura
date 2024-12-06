@@ -30,6 +30,7 @@ Route::get('/pembelajaran', [HomeController::class, 'pembelajaran']);
 Route::get('/session', [SessionController::class, 'index'])->name('login');
 Route::post('/session/login', [SessionController::class, 'login']);
 
+Route::group(['middleware' => 'auth'], function(){
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor');
 Route::get('/kontributor/indikator/tambah', [KontributorController::class, 'inputIndikator'])->name('kontributor');
 Route::get('/kontributor/kegiatan', [KontributorController::class, 'kegiatan'])->name('kontributor');
@@ -52,6 +53,11 @@ Route::put('/admin/kegiatan/verify/{id}', [AdminController::class, 'approveKegia
 Route::put('/admin/kegiatan/reject/{id}', [AdminController::class, 'rejectKegiatan']);
 
 Route::get('/admin/tambah-kegiatan', [AdminController::class, 'tambahKegiatan']);
+
+Route::get('/session/logout', [SessionController::class, 'logout'])->name('logout');
+
+});
+
 
 // Route::get('/', function () {
 //     return view('welcome');

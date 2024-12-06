@@ -17,8 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('indikator')->nullable();
             $table->foreignId('id_komponen');
+            $table->foreignId('id_instansi');
             $table->string('target')->nullable();
             $table->string('satuan')->nullable();
+            $table->string('tahun')->nullable();
+            $table->string('capaian')->nullable();
+            $table->string('dokumen_pendukung')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

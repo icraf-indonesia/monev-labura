@@ -32,7 +32,7 @@ class MonevInstansiSeeder extends Seeder
             10 => array ('id' => 11, 'instansi' => 'Dinas Perumahan dan Permukiman'),
             11 => array ('id' => 12, 'instansi' => 'DPMPTSP'),
             12 => array ('id' => 13, 'instansi' => 'KPH'),
-            13 => array ('id' => 14, 'instansi' => 'Perekonomian Setdakab/Sosbud '),
+            13 => array ('id' => 14, 'instansi' => 'Perekonomian Setdakab/Sosbud'),
             14 => array ('id' => 15, 'instansi' => 'ATR/BPN')
         ));
     }
