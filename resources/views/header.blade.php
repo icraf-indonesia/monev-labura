@@ -26,6 +26,7 @@
     <!-- slider -->
     <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider-extensions.min.js" rel="stylesheet" crossorigin="anonymous"> --}}
     <link href="https://fonts.cdnfonts.com/css/rubik?styles=19495" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>

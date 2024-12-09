@@ -78,27 +78,6 @@
     <div class="container-fluid" style="max-width: 1170px; margin: auto;">
         <div class="row">
             <h1 align="center" style="color:#80b441; padding-bottom:30px;"><b>Monitoring dan evaluasi Rencana Aksi Daerah Kelapa Sawit Berkelanjutan (RAD KSB) di Kabupaten Labuhanbatu Utara</b></h1>
-            {{-- <div
-                class="swiffy-slider slider-nav-visible slider-nav-autoplay slider-nav-autopause slider-nav-animation slider-nav-animation-fadein slider-nav-animation-slow" data-slider-nav-autoplay-interval="7000">
-                <ul class="slider-container">
-                    <li class="slide-visible">
-                        <img src="dist/assets/img/1.png">
-                    </li>
-                    <li><img src="dist/assets/img/2.png"></li>
-                    <li><img src="dist/assets/img/3.png"></li>
-                    <li><img src="dist/assets/img/4.png"></li>
-                </ul>
-
-                <button type="button" class="slider-nav"></button>
-                <button type="button" class="slider-nav slider-nav-next"></button>
-
-                <ul class="slider-indicators">
-                    <li class="active"></li>
-                    <li class=""></li>
-                    <li class=""></li>
-                    <li class=""></li>
-                </ul>
-            </div> --}}
             <div class="hidden-xs hidden-sm">
                 <h2 style="padding-bottom:20px;">Pelaksanaan Rencana Aksi</h2>
                 <p>Kelapa sawit merupakan komoditas strategis yang berperan penting dalam perekonomian Indonesia, tidak hanya sebagai sumber devisa negara tetapi juga sebagai penyedia lapangan pekerjaan bagi jutaan masyarakat. Kabupaten Labuhanbatu Utara, sebagai salah satu sentra perkebunan kelapa sawit di Sumatera Utara, memiliki luas tanaman kelapa sawit mencapai 93.221 hektar, yang memberikan kontribusi signifikan terhadap produksi kelapa sawit. Dengan dominasi tutupan lahan kelapa sawit, sektor ini menjadi tulang punggung perekonomian dan sumber penghidupan utama masyarakat. Namun, pengelolaan kelapa sawit di Indonesia, termasuk di Labuhanbatu Utara, masih menghadapi berbagai tantangan yang memerlukan perbaikan tata kelola dan praktik yang berkelanjutan.
@@ -180,11 +159,26 @@
                     <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->url($keluaran_tables->lastPage()) }}">Last</a></li>
                 </ul>
             </nav>
-            <div class="hidden-xs hidden-sm">
-                <h2 style="padding-bottom:20px;">Monitoring Dampak</h2>
-                <div id='map'></div>
-            </div>
+            <div class="swiffy-slider slider-item-show2 slider-item-reveal">
+                <ul class="slider-container">
+                    <li class="slide-visible">
+                        <img src="dist/assets/img/1.png">
+                    </li>
+                    <li><img src="dist/assets/img/2.png"></li>
+                    <li><img src="dist/assets/img/3.png"></li>
+                    <li><img src="dist/assets/img/4.png"></li>
+                </ul>
 
+                <button type="button" class="slider-nav"></button>
+                <button type="button" class="slider-nav slider-nav-next"></button>
+
+                <ul class="slider-indicators">
+                    <li class="active"></li>
+                    <li class=""></li>
+                    <li class=""></li>
+                    <li class=""></li>
+                </ul>
+            </div>
         </div>
         <div class="row" style="padding-top: 50px;">
             <div class="hidden-xs hidden-sm">

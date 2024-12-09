@@ -13,9 +13,9 @@
             <li>Komponen E: Dukungan percepatan pelaksanaan sertifikasi ISPO dan peningkatan akses pasar produk kelapa sawit.</li>
         </ul>
         <p>Dokumen RAD KSB disusun secara partisipatif dengan melibatkan berbagai pemangku kepentingan, termasuk pemerintah pusat, pemerintah provinsi, pemerintah kabupaten, lembaga swadaya masyarakat (NGO), perusahaan, dan universitas. Setiap pihak memiliki peran penting dalam mendukung implementasi program dan kegiatan yang tercantum di dalamnya. Dengan sinergi dari berbagai pihak, RAD KSB diharapkan mampu menjadi dasar yang kuat untuk mewujudkan pengelolaan kelapa sawit yang berkelanjutan di Kabupaten Labuhanbatu Utara.</p>
-        <p align="center">
+        {{-- <p align="center">
             <img src="dist/assets/img/grafikbatang.png" alt="">
-        </p>
+        </p> --}}
         <div class="table-responsive">
             <table id="tabel-data" class="table table-bordered table-striped" style="width:100%; border:0; font-size:12;">
                 <thead>
