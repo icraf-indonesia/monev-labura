@@ -49,12 +49,47 @@
                                     <tbody>                                        
                                             <tr>
                                                 <td width="1%">1</td>
-                                                <td width="10%">test</td>
-                                                <td width="1%">test</td>
-                                                <td width="1%">test</td>
-                                                <td width="1%">test</td>
-                                                <td width="1%">test</td>
-                                                <td width="1%">test</td>
+                                                <td width="10%">Penguatan data dasar Perkebunan Kelapa Sawit untuk dukungan tata kelola perkebunan yang lebih baik</td>
+                                                <td width="1%">Penyelenggaraan Statistik Sektoral di Lingkup Daerah Kabupaten/Kota</td>
+                                                <td width="1%">Koordinasi dan Sinkronisasi Pengumpulan, Pengolahan, Analisis dan Diseminasi Data Statistik Sektora</td>
+                                                <td width="1%">Jumlah dokumen koordinasi dan sinkronisasi pengumpulan, pengolahan, analisis, dan diseminasi data statistik sektoral</td>
+                                                <td width="1%">BPS</td>
+                                                <td width="1%">APBD</td>
+                                                <td width="6%">
+                                                    {{-- @if($c->status == 0) --}}
+                                                        <form action="/admin/kegiatan/verify/" method="post" class="d-inline" style="float: left; margin-right: 5px;">
+                                                            @method('put')
+                                                            @csrf
+                                                            <input type="hidden" value="1" name="status">
+                                                            <input type="hidden" value="" name="verified_by">
+                                                            <button type="submit" class="custom-badge status-blue bg-primary" onclick="return confirm('Approve data ini?')">Approve</button>
+                                                        </form>
+                                                        <form action="/admin/kegiatan/reject/" method="post" class="d-inline">
+                                                            @method('put')
+                                                            @csrf
+                                                            <input type="hidden" value="2" name="status">
+                                                            <input type="hidden" value="" name="verified_by">
+                                                            <button type="submit" class="custom-badge status-red bg-danger" onclick="return confirm('Revisi data ini?')">Revisi</button>
+                                                        </form>
+                                                    {{-- @elseif($c->status == 2)
+                                                        <form action="/admin/capaian/verify/{{ $c->id }}" method="post" class="d-inline" style="float: left; margin-right: 5px;">
+                                                            @method('put')
+                                                            @csrf
+                                                            <input type="hidden" value="1" name="status">
+                                                            <input type="hidden" value="{{Auth::user()->name}}" name="verified_by">
+                                                            <button type="submit" class="custom-badge status-blue bg-info" onclick="return confirm('Approve data ini?')">Approve</button>
+                                                        </form>
+                                                    @endif --}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="1%">2</td>
+                                                <td width="10%">Peningkatan Sinergitas antar kementerian/lembaga pemerintah daerah dalam hubungannya dengan usaha perkebunan kelapa sawit</td>
+                                                <td width="1%">Koordinasi dan Sinkronisasi Pengendalian Pemanfaatan Ruang Daerah Kabupaten/Kota</td>
+                                                <td width="1%">Koordinasi Pelaksanaan Penataan Ruang</td>
+                                                <td width="1%">Jumlah Dokumen Koordinasi Pelaksanaan Penataan Ruang</td>
+                                                <td width="1%">Dinas Pertanian</td>
+                                                <td width="1%">APBD</td>
                                                 <td width="6%">
                                                     {{-- @if($c->status == 0) --}}
                                                         <form action="/admin/kegiatan/verify/" method="post" class="d-inline" style="float: left; margin-right: 5px;">

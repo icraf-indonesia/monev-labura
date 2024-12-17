@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\MonevIndikator;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KontributorController extends Controller
 {
@@ -50,11 +53,121 @@ class KontributorController extends Controller
 
     public function inputIndikator(Request $request)
     {
-        return view('kontributor.input_indikator');
+        $input_indikators = DB::table('monev_indikators')
+        ->select(
+            'id',
+            'indikator',
+            'target',
+            'satuan',
+            'tahun',
+            'capaian',
+            'dokumen_pendukung'
+        )
+        ->get(); // Execute the query and get the results
+        return view('kontributor.input_indikator', ['inputindikator_tables' => $input_indikators]);
     }
+
+        public function satuan($id)
+    {
+        $data = DB::table('monev_indikators')
+            ->where('id', $id)
+            ->select('satuan', 'target')
+            ->first();
+
+        if ($data) {
+            return response()->json([
+                'satuan' => $data->satuan,
+                'target' => $data->target
+            ]);
+        }
+
+        return response()->json([]);
+    }
+
+    public function storeIndikator(Request $request)
+    {
+        $request->validate([
+            'indikator' => 'required',
+            'tahun' => 'required',
+            'capaian' => 'required',
+            // 'satuan' => 'required',
+            'dokumen' => 'required|mimes:pdf,xlsx,xls,doc,docx,zip|max:5120'
+        ]);
+
+        $file = $request->dokumen;
+
+		$nama_file = time()."_".$file->getClientOriginalName();
+
+      	// isi dengan nama folder tempat kemana file diupload
+		$tujuan_upload = 'dokumen';
+		$file->move($tujuan_upload, $nama_file);
+
+        $detail_indikator = DB::table('monev_indikators')
+                            ->where('id', $request->indikator)
+                            ->first()->indikator;
+
+        // $komponen = DB::table('monev_indikators')
+        // ->where('id', $request->komponen)
+        // ->first()->komponen;
+
+        MonevIndikator::create([
+            'indikator' => $request->indikator,
+            'id_komponen' => 1,
+            'id_instansi' => 2,
+            'target' => 10,
+            'satuan' => 0,
+            'tahun' => $request->tahun,
+            // 'parameter_pengukuran' => $detail_indikator,
+            'capaian' => $request->capaian,
+            'dokumen_pendukung' => $nama_file,
+            'keterangan' => 'Baseline'
+        ]);
+
+        return redirect()->route('kontributor')->withFragment('#b')->with('status' ,'Capaian indikator berhasil ditambah.');
+    }
+
+    // public function inputKegiatan(Request $request)
+    // {
+    //     $input_kegiatans = DB::table('monev_indikator_keluarans')
+    //         ->leftJoin('monev_komponens', 'monev_indikator_keluarans.id_komponen', '=', 'monev_komponens.id')
+    //         ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
+    //         ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
+    //         ->leftJoin('monev_subkegiatans', 'monev_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
+    //         ->leftJoin('monev_instansis', 'monev_indikator_keluarans.id_instansi', '=', 'monev_instansis.id')
+    //         ->leftJoin('monev_capaians', 'monev_indikator_keluarans.id', '=', 'monev_capaians.id_keluaran')
+    //         ->select(
+    //             'monev_indikator_keluarans.id',
+    //             'monev_komponens.komponen',
+    //             'monev_programs.program',
+    //             'monev_kegiatans.kegiatan',
+    //             'monev_subkegiatans.subkegiatan',
+    //             'monev_indikator_keluarans.indikator_keluaran',
+    //             'monev_instansis.instansi',
+    //             'monev_capaians.sumber_pembiayaan'
+    //         );
+    //     return view('kontributor.input_pelaksanaan_kegiatan', ['inputkegiatan_tables' => $input_kegiatans]);
+    // }
 
     public function inputKegiatan(Request $request)
     {
-        return view('kontributor.input_pelaksanaan_kegiatan');
+        $input_kegiatans = DB::table('monev_indikator_keluarans')
+            ->leftJoin('monev_komponens', 'monev_indikator_keluarans.id_komponen', '=', 'monev_komponens.id')
+            ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
+            ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
+            ->leftJoin('monev_subkegiatans', 'monev_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
+            ->leftJoin('monev_instansis', 'monev_indikator_keluarans.id_instansi', '=', 'monev_instansis.id')
+            ->leftJoin('monev_capaians', 'monev_indikator_keluarans.id', '=', 'monev_capaians.id_keluaran')
+            ->select(
+                'monev_indikator_keluarans.id',
+                'monev_komponens.komponen',
+                'monev_programs.program',
+                'monev_kegiatans.kegiatan',
+                'monev_subkegiatans.subkegiatan',
+                'monev_indikator_keluarans.indikator_keluaran',
+                'monev_instansis.instansi',
+                'monev_capaians.sumber_pembiayaan'
+            )
+        ->get()->unique('komponen'); // Execute the query and get the results
+        return view('kontributor.input_pelaksanaan_kegiatan', ['inputkegiatan_tables' => $input_kegiatans]);
     }
 }

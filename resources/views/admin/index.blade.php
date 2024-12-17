@@ -47,19 +47,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td width="1%">1</td>
-                                            <td width="10%">test</td>
-                                            <td width="1%">test</td>
-                                            <td width="1%">test</td>
-                                            <td width="2%">Belum ada dokumen</td>
-                                            <td width="2%">
-                                                <a class="custom-badge status-green bg-success text-right" href="/admin/indikator/edit">Ubah</a>
-                                            </td>
-                                        </tr>
-                                        {{-- @foreach ($target as $t)
+                                        @foreach ($indikator_dampaks as $t)
                                             <tr>
-                                                <td width="1%">{{ (($target->currentPage() * 10) - 10) + $loop->iteration }}</td>
+                                                <td width="1%">{{ (($indikator_dampaks->currentPage() * 10) - 10) + $loop->iteration }}</td>
                                                 <td width="10%">{{ $t->indikator }}</td>
                                                 <td width="1%">{{ $t->target }}</td>
                                                 <td width="1%">{{ $t->satuan }}</td>
@@ -69,23 +59,24 @@
                                                     <td width="2%">{{$t->dokumen}}</td>
                                                 @endif
                                                 <td width="2%">
-                                                    <a class="custom-badge status-green bg-success text-right" href="/admin/indikator/{{ $t->id }}">Ubah</a>
+                                                    {{-- <a class="custom-badge status-green bg-success text-right" href="/admin/indikator/{{ $t->id }}">Ubah</a> --}}
+                                                    <a class="custom-badge status-green bg-success text-right" href="/admin/indikator/edit">Ubah</a>
                                                 </td>
                                             </tr>
-                                        @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <br />
-                            {{-- <nav aria-label="Page navigation">
+                            <nav aria-label="Page navigation">
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="{{ $target->url($target->onFirstPage()) }}">First</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $target->previousPageUrl() }}">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">{{ $target->currentPage() }}</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $target->nextPageUrl() }}">Next</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $target->url($target->lastPage()) }}">Last</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->url($indikator_dampaks->onFirstPage()) }}">First</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->previousPageUrl() }}">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">{{ $indikator_dampaks->currentPage() }}</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->nextPageUrl() }}">Next</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->url($indikator_dampaks->lastPage()) }}">Last</a></li>
                                 </ul>
-                            </nav> --}}
+                            </nav>
                         </div>
                         {{-- tambah-target --}}
                         <div class="tab-pane" id="tambah-target">

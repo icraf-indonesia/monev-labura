@@ -32,6 +32,17 @@ Route::post('/session/login', [SessionController::class, 'login']);
 
 Route::group(['middleware' => 'auth'], function(){
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor');
+Route::get('komponen/{id}', [KontributorController::class, 'komponen']);
+Route::get('indikator/{id}', [KontributorController::class, 'indikator']);
+Route::get('satuan/{id}', [KontributorController::class, 'satuan']);
+Route::get('target/{id}', [KontributorController::class, 'target']);
+
+Route::get('/kontributor/capaian/tambah', [KontributorController::class, 'tambahCapaian']);
+Route::post('/kontributor/store', [KontributorController::class, 'store']);
+Route::post('/kontributor/store_indikator', [KontributorController::class, 'storeIndikator']);
+// Route::get('/kontributor/indikator/{id}', [KontributorController::class, 'revisiIndikator']);
+// Route::put('/kontributor/indikator/{id}', [KontributorController::class, 'updateRevisiIndikator']);
+
 Route::get('/kontributor/indikator/tambah', [KontributorController::class, 'inputIndikator'])->name('kontributor');
 Route::get('/kontributor/kegiatan', [KontributorController::class, 'kegiatan'])->name('kontributor');
 Route::get('/kontributor/kegiatan/tambah', [KontributorController::class, 'inputKegiatan'])->name('kontributor');

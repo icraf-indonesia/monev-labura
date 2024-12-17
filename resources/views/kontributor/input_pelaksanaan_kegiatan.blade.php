@@ -34,17 +34,17 @@
 
                         {{-- tab insert capaian  --}}
                         <div class="tab-pane active" id="tambah-capaian">
-                            <form class="page-box" method="post" action="/kontributor/store_capaian"
+                            <form class="page-box" method="post" action="/kontributor/store_indikator"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Komponen</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="strategi" id="strategi">
+                                        <select class="form-control select" name="komponen" id="komponen">
                                             <option value="">== Pilih Komponen ==</option>
-                                            {{-- @foreach ($strategi as $s)
-                                                <option value="{{ $s->id }}">{{ $s->strategi }}</option>
-                                            @endforeach --}}
+                                            @foreach ($inputkegiatan_tables as $inputkegiatan_table)
+                                                <option value="{{ $inputkegiatan_table->id }}">{{ $inputkegiatan_table->komponen }}</option>
+                                            @endforeach
                                         </select>
                                         <span class="form-text text-muted">Pilih salah satu <b>komponen</b> yang
                                             sesuai</span>
@@ -53,11 +53,8 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Program</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="strategi" id="strategi">
+                                        <select class="form-control select" name="program" id="program">
                                             <option value="">== Pilih Program ==</option>
-                                            {{-- @foreach ($strategi as $s)
-                                                <option value="{{ $s->id }}">{{ $s->strategi }}</option>
-                                            @endforeach --}}
                                         </select>
                                         <span class="form-text text-muted">Pilih salah satu <b>program</b> yang
                                             sesuai</span>
@@ -66,31 +63,25 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Kegiatan</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="strategi" id="strategi">
+                                        <select class="form-control select" name="kegiatan" id="kegiatan">
                                             <option value="">== Pilih Kegiatan ==</option>
-                                            {{-- @foreach ($strategi as $s)
-                                                <option value="{{ $s->id }}">{{ $s->strategi }}</option>
-                                            @endforeach --}}
                                         </select>
                                         <span class="form-text text-muted">Pilih salah satu <b>kegiatan</b> yang
                                             sesuai</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Sub kegiatan</label>
+                                    <label class="col-lg-3 col-form-label">Subkegiatan</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="strategi" id="strategi">
-                                            <option value="">== Pilih Sub kegiatan ==</option>
-                                            {{-- @foreach ($strategi as $s)
-                                                <option value="{{ $s->id }}">{{ $s->strategi }}</option>
-                                            @endforeach --}}
+                                        <select class="form-control select" name="subkegiatan" id="subkegiatan">
+                                            <option value="">== Pilih Subkegiatan ==</option>
                                         </select>
-                                        <span class="form-text text-muted">Pilih salah satu <b>sub kegiatan</b> yang
+                                        <span class="form-text text-muted">Pilih salah satu <b>subkegiatan</b> yang
                                             sesuai</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Indikator</label>
+                                    <label class="col-lg-3 col-form-label">Indikator Keluaran</label>
                                     <div class="col-lg-9">
                                         <input name="satuan" class="form-control" placeholder="" type="text" disabled
                                             id="satuan">
@@ -99,11 +90,8 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Pelaksana</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="strategi" id="strategi">
+                                        <select class="form-control select" name="instansi" id="instansi">
                                             <option value="">== Pilih Pelaksana ==</option>
-                                            {{-- @foreach ($strategi as $s)
-                                                <option value="{{ $s->id }}">{{ $s->strategi }}</option>
-                                            @endforeach --}}
                                         </select>
                                     </div>
                                 </div>
@@ -121,9 +109,6 @@
                                     <div class="col-lg-9">
                                         <select class="form-control select" name="strategi" id="strategi">
                                             <option value="">== Pilih Sumber Pendanaan ==</option>
-                                            {{-- @foreach ($strategi as $s)
-                                                <option value="{{ $s->id }}">{{ $s->strategi }}</option>
-                                            @endforeach --}}
                                         </select>
                                     </div>
                                 </div>

@@ -50,11 +50,57 @@
                                     <tbody>                                        
                                             <tr>
                                                 <td width="1%">1</td>
-                                                <td width="10%">test</td>
-                                                <td width="1%">test</td>
-                                                <td width="1%">test</td>
-                                                <td width="1%">test</td>
-                                                <td width="1%">test</td>
+                                                <td width="10%">Tersedianya basis data spasial dan non spasial kelapa sawit</td>
+                                                <td width="1%">2024</td>
+                                                <td width="1%">1</td>
+                                                <td width="1%">1</td>
+                                                <td width="1%">zip</td>
+                                                <td width="2%">
+                                                    <span class="badge rounded-pill" style="background-color: #198754 !important; color: #fff;">                                                        <span class="badge rounded-pill" style="background-color: #198754 !important; color: #fff;">Diverifikasi</span>
+                                                </span>
+                                                    {{-- @if($c->status === 0)
+                                                        <span class="badge rounded-pill" style="background-color: #0d6efd !important; color: #fff;">Menunggu</span>
+                                                    @elseif($c->status === 1)
+                                                        <span class="badge rounded-pill" style="background-color: #198754 !important; color: #fff;">Diverifikasi</span>
+                                                    @else
+                                                        <span class="badge rounded-pill" style="background-color: #dc3545 !important; color: #fff;">Dalam revisi</span>
+                                                    @endif --}}
+                                                </td>
+                                                <td width="1%">Admin 1</td>
+                                                <td width="6%">
+                                                    {{-- @if($c->status == 0) --}}
+                                                        <form action="/admin/capaian/verify/" method="post" class="d-inline" style="float: left; margin-right: 5px;">
+                                                            @method('put')
+                                                            @csrf
+                                                            <input type="hidden" value="1" name="status">
+                                                            <input type="hidden" value="" name="verified_by">
+                                                            <button type="submit" class="custom-badge status-blue bg-primary" onclick="return confirm('Approve data ini?')">Approve</button>
+                                                        </form>
+                                                        <form action="/admin/capaian/reject/" method="post" class="d-inline">
+                                                            @method('put')
+                                                            @csrf
+                                                            <input type="hidden" value="2" name="status">
+                                                            <input type="hidden" value="" name="verified_by">
+                                                            <button type="submit" class="custom-badge status-red bg-danger" onclick="return confirm('Revisi data ini?')">Revisi</button>
+                                                        </form>
+                                                    {{-- @elseif($c->status == 2)
+                                                        <form action="/admin/capaian/verify/{{ $c->id }}" method="post" class="d-inline" style="float: left; margin-right: 5px;">
+                                                            @method('put')
+                                                            @csrf
+                                                            <input type="hidden" value="1" name="status">
+                                                            <input type="hidden" value="{{Auth::user()->name}}" name="verified_by">
+                                                            <button type="submit" class="custom-badge status-blue bg-info" onclick="return confirm('Approve data ini?')">Approve</button>
+                                                        </form>
+                                                    @endif --}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="1%">2</td>
+                                                <td width="10%">Tersedianya Informasi Geospasial Tematik tutupan lahan kelapa sawit</td>
+                                                <td width="1%">2024</td>
+                                                <td width="1%">1</td>
+                                                <td width="1%">0</td>
+                                                <td width="1%">belum ditentukan</td>
                                                 <td width="2%">
                                                     <span class="badge rounded-pill" style="background-color: #0d6efd !important; color: #fff;">Menunggu</span>
                                                     {{-- @if($c->status === 0)
@@ -65,7 +111,52 @@
                                                         <span class="badge rounded-pill" style="background-color: #dc3545 !important; color: #fff;">Dalam revisi</span>
                                                     @endif --}}
                                                 </td>
-                                                <td width="1%">Admin</td>
+                                                <td width="1%"></td>
+                                                <td width="6%">
+                                                    {{-- @if($c->status == 0) --}}
+                                                        <form action="/admin/capaian/verify/" method="post" class="d-inline" style="float: left; margin-right: 5px;">
+                                                            @method('put')
+                                                            @csrf
+                                                            <input type="hidden" value="1" name="status">
+                                                            <input type="hidden" value="" name="verified_by">
+                                                            <button type="submit" class="custom-badge status-blue bg-primary" onclick="return confirm('Approve data ini?')">Approve</button>
+                                                        </form>
+                                                        <form action="/admin/capaian/reject/" method="post" class="d-inline">
+                                                            @method('put')
+                                                            @csrf
+                                                            <input type="hidden" value="2" name="status">
+                                                            <input type="hidden" value="" name="verified_by">
+                                                            <button type="submit" class="custom-badge status-red bg-danger" onclick="return confirm('Revisi data ini?')">Revisi</button>
+                                                        </form>
+                                                    {{-- @elseif($c->status == 2)
+                                                        <form action="/admin/capaian/verify/{{ $c->id }}" method="post" class="d-inline" style="float: left; margin-right: 5px;">
+                                                            @method('put')
+                                                            @csrf
+                                                            <input type="hidden" value="1" name="status">
+                                                            <input type="hidden" value="{{Auth::user()->name}}" name="verified_by">
+                                                            <button type="submit" class="custom-badge status-blue bg-info" onclick="return confirm('Approve data ini?')">Approve</button>
+                                                        </form>
+                                                    @endif --}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="1%">3</td>
+                                                <td width="10%">Jumlah paket pembangunan, rehabilitasi, dan pemeliharaan jalan usaha tani</td>
+                                                <td width="1%">2024</td>
+                                                <td width="1%">100</td>
+                                                <td width="1%">5</td>
+                                                <td width="1%">paket</td>
+                                                <td width="2%">
+                                                    <span class="badge rounded-pill" style="background-color: #0d6efd !important; color: #fff;">Menunggu</span>
+                                                    {{-- @if($c->status === 0)
+                                                        <span class="badge rounded-pill" style="background-color: #0d6efd !important; color: #fff;">Menunggu</span>
+                                                    @elseif($c->status === 1)
+                                                        <span class="badge rounded-pill" style="background-color: #198754 !important; color: #fff;">Diverifikasi</span>
+                                                    @else
+                                                        <span class="badge rounded-pill" style="background-color: #dc3545 !important; color: #fff;">Dalam revisi</span>
+                                                    @endif --}}
+                                                </td>
+                                                <td width="1%"></td>
                                                 <td width="6%">
                                                     {{-- @if($c->status == 0) --}}
                                                         <form action="/admin/capaian/verify/" method="post" class="d-inline" style="float: left; margin-right: 5px;">

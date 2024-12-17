@@ -43,57 +43,48 @@
                                             <th>Kegiatan</th>
                                             <th>Sub Kegiatan</th>
                                             <th>Indikator Keluaran</th>
-                                            <th>Satuan</th>
-                                            <th>Waktu Pelaksanaan</th>
-                                            <th>Lembaga</th>
+                                            {{-- <th>Waktu Pelaksanaan</th> --}}
+                                            <th>Lembaga Penanggung Jawab</th>
                                             <th>Target</th>
+                                            <th>Dokumen Pendukung</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td width="1%">1</td>
-                                            <td width="10%">test</td>
-                                            <td width="1%">test</td>
-                                            <td width="1%">test</td>
-                                            <td width="2%">test</td>
-                                            <td width="2%">test</td>
-                                            <td width="2%">test</td>
-                                            <td width="2%">test</td>
-                                            <td width="2%">test</td>
-                                            <td width="2%">
-                                                <a class="custom-badge status-green bg-success text-right" href="/admin/kegiatan/{id}">Ubah</a>
-                                            </td>
-                                        </tr>
-                                        {{-- @foreach ($target as $t)
+                                        @foreach ($kegiatans as $k)
                                             <tr>
-                                                <td width="1%">{{ (($target->currentPage() * 10) - 10) + $loop->iteration }}</td>
-                                                <td width="10%">{{ $t->indikator }}</td>
-                                                <td width="1%">{{ $t->target }}</td>
-                                                <td width="1%">{{ $t->satuan }}</td>
-                                                @if (empty($t->dokumen))
+                                                <td width="1%">{{ (($kegiatans->currentPage() * 10) - 10) + $loop->iteration }}</td>
+                                                <td width="10%">{{ $k->program }}</td>
+                                                <td width="10%">{{ $k->kegiatan }}</td>
+                                                <td width="10%">{{ $k->subkegiatan }}</td>
+                                                <td width="10%">{{ $k->indikator_keluaran }}</td>
+                                                {{-- <td width="10%">{{ $k->tahun }}</td> --}}
+                                                <td width="10%">{{ $k->instansi }}</td>
+                                                <td width="1%">{{ $k->target }}</td>
+                                                @if (empty($k->dokumen_pendukung))
                                                     <td width="2%">Belum ada dokumen</td>
                                                 @else
-                                                    <td width="2%">{{$t->dokumen}}</td>
+                                                    <td width="2%">{{$k->dokumen_pendukung}}</td>
                                                 @endif
                                                 <td width="2%">
-                                                    <a class="custom-badge status-green bg-success text-right" href="/admin/indikator/{{ $t->id }}">Ubah</a>
+                                                    {{-- <a class="custom-badge status-green bg-success text-right" href="/admin/indikator/{{ $t->id }}">Ubah</a> --}}
+                                                    <a class="custom-badge status-green bg-success text-right" href="/admin/indikator/edit">Ubah</a>
                                                 </td>
                                             </tr>
-                                        @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <br />
-                            {{-- <nav aria-label="Page navigation">
+                            <nav aria-label="Page navigation">
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="{{ $target->url($target->onFirstPage()) }}">First</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $target->previousPageUrl() }}">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">{{ $target->currentPage() }}</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $target->nextPageUrl() }}">Next</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $target->url($target->lastPage()) }}">Last</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $kegiatans->url($kegiatans->onFirstPage()) }}">First</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $kegiatans->previousPageUrl() }}">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">{{ $kegiatans->currentPage() }}</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $kegiatans->nextPageUrl() }}">Next</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $kegiatans->url($kegiatans->lastPage()) }}">Last</a></li>
                                 </ul>
-                            </nav> --}}
+                            </nav>
                         </div>
                         {{-- tambah-target --}}
                         <div class="tab-pane" id="tambah-target">

@@ -34,17 +34,17 @@
 
                         {{-- tab insert capaian  --}}
                         <div class="tab-pane active" id="tambah-capaian">
-                            <form class="page-box" method="post" action="/kontributor/store_capaian"
+                            <form class="page-box" method="post" action="/kontributor/store_indikator"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Indikator Dampak</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="strategi" id="strategi">
+                                        <select class="form-control select" name="indikator" id="indikator">
                                             <option value="">== Pilih Indikator ==</option>
-                                            {{-- @foreach ($strategi as $s)
-                                                <option value="{{ $s->id }}">{{ $s->strategi }}</option>
-                                            @endforeach --}}
+                                            @foreach ($inputindikator_tables as $inputindikator_table)
+                                                <option value="{{ $inputindikator_table->id }}">{{ $inputindikator_table->indikator }}</option>
+                                            @endforeach
                                         </select>
                                         <span class="form-text text-muted">Pilih salah satu <b>indikator</b> yang
                                             sesuai</span>
@@ -53,18 +53,14 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Target</label>
                                     <div class="col-lg-9">
-                                        <input name="satuan" class="form-control" placeholder="" type="text" disabled
-                                            id="satuan">
+                                        <input name="target" class="form-control" placeholder="" type="text" disabled
+                                            id="target">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Tahun</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="indikator" id="indikator">
-                                            <option value="">== Pilih Tahun ==</option>
-                                        </select>
-                                        <span class="form-text text-muted">Pilih salah satu <b>tahun</b> yang
-                                            sesuai</span>
+                                        <input name="tahun" class="date-own form-control @error('tahun') is-invalid @enderror" placeholder="" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -115,66 +111,29 @@
 
 @section('customJS')
     $(document).ready(function() {
-    $('select[name="strategi"]').on('change', function() {
-    var strategiID = $(this).val();
-    if(strategiID) {
-    $.ajax({
-    url: '/intervensi/capaian/' + strategiID,
-    type: "GET",
-    dataType: "json",
-    success: function(data) {
-    $('select[name="intervensi"]').empty();
-    $('select[name="intervensi"]').append('<option value="">== Pilih Intervensi ==</option>');
-    $.each(data, function(key, value) {
-    $('select[name="intervensi"]').append('<option value="'+ key +'">'+ value +'</option>');
-    });
-    }
-    });
-    } else {
-    $('select[name="intervensi"]').empty();
-    }
-    });
-
-    $('select[name="intervensi"]').on('change', function() {
-    var intervensiID = $(this).val();
-    if(intervensiID) {
-    $.ajax({
-    url: '/indikator/' + intervensiID,
-    type: "GET",
-    dataType: "json",
-    success: function(data2) {
-    $('select[name="indikator"]').empty();
-    $('select[name="indikator"]').append('<option value="">== Pilih Indikator ==</option>');
-    $.each(data2, function(key, value) {
-    $('select[name="indikator"]').append('<option value="'+ key +'">'+ value +'</option>');
-    });
-    }
-    });
-    } else {
-    $('select[name="indikator"]').empty();
-    }
-    });
-
-    $('select[name="indikator"]').on('change', function() {
-    var indikatorID = $(this).val();
-    if(indikatorID) {
-    $.ajax({
-    url: '/satuan/' + indikatorID,
-    type: "GET",
-    dataType: "json",
-    success: function(data3) {
-    {{-- console.log(data3); --}}
-    $.each(data3, function(key, value) {
-    //$('input[name="satuan"]').append(' value="'+ value +'">');
-    document.getElementById('satuan').value = key;
-    $('#dokumenPendukung').text(value);
-    });
-    }
-    });
-    } else {
-    $('input[name="satuan"]').empty();
-    }
-    });
+        $('select[name="indikator"]').on('change', function() {
+            var indikatorID = $(this).val();
+            if (indikatorID) {
+                $.ajax({
+                    url: '/satuan/' + indikatorID,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        // Assuming the response is an object with 'satuan' and 'target' keys
+                        if (data.satuan && data.target) {
+                            $('#satuan').val(data.satuan); // Set the value of the 'satuan' input field
+                            $('#target').val(data.target); // Set the value of the 'target' input field
+                        } else {
+                            $('#satuan').val(''); // Clear the 'satuan' input field if no data
+                            $('#target').val(''); // Clear the 'target' input field if no data
+                        }
+                    }
+                });
+            } else {
+                $('#satuan').val(''); // Clear the 'satuan' input field if no indikator is selected
+                $('#target').val(''); // Clear the 'target' input field if no indikator is selected
+            }
+        });
     });
 
     $('.date-own').datetimepicker({

@@ -65,7 +65,7 @@
                                             <th>Capaian</th>
                                             <th>Satuan</th>
                                             <th>Dokumen</th>
-                                            <th>Status</th>
+                                            <th>Keterangan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -88,11 +88,11 @@
                                                         @elseif($indikator_dampak->keterangan === 'Aktual')
                                                             <span class="badge rounded-pill"
                                                                 style="background-color: #198754 !important;color: #fff;">Aktual</span>
-                                                        @else
+                                                        {{-- @else
                                                             <a class="custom-badge status-green text-right"
-                                                                href="/kontributor/capaian/{{ $table->id }}">
+                                                                href="/kontributor/indikator/{{ $indikator_dampak->id }}">
                                                                 Revisi
-                                                            </a>
+                                                            </a> --}}
                                                         @endif
                                                     </td>
                                                 </tr>
