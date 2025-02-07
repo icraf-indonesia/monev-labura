@@ -2,41 +2,41 @@
 
 @section('css')
     table {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: Arial, sans-serif;
-        margin-bottom: 1rem;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     }
 
     th, td {
-        padding: 12px 15px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
     }
 
     th {
-        background-color: #4CAF50;
-        color: white;
-        font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
     }
 
     tr:nth-child(even) {
-        background-color: #f2f2f2;
+    background-color: #f2f2f2;
     }
 
     tr:hover {
-        background-color: #ddd;
+    background-color: #ddd;
     }
 
     a {
-        color: #4CAF50;
-        text-decoration: none;
-        font-weight: bold;
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
     }
 
     a:hover {
-        text-decoration: underline;
+    text-decoration: underline;
     }
 @stop
 
@@ -57,26 +57,26 @@
             </tr>
             <tr>
                 <td>Regulasi Kelapa Sawit Berkelanjutan</td>
-                <td><a href="https://drive.google.com/file/d/1Ht8eOd5S5L2dfk93vEEMsHATZE_2EI45/view?usp=sharing">Klik
+                <td><a href="https://drive.google.com/file/d/1Ht8eOd5S5L2dfk93vEEMsHATZE_2EI45/view?usp=sharing" class="btn btn-danger">Klik
                         disini</a></td>
             </tr>
             <tr>
                 <td>RAN KSB</td>
-                <td><a href="https://drive.google.com/file/d/1nDgSjU_2_cVbpQFsw8DsmPBIu_yoTX1J/view?usp=sharing">Klik
+                <td><a href="https://drive.google.com/file/d/1nDgSjU_2_cVbpQFsw8DsmPBIu_yoTX1J/view?usp=sharing" class="btn btn-danger">Klik
                         disini</a></td>
             </tr>
             <tr>
                 <td>Panduan Penyusunan dan Pelaksanaan RAD KSB</td>
-                <td><a href="https://drive.google.com/file/d/1oBLzccdfy0IAhP_HSRg7Q8a4kz780en1/view?usp=sharing">Klik
+                <td><a href="https://drive.google.com/file/d/1oBLzccdfy0IAhP_HSRg7Q8a4kz780en1/view?usp=sharing" class="btn btn-danger">Klik
                         disini</a></td>
             </tr>
             <tr>
                 <td>Pengantar Good Agriculture Practices (GAP) dalam pengelolaan sawit</td>
-                <td><a href="/the_url">Klik disini</a></td>
+                <td><a href="/the_url" class="btn btn-danger">Klik disini</a></td>
             </tr>
             <tr>
                 <td>Pengelolaan Agroforestri Kelapa Sawit</td>
-                <td><a href="/the_url">Klik disini</a></td>
+                <td><a href="/the_url" class="btn btn-danger">Klik disini</a></td>
             </tr>
         </table>
         <h2 style="padding-bottom:20px;">Kebijakan Pengelolaan Sawit</h2>
@@ -112,11 +112,6 @@
                             dan ketahanan ekonomi petani, serta mengurangi dampak negatif terhadap lingkungan.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="card" style="padding-bottom: 20px;">
-            <div class="card-body" style="background-color:#cbcbcb; border-radius: 15px; padding: 20px;">
-                <h3 align="center" style="color:#000000; margin-top:10px;"><b>Unduh Dokumen</b></h3>
             </div>
         </div>
     </div>

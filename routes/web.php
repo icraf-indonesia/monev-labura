@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KontributorController;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::get('/beranda/monitoring', [HomeController::class, 'monitoring']);
 Route::get('/beranda/dampak', [HomeController::class, 'dampak']);
 
 Route::get('/perencanaan', [HomeController::class, 'perencanaan']);
+Route::get('/export-pdf', [PDFController::class, 'exportPDF']);
 
 Route::get('/pembelajaran', [HomeController::class, 'pembelajaran']);
 
