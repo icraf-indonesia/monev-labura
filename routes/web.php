@@ -45,9 +45,9 @@ Route::post('/kontributor/store_indikator', [KontributorController::class, 'stor
 // Route::get('/kontributor/indikator/{id}', [KontributorController::class, 'revisiIndikator']);
 // Route::put('/kontributor/indikator/{id}', [KontributorController::class, 'updateRevisiIndikator']);
 
-Route::get('/kontributor/indikator/tambah', [KontributorController::class, 'inputIndikator'])->name('kontributor');
-Route::get('/kontributor/kegiatan', [KontributorController::class, 'kegiatan'])->name('kontributor');
-Route::get('/kontributor/kegiatan/tambah', [KontributorController::class, 'inputKegiatan'])->name('kontributor');
+Route::get('/kontributor/indikator/tambah', [KontributorController::class, 'inputIndikator'])->name('addIndikator');
+Route::get('/kontributor/kegiatan', [KontributorController::class, 'kegiatan'])->name('kegiatan');
+Route::get('/kontributor/kegiatan/tambah', [KontributorController::class, 'inputKegiatan'])->name('addKegiatan');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin/indikator/edit', [AdminController::class, 'editIndikator']);

@@ -75,12 +75,20 @@
                                                     <td width="1%">
                                                         {{ ($indikator_dampaks->currentPage() - 1) * $indikator_dampaks->perPage() + $loop->iteration }}
                                                     </td>
-                                                    <td width="10%">{{ $indikator_dampak->indikator }}</td>
+                                                    <td width="20%">{{ $indikator_dampak->indikator }}</td>
                                                     <td width="10%">{{ $indikator_dampak->tahun }}</td>
                                                     <td width="10%">{{ $indikator_dampak->target }}</td>
                                                     <td width="10%">{{ $indikator_dampak->capaian }}</td>
                                                     <td width="10%">{{ $indikator_dampak->satuan }}</td>
-                                                    <td width="10%">{{ $indikator_dampak->dokumen_pendukung }}</td>
+                                                    <td width="10%">
+                                                        @if(!empty($indikator_dampak->dokumen_pendukung) && strtolower($indikator_dampak->dokumen_pendukung) !== "tidak ada")
+                                                            <a href="{{ asset('storage/' . $indikator_dampak->dokumen_pendukung) }}" target="_blank" class="btn btn-danger">
+                                                                Lihat Dokumen
+                                                            </a>
+                                                        @else
+                                                            <span class="text-muted">Tidak Ada Dokumen</span>
+                                                        @endif
+                                                    </td>
                                                     <td width="10%">
                                                         @if ($indikator_dampak->keterangan === 'Baseline')
                                                             <span class="badge rounded-pill"

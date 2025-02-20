@@ -84,46 +84,43 @@ class KontributorController extends Controller
         return response()->json([]);
     }
 
-    public function storeIndikator(Request $request)
+        public function storeIndikator(Request $request)
     {
         $request->validate([
-            'indikator' => 'required',
-            'tahun' => 'required',
-            'capaian' => 'required',
-            // 'satuan' => 'required',
-            'dokumen' => 'required|mimes:pdf,xlsx,xls,doc,docx,zip|max:5120'
+            'indikator' => 'required|exists:monev_indikators,id',
+            'tahun' => 'required|digits:4|integer',
+            'capaian' => 'required|numeric',
+            'dokumen' => 'nullable|file|mimes:pdf,xlsx,xls,doc,docx,zip|max:5120',
         ]);
 
-        $file = $request->dokumen;
+        try {
+            // Retrieve indikator name safely
+            $detail_indikator = optional(DB::table('monev_indikators')->where('id', $request->indikator)->first())->indikator;
 
-		$nama_file = time()."_".$file->getClientOriginalName();
+            // Handle file upload
+            $nama_file = null;
+            if ($request->hasFile('dokumen')) {
+                $nama_file = $request->file('dokumen')->store('dokumen', 'public');
+            }
 
-      	// isi dengan nama folder tempat kemana file diupload
-		$tujuan_upload = 'dokumen';
-		$file->move($tujuan_upload, $nama_file);
+            // Insert into database
+            MonevIndikator::create([
+                'indikator' => $detail_indikator,
+                'id_komponen' => $request->id_komponen ?? 1,
+                'id_instansi' => $request->id_instansi ?? 2,
+                'target' => $request->target ?? 10,       
+                'satuan' => $request->satuan ?? 0,
+                'tahun' => $request->tahun,
+                'capaian' => $request->capaian,
+                'dokumen_pendukung' => $nama_file,
+                'keterangan' => 'Baseline'
+            ]);
 
-        $detail_indikator = DB::table('monev_indikators')
-                            ->where('id', $request->indikator)
-                            ->first()->indikator;
-
-        // $komponen = DB::table('monev_indikators')
-        // ->where('id', $request->komponen)
-        // ->first()->komponen;
-
-        MonevIndikator::create([
-            'indikator' => $request->indikator,
-            'id_komponen' => 1,
-            'id_instansi' => 2,
-            'target' => 10,
-            'satuan' => 0,
-            'tahun' => $request->tahun,
-            // 'parameter_pengukuran' => $detail_indikator,
-            'capaian' => $request->capaian,
-            'dokumen_pendukung' => $nama_file,
-            'keterangan' => 'Baseline'
-        ]);
-
-        return redirect()->route('kontributor')->withFragment('#b')->with('status' ,'Capaian indikator berhasil ditambah.');
+            return redirect()->route('kontributor')->withFragment('#b')->with('status', 'Capaian indikator berhasil ditambah.');
+        
+        } catch (\Exception $e) {
+            return redirect()->route('kontributor')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     // public function inputKegiatan(Request $request)
