@@ -42,12 +42,8 @@
                                     <div class="col-lg-9">
                                         <select class="form-control select" name="indikator" id="indikator">
                                             <option value="">== Pilih Indikator ==</option>
-                                            @foreach ($inputindikator_tables as $inputindikator_table)
-                                                <option value="{{ $inputindikator_table->id }}">{{ $inputindikator_table->indikator }}</option>
-                                            @endforeach
                                         </select>
-                                        <span class="form-text text-muted">Pilih salah satu <b>indikator</b> yang
-                                            sesuai</span>
+                                        <span class="form-text text-muted">Pilih salah satu <b>indikator</b> yang sesuai</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -110,40 +106,36 @@
 @stop
 
 @section('customJS')
-    $(document).ready(function() {
-        $('select[name="indikator"]').on('change', function() {
-            var indikatorID = $(this).val();
-            if (indikatorID) {
-                $.ajax({
-                    url: '/satuan/' + indikatorID,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        // Assuming the response is an object with 'satuan' and 'target' keys
-                        if (data.satuan && data.target) {
-                            $('#satuan').val(data.satuan); // Set the value of the 'satuan' input field
-                            $('#target').val(data.target); // Set the value of the 'target' input field
-                        } else {
-                            $('#satuan').val(''); // Clear the 'satuan' input field if no data
-                            $('#target').val(''); // Clear the 'target' input field if no data
-                        }
-                    }
-                });
-            } else {
-                $('#satuan').val(''); // Clear the 'satuan' input field if no indikator is selected
-                $('#target').val(''); // Clear the 'target' input field if no indikator is selected
-            }
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Fetch Indikator options on page load
+    $.get('/get-indikators', function(data) {
+        let dropdown = $('#indikator');
+        dropdown.append('<option value="">== Pilih Indikator ==</option>');
+        $.each(data, function(index, indikator) {
+            dropdown.append(`<option value="${indikator.id}">${indikator.indikator}</option>`);
         });
     });
 
-    $('.date-own').datetimepicker({
-    viewMode: 'years',
-    format: 'YYYY'
+    // Fetch and populate Satuan & Target on selection change
+    $('#indikator').on('change', function() {
+        var indikatorID = $(this).val();
+        if (indikatorID) {
+            $.get(`/satuan/${indikatorID}`, function(data) {
+                $('#satuan').val(data.satuan || '');
+                $('#target').val(data.target || '');
+            });
+        } else {
+            $('#satuan, #target').val('');
+        }
     });
 
-    function getFormattedDate(date) {
-    var year1 = date.getFullYear();
-    var year2 = date.getFullYear() + 1;
-    return year1 + '-' + year2;
-    }
+    // Initialize datepicker for Tahun input
+    $('.date-own').datetimepicker({
+        viewMode: 'years',
+        format: 'YYYY'
+    });
+});
+</script>
 @stop

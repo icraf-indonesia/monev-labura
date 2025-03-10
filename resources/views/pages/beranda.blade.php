@@ -83,10 +83,11 @@
                 class="swiffy-slider slider-item-ratio slider-item-ratio-21x9 slider-item-nogap slider-nav-autoplay slider-indicators-round slider-nav-animation slider-nav-animation-fadein slider-nav-animation-slow">
                 <ul class="slider-container">
                     <li class="slide-visible">
-                        <img src="dist/assets/img/1.JPG">
+                        <img src="dist/assets/img/slider labura.jpg">
                     </li>
-                    <li><img src="dist/assets/img/2.JPG"></li>
-                    <li><img src="dist/assets/img/3.JPG"></li>
+                    <li><img src="dist/assets/img/slider labura2.jpg"></li>
+                    <li><img src="dist/assets/img/slider labura3.jpg"></li>
+                    <li><img src="dist/assets/img/slider labura4.jpg"></li>
                 </ul>
 
                 <button type="button" class="slider-nav"></button>
@@ -128,8 +129,18 @@
             </div>
             <div class="dct-dashbd-lft hidden-xs hidden-sm">
                 <h2 style="padding-bottom:20px;">Monitoring Rencana Aksi</h2>
-                <table id="tabel-data" class="table table-bordered table-striped"
-                    style="width:100%; border:0; font-size:12;">
+                <form method="GET" action="{{ route('beranda') }}" class="mb-4" style="padding-bottom:10px;">
+                    <label for="tahun" class="fw-bold me-2">Filter Tahun:</label>
+                    <select name="tahun" id="tahun" class="form-select d-inline-block" style="width: 150px;" onchange="this.form.submit()">
+                        <option value="">Semua Tahun</option>
+                        @foreach($tahun_list as $tahun)
+                            <option value="{{ $tahun }}" {{ request('tahun') == $tahun ? 'selected' : '' }}>
+                                {{ $tahun }}
+                            </option>
+                        @endforeach
+                    </select>
+                </form>
+                <table id="tabel-data" class="table table-bordered table-striped" style="width:100%; font-size:12px;">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -138,40 +149,38 @@
                             <th>Subkegiatan</th>
                             <th>Indikator Keluaran</th>
                             <th>Target</th>
-                            {{-- <th>% (2020) (Sem 1)</th>
-                                                <th>Kategori (2020) (Sem 1)</th>
-                                                <th>Nilai (2020) (Sem 1)</th>
-                                                <th>% (2020) (Sem 2)</th>
-                                                <th>Kategori (2020) (Sem 2)</th>
-                                                <th>Nilai (2020) (Sem 2)</th> --}}
+                            <th>Capaian</th>
+                            <!-- <th>Tahun</th> -->
                         </tr>
                     </thead>
                     <tbody>
-                        @if (count($keluaran_tables))
+                        @if ($keluaran_tables->count())
                             @foreach ($keluaran_tables as $keluaran_table)
                                 <tr>
-                                    {{-- <td width="1%">{{ (($keluaran_tables->currentPage() * 10) - 10) + $loop->iteration }}</td> --}}
-                                    <td width="1%">
-                                        {{ ($keluaran_tables->currentPage() - 1) * $keluaran_tables->perPage() + $loop->iteration }}
-                                    </td>
-                                    <td width="10%">{{ $keluaran_table->program }}</td>
-                                    <td width="10%">{{ $keluaran_table->kegiatan }}</td>
-                                    <td width="10%">{{ $keluaran_table->subkegiatan }}</td>
-                                    <td width="10%">{{ $keluaran_table->indikator_keluaran }}</td>
-                                    <td width="10%">{{ $keluaran_table->target }}</td>
+                                    <td>{{ ($keluaran_tables->currentPage() - 1) * $keluaran_tables->perPage() + $loop->iteration }}</td>
+                                    <td>{{ $keluaran_table->program }}</td>
+                                    <td>{{ $keluaran_table->kegiatan }}</td>
+                                    <td>{{ $keluaran_table->subkegiatan }}</td>
+                                    <td>{{ $keluaran_table->indikator_keluaran }}</td>
+                                    <td>{{ $keluaran_table->target }}</td>
+                                    <td>{{ $keluaran_table->capaian }}</td>
+                                    <!-- <td>{{ $keluaran_table->tahun }}</td> -->
                                 </tr>
                             @endforeach
                         @else
-                    <tbody>
-                        <tr>
-                            <td>Tidak ada data</td>
-                        </tr>
-                    </tbody>
-                    @endif
+                            <tr>
+                                <td colspan="8" class="text-center">Tidak ada data</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
+
+                <!-- Pagination -->
+                <div class="d-flex justify-content-center">
+                    {{ $keluaran_tables->appends(['tahun' => request('tahun')])->links() }}
+                </div>
             </div>
-            <nav aria-label="Page navigation">
+            <!-- <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li class="page-item"><a class="page-link"
                             href="{{ $keluaran_tables->url($keluaran_tables->onFirstPage()) }}">First</a></li>
@@ -182,7 +191,7 @@
                     <li class="page-item"><a class="page-link"
                             href="{{ $keluaran_tables->url($keluaran_tables->lastPage()) }}">Last</a></li>
                 </ul>
-            </nav>
+            </nav> -->
         </div>
         <div class="row" style="padding-top: 50px;">
             <div class="hidden-xs hidden-sm">

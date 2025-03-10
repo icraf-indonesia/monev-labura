@@ -31,6 +31,7 @@
             <img src="dist/assets/img/grafikbatang.png" alt="">
         </p> --}}
         <div class="table-responsive">
+            <h1>Matriks RAD KSB Tahun 2024-2025</h1>
             <table id="tabel-data" class="table table-bordered table-striped" style="width:100%; border:0; font-size:12;">
                 <thead>
                     <tr>

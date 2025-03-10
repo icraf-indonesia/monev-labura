@@ -96,11 +96,6 @@
                                                         @elseif($indikator_dampak->keterangan === 'Aktual')
                                                             <span class="badge rounded-pill"
                                                                 style="background-color: #198754 !important;color: #fff;">Aktual</span>
-                                                        {{-- @else
-                                                            <a class="custom-badge status-green text-right"
-                                                                href="/kontributor/indikator/{{ $indikator_dampak->id }}">
-                                                                Revisi
-                                                            </a> --}}
                                                         @endif
                                                     </td>
                                                 </tr>

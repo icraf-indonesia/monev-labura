@@ -19,15 +19,16 @@ use App\Http\Controllers\PDFController;
 */
 
 // Home & Main Page
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('beranda');
 Route::get('/beranda/pelaksanaan', [HomeController::class, 'pelaksanaan']);
 Route::get('/beranda/monitoring', [HomeController::class, 'monitoring']);
 Route::get('/beranda/dampak', [HomeController::class, 'dampak']);
+Route::get('/grafik', [HomeController::class, 'grafik']);
 
 Route::get('/perencanaan', [HomeController::class, 'perencanaan']);
 Route::get('/export-pdf', [PDFController::class, 'exportPDF']);
 
-Route::get('/pembelajaran', [HomeController::class, 'pembelajaran']);
+Route::get('/unduh', [HomeController::class, 'unduh']);
 
 Route::get('/session', [SessionController::class, 'index'])->name('login');
 Route::post('/session/login', [SessionController::class, 'login']);
@@ -36,12 +37,14 @@ Route::group(['middleware' => 'auth'], function(){
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor');
 Route::get('komponen/{id}', [KontributorController::class, 'komponen']);
 Route::get('indikator/{id}', [KontributorController::class, 'indikator']);
+Route::get('/get-indikators', [KontributorController::class, 'getIndikators']);
 Route::get('satuan/{id}', [KontributorController::class, 'satuan']);
 Route::get('target/{id}', [KontributorController::class, 'target']);
 
 Route::get('/kontributor/capaian/tambah', [KontributorController::class, 'tambahCapaian']);
 Route::post('/kontributor/store', [KontributorController::class, 'store']);
 Route::post('/kontributor/store_indikator', [KontributorController::class, 'storeIndikator']);
+
 // Route::get('/kontributor/indikator/{id}', [KontributorController::class, 'revisiIndikator']);
 // Route::put('/kontributor/indikator/{id}', [KontributorController::class, 'updateRevisiIndikator']);
 

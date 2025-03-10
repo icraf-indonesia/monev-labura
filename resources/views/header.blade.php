@@ -58,7 +58,7 @@
                                         class="img-responsive" alt=""></a></li>
                             <li><a class="home" href="{{ url('') }}/">Beranda</a></li>
                             <li><a class="home" href="{{ url('') }}/perencanaan">Perencanaan</a></li>
-                            <li><a class="home" href="{{ url('') }}/pembelajaran">Pembelajaran</a></li>
+                            <li><a class="home" href="{{ url('') }}/unduh">Unduh</a></li>
                             @if (Auth::check())
                                 @if (Auth::user()->role === 'admin')
                                     <li><a href="{{ url('') }}/admin">Admin</a></li>

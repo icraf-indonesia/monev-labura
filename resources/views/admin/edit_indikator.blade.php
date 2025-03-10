@@ -24,7 +24,7 @@
                     @endif
                     <ul class="nav nav-tabs paitent-app-tab">
                         <li><a href="/admin">Kembali</a></li>
-                        <li class="active"><a href="#edit-target" data-toggle="tab">Ubah Target Kegiatan</a></li>
+                        <li class="active"><a href="#edit-target" data-toggle="tab">Ubah Target</a></li>
                     </ul>
                     <div class="tab-content" style="padding-top: 10px;">
                         <div class="tab-pane active" id="edit-target">

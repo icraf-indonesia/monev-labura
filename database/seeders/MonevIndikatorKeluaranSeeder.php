@@ -22,7 +22,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             0 => array (
                 'id' => 1, 
                 'indikator_keluaran' => 'Jumlah dokumen koordinasi dan sinkronisasi pengumpulan, pengolahan, analisis, dan diseminasi data statistik sektoral',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 1,
@@ -33,7 +33,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             1 => array (
                 'id' => 2, 
                 'indikator_keluaran' => 'Jumlah Dokumen Koordinasi Pelaksanaan Penataan Ruang',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 4,
@@ -44,7 +44,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             2 => array (
                 'id' => 3, 
                 'indikator_keluaran' => 'Jumlah kegiatan pengawasan penggunaan sarana pertanian',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 6,
@@ -66,7 +66,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             4 => array (
                 'id' => 5, 
                 'indikator_keluaran' => 'Jumlah orang yang dibina dalam pemanfaatan data dan informasi',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 1,
@@ -77,7 +77,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             5 => array (
                 'id' => 6, 
                 'indikator_keluaran' => 'Jumlah paket pembangunan, rehabilitasi, dan  pemeliharaan jalan usaha tani',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 6,
@@ -88,7 +88,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             6 => array (
                 'id' => 7, 
                 'indikator_keluaran' => 'Jumlah pekebun yang dilibatkan ',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 3,
@@ -99,7 +99,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             7 => array (
                 'id' => 8, 
                 'indikator_keluaran' => 'Jumlah pelaku usaha yang dibina',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 7,
@@ -110,7 +110,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             8 => array (
                 'id' => 9, 
                 'indikator_keluaran' => 'Jumlah Perusahaan yang Melaksanakan Pengesahan Peraturan Perusahaan yang Terkait dengan Hubungan Industrial dan Terdaftar di WLKP Online',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 7,
@@ -121,7 +121,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             9 => array (
                 'id' => 10, 
                 'indikator_keluaran' => 'Tersedianya basis data spasial dan non spasial kelapa sawit',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 2,
@@ -132,7 +132,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             10 => array (
                 'id' => 11, 
                 'indikator_keluaran' => 'Tersedianya data statistik perkebunan sawit rakyat dan perusahaan Kabupaten Labuanbatu Utara',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 1,
@@ -143,7 +143,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             11 => array (
                 'id' => 12, 
                 'indikator_keluaran' => 'Tersedianya Informasi Geospasial Tematik tutupan lahan kelapa sawit',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 2,
@@ -165,7 +165,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             13 => array (
                 'id' => 14, 
                 'indikator_keluaran' => 'Tersusunnya buku profil pembangunan daerah kabupaten',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 1,
                 'id_program' => 1,
@@ -176,7 +176,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             14 => array (
                 'id' => 15, 
                 'indikator_keluaran' => 'Jumlah Badan Usaha Milik Petani yang terbentuk',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 2,
                 'id_program' => 11,
@@ -187,7 +187,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             15 => array (
                 'id' => 16, 
                 'indikator_keluaran' => 'Jumlah BPP penerima manfaat sarana dan prasarana penyuluhan pertanian',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 2,
                 'id_program' => 9,
@@ -220,7 +220,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             18 => array (
                 'id' => 19, 
                 'indikator_keluaran' => 'Jumlah kemitraan yang terbentuk untuk realisasi KUR PSR',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 2,
                 'id_program' => 10,
@@ -231,7 +231,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             19 => array (
                 'id' => 20, 
                 'indikator_keluaran' => 'Jumlah pekebun yang terlibat dalam kegiatan peningkatan kapasitas',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 2,
                 'id_program' => 10,
@@ -242,7 +242,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             20 => array (
                 'id' => 21, 
                 'indikator_keluaran' => 'Jumlah pelatihan yang dilakukan untuk koperasi petani sawit',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 2,
                 'id_program' => 11,
@@ -275,7 +275,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             23 => array (
                 'id' => 24, 
                 'indikator_keluaran' => 'Jumlah petani sawit yang terlibat dalam pelatihan perkoperasian',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 2,
                 'id_program' => 11,
@@ -286,7 +286,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             24 => array (
                 'id' => 25, 
                 'indikator_keluaran' => 'Jumlah Unit Usaha Koperasi Petani Sawit yang Telah Dilakukan Penilaian Kesehatan',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 2,
                 'id_program' => 11,
@@ -308,7 +308,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             26 => array (
                 'id' => 27, 
                 'indikator_keluaran' => 'Jumlah aksi mitigasi yang dilaporkan',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 16,
@@ -319,7 +319,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             27 => array (
                 'id' => 28, 
                 'indikator_keluaran' => 'Jumlah Desa/Kelurahan yang Terbentuk dan Terbina Relawan Pemadam Kebakaran pada Lingkup Sistem Ketahanan Kebakaran Lingkungan (SKKL) Setiap Tahunnya',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 14,
@@ -330,7 +330,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             28 => array (
                 'id' => 29, 
                 'indikator_keluaran' => 'Jumlah kasus yang ditangani',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 13,
@@ -341,7 +341,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             29 => array (
                 'id' => 30, 
                 'indikator_keluaran' => 'Jumlah kegiatan pemantauan yang dilakukan ',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 13,
@@ -352,7 +352,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             30 => array (
                 'id' => 31, 
                 'indikator_keluaran' => 'Jumlah kegiatan penyuluhan dan kampanye lingkungan',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 13,
@@ -363,7 +363,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             31 => array (
                 'id' => 32, 
                 'indikator_keluaran' => 'Jumlah kegiatan promosi produk hasil pengelolaan limbah kelapa sawit yang dilakukan',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 18,
@@ -374,7 +374,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             32 => array (
                 'id' => 33, 
                 'indikator_keluaran' => 'Jumlah kegiatan sosialisasi yang dilakukan',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 13,
@@ -385,7 +385,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             33 => array (
                 'id' => 34, 
                 'indikator_keluaran' => 'Jumlah Laporan Hasil Pelaksanaan Monitoring, Evaluasi dan Pelaporan Pemenuhan Target dan Standar Pelayanan Pengelolaan Sampah Kabupaten/Kota',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 18,
@@ -396,7 +396,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             34 => array (
                 'id' => 35, 
                 'indikator_keluaran' => 'Jumlah orang yang memperoleh Sosialisasi KIE Rawan Bencana',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 14,
@@ -407,7 +407,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             35 => array (
                 'id' => 36, 
                 'indikator_keluaran' => 'Jumlah personil TRC yang dikembangkan kapasitas teknis dan manajerialnya',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 14,
@@ -418,7 +418,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             36 => array (
                 'id' => 37, 
                 'indikator_keluaran' => 'Jumlah perusahaan yang melaporkan hasil pemantauan',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 14,
@@ -429,7 +429,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             37 => array (
                 'id' => 38, 
                 'indikator_keluaran' => 'Jumlah Sarana dan Prasarana Untuk Pencegahan dan Penanggulangan Kebakaran dan Alat Pelindung Diri yang Sah dan Legal Sesuai Standar Teknis Terkait',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 14,
@@ -440,7 +440,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             38 => array (
                 'id' => 39, 
                 'indikator_keluaran' => 'Jumlah unit bantuan yang disalurkan',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 18,
@@ -451,7 +451,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             39 => array (
                 'id' => 40, 
                 'indikator_keluaran' => 'Jumlah Unit Usaha pengelolaan limbah kelapa sawit yang Telah Menerima Pembinaan dan Pendampingan Terhadap Usaha Mikro',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 18,
@@ -462,7 +462,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             40 => array (
                 'id' => 41, 
                 'indikator_keluaran' => 'Jumlah warga negara dan aparatur yang mengikuti pelatihan pencegahan dan mitigasi bencana',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 14,
@@ -473,7 +473,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             41 => array (
                 'id' => 42, 
                 'indikator_keluaran' => 'Luas agroforestri sawit ',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 13,
@@ -484,7 +484,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             42 => array (
                 'id' => 43, 
                 'indikator_keluaran' => 'Luas agroforestri sawit',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 17,
@@ -495,7 +495,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             43 => array (
                 'id' => 44, 
                 'indikator_keluaran' => 'Terdapat data hasil inventarisasi emisi GRK secara berkala',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 15,
@@ -506,7 +506,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             44 => array (
                 'id' => 45, 
                 'indikator_keluaran' => 'Terdapat profil emisi GRK Kabupaten Labuanbatu Utara',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 15,
@@ -517,7 +517,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             45 => array (
                 'id' => 46, 
                 'indikator_keluaran' => 'Tersedianya RPB kebakaran hutan dan lahan',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 14,
@@ -528,7 +528,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             46 => array (
                 'id' => 47, 
                 'indikator_keluaran' => 'Tersusunnya kajian risiko bencana kebakaran',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 3,
                 'id_program' => 14,
@@ -539,7 +539,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             47 => array (
                 'id' => 48, 
                 'indikator_keluaran' => 'Jumlah dokumen pengendalian dan pemanfaatan ruang yang sesuai',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 4,
                 'id_program' => 21,
@@ -550,7 +550,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             48 => array (
                 'id' => 49, 
                 'indikator_keluaran' => 'Jumlah kegiatan pendampingan yang dilakukan',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 4,
                 'id_program' => 23,
@@ -561,7 +561,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             49 => array (
                 'id' => 50, 
                 'indikator_keluaran' => 'Jumlah kelompok yang difasilitasi dalam pengajuan skema PS',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 4,
                 'id_program' => 22,
@@ -572,7 +572,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             50 => array (
                 'id' => 51, 
                 'indikator_keluaran' => 'Jumlah pekebun yang difasilitasi',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 4,
                 'id_program' => 21,
@@ -583,7 +583,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             51 => array (
                 'id' => 52, 
                 'indikator_keluaran' => 'Jumlah pekebun yang difasilitasi',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 4,
                 'id_program' => 22,
@@ -594,7 +594,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             52 => array (
                 'id' => 53, 
                 'indikator_keluaran' => 'Jumlah pelaku usaha yang dibina',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 4,
                 'id_program' => 20,
@@ -605,7 +605,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             53 => array (
                 'id' => 54, 
                 'indikator_keluaran' => 'Luas kelapa sawit di kawasan hutan',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 4,
                 'id_program' => 22,
@@ -627,7 +627,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             55 => array (
                 'id' => 56, 
                 'indikator_keluaran' => 'Persentase perusahaan yang menerapak tata kelola kerja yang layak',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 4,
                 'id_program' => 25,
@@ -638,7 +638,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             56 => array (
                 'id' => 57, 
                 'indikator_keluaran' => 'Jumlah kegiatan pengembangan kapasitas',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 5,
                 'id_program' => 27,
@@ -660,7 +660,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             58 => array (
                 'id' => 59, 
                 'indikator_keluaran' => 'Jumlah lembaga pekebun yang tersertifikasi ISPO',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 5,
                 'id_program' => 27,
@@ -671,7 +671,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             59 => array (
                 'id' => 60, 
                 'indikator_keluaran' => 'Jumlah pekebun yang menerima sosialisasi ISPO',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 5,
                 'id_program' => 26,
@@ -682,7 +682,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             60 => array (
                 'id' => 61, 
                 'indikator_keluaran' => 'Jumlah Pelaku Usaha Kelapa Sawit Rakyat yang Difasilitasi dalam Pameran Dagang',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 5,
                 'id_program' => 29,
@@ -693,7 +693,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
             61 => array (
                 'id' => 62, 
                 'indikator_keluaran' => 'Jumlah STD-B yang diterbitkan Dinas kabupaten yang dalam pemenuhan persyaratan ISPO',
-                'target' => 0,
+                'target' => 100,
                 'satuan' => 'perlu diisi',
                 'id_komponen' => 5,
                 'id_program' => 27,

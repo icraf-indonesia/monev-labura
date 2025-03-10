@@ -50,11 +50,14 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
+                                            <th>Komponen</th>
                                             <th>Program</th>
                                             <th>Kegiatan</th>
                                             <th>Sub Kegiatan</th>
                                             <th>Indikator Keluaran</th>
                                             <th>Pelaksana</th>
+                                            <th>Target</th>
+                                            <th>Capaian</th>
                                             <th>Sumber Pendanaan</th>
                                             <th>Status</th>
                                         </tr>
@@ -66,11 +69,14 @@
                                                     <td width="1%">
                                                         {{ ($kegiatan_tables->currentPage() - 1) * $kegiatan_tables->perPage() + $loop->iteration }}
                                                     </td>
+                                                    <td width="10%">{{ $kegiatan_table->komponen }}</td>
                                                     <td width="10%">{{ $kegiatan_table->program }}</td>
                                                     <td width="10%">{{ $kegiatan_table->kegiatan }}</td>
                                                     <td width="10%">{{ $kegiatan_table->subkegiatan }}</td>
                                                     <td width="10%">{{ $kegiatan_table->indikator_keluaran }}</td>
                                                     <td width="10%">{{ $kegiatan_table->instansi }}</td>
+                                                    <td width="10%">{{ $kegiatan_table->target }}</td>
+                                                    <td width="10%">{{ $kegiatan_table->capaian }}</td>
                                                     <td width="10%">{{ $kegiatan_table->sumber_pembiayaan }}</td>
                                                     <td width="10%">
                                                         @if ($kegiatan_table->status === 0)

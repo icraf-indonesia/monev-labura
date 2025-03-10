@@ -24,7 +24,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 1,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -34,7 +34,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 2,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -44,7 +44,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 3,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -54,7 +54,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 4,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -64,7 +64,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 5,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -74,7 +74,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 6,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -84,7 +84,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 7,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -94,7 +94,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 8,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -104,7 +104,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 9,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -114,7 +114,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 10,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -124,7 +124,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 11,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -134,7 +134,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 12,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -144,7 +144,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 13,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -154,7 +154,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 14,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -164,7 +164,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 15,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -174,7 +174,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 16,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -184,7 +184,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 17,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -194,7 +194,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 18,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -204,7 +204,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 19,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -214,7 +214,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 20,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -224,7 +224,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 21,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -234,7 +234,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 22,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -244,7 +244,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 23,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -254,7 +254,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 24,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -264,7 +264,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 25,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -274,7 +274,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 26,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -284,7 +284,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 27,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -294,7 +294,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 28,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -304,7 +304,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 29,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -314,7 +314,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 30,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -324,7 +324,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 31,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -334,7 +334,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 32,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -344,7 +344,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 33,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -354,7 +354,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 34,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -364,7 +364,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 35,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -374,7 +374,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 36,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -384,7 +384,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 37,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -394,7 +394,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 38,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -404,7 +404,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 39,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -414,7 +414,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 40,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -424,7 +424,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 41,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -434,7 +434,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 42,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -444,7 +444,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 43,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -454,7 +454,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 44,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -464,7 +464,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 45,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -474,7 +474,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 46,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -484,7 +484,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 47,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -494,7 +494,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 48,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -504,7 +504,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 49,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -514,7 +514,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 50,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -524,7 +524,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 51,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -534,7 +534,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 52,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -544,7 +544,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 53,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -554,7 +554,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 54,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -564,7 +564,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 55,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -574,7 +574,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 56,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -584,7 +584,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 57,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -594,7 +594,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 58,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -604,7 +604,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 59,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -614,7 +614,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 60,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -624,7 +624,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 61,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0
@@ -634,7 +634,7 @@ class MonevCapaianSeeder extends Seeder
                 'id_keluaran' => 62,
                 'tahun' => 2024,
                 'semester' => 1,
-                'capaian' => 100,
+                'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
                 'status' => 0

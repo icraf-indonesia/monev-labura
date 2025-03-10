@@ -32,12 +32,14 @@ class KontributorController extends Controller
     public function kegiatan(Request $request)
     {
         $kegiatan_tables = DB::table('monev_indikator_keluarans')
+            ->leftJoin('monev_komponens', 'monev_indikator_keluarans.id_komponen', '=', 'monev_komponens.id')
             ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
             ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
             ->leftJoin('monev_subkegiatans', 'monev_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
             ->leftJoin('monev_instansis', 'monev_indikator_keluarans.id_instansi', '=', 'monev_instansis.id')
             ->leftJoin('monev_capaians', 'monev_indikator_keluarans.id', '=', 'monev_capaians.id_keluaran')
             ->select(
+                'monev_komponens.komponen',
                 'monev_programs.program',
                 'monev_kegiatans.kegiatan',
                 'monev_subkegiatans.subkegiatan',
@@ -45,7 +47,8 @@ class KontributorController extends Controller
                 'monev_indikator_keluarans.target',
                 'monev_instansis.instansi',
                 'monev_capaians.sumber_pembiayaan',
-                'monev_capaians.status',
+                'monev_capaians.capaian',
+                'monev_capaians.status'
             )
             ->paginate(5); // Use pagination
         return view('kontributor.daftar_kegiatan', ['kegiatan_tables' => $kegiatan_tables]);
@@ -65,23 +68,6 @@ class KontributorController extends Controller
         )
         ->get(); // Execute the query and get the results
         return view('kontributor.input_indikator', ['inputindikator_tables' => $input_indikators]);
-    }
-
-        public function satuan($id)
-    {
-        $data = DB::table('monev_indikators')
-            ->where('id', $id)
-            ->select('satuan', 'target')
-            ->first();
-
-        if ($data) {
-            return response()->json([
-                'satuan' => $data->satuan,
-                'target' => $data->target
-            ]);
-        }
-
-        return response()->json([]);
     }
 
         public function storeIndikator(Request $request)
@@ -123,27 +109,54 @@ class KontributorController extends Controller
         }
     }
 
-    // public function inputKegiatan(Request $request)
+    //     public function getIndikators()
     // {
-    //     $input_kegiatans = DB::table('monev_indikator_keluarans')
-    //         ->leftJoin('monev_komponens', 'monev_indikator_keluarans.id_komponen', '=', 'monev_komponens.id')
-    //         ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
-    //         ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
-    //         ->leftJoin('monev_subkegiatans', 'monev_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
-    //         ->leftJoin('monev_instansis', 'monev_indikator_keluarans.id_instansi', '=', 'monev_instansis.id')
-    //         ->leftJoin('monev_capaians', 'monev_indikator_keluarans.id', '=', 'monev_capaians.id_keluaran')
-    //         ->select(
-    //             'monev_indikator_keluarans.id',
-    //             'monev_komponens.komponen',
-    //             'monev_programs.program',
-    //             'monev_kegiatans.kegiatan',
-    //             'monev_subkegiatans.subkegiatan',
-    //             'monev_indikator_keluarans.indikator_keluaran',
-    //             'monev_instansis.instansi',
-    //             'monev_capaians.sumber_pembiayaan'
-    //         );
-    //     return view('kontributor.input_pelaksanaan_kegiatan', ['inputkegiatan_tables' => $input_kegiatans]);
+    //     $indikators = DB::table('monev_indikators')
+    //         ->select('indikator') // Select only the "indikator" column
+    //         ->distinct() // Ensure unique values
+    //         ->orderBy('indikator', 'asc') // Optional: Sort alphabetically
+    //         ->pluck('indikator'); // Return only values, not full objects
+
+    //     return response()->json($indikators);
     // }
+
+    // public function satuan($id)
+    // {
+    //     $data = DB::table('monev_indikators')
+    //         ->where('id', $id)
+    //         ->select('satuan', 'target')
+    //         ->first();
+
+    //     if ($data) {
+    //         return response()->json([
+    //             'satuan' => $data->satuan,
+    //             'target' => $data->target
+    //         ]);
+    //     }
+
+    //     return response()->json([]);
+    // }
+
+        public function getIndikators()
+    {
+        $indikators = DB::table('monev_indikators')
+            ->select('id', 'indikator') // Selecting ID and Indikator
+            ->distinct()
+            ->orderBy('indikator', 'asc')
+            ->get(); // Fetching as array of objects
+
+        return response()->json($indikators);
+    }
+
+    public function satuan($id)
+    {
+        $data = DB::table('monev_indikators')
+            ->where('id', $id)
+            ->select('satuan', 'target')
+            ->first();
+
+        return response()->json($data ?: []);
+    }
 
     public function inputKegiatan(Request $request)
     {
