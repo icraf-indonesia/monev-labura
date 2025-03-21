@@ -34,77 +34,33 @@
     <div class="row">
         <h1 align="center" style="color:#80b441; padding-bottom:30px;"><b>Monitoring dan Evaluasi RAD KSB di Labuhanbatu Utara</b></h1>
     </div>
-
-    <div class="row">
-        <!-- Capaian Kumulatif -->
-        <div class="col-md-6">
-            <canvas id="capaianKumulatifChart"></canvas>
-        </div>
-        
-        <!-- Capaian Kumulatif Komponen -->
-        <div class="col-md-6">
-            <canvas id="komponenChart"></canvas>
-        </div>
-    </div>
+    <canvas id="grafikKomponen"></canvas>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
-    // Capaian Kumulatif Chart (Doughnut)
-    // const capaianKumulatifData = {
-    //     labels: ["Capaian", "Sisa Target"],
-    //     datasets: [{
-    //         data: [{{ $capaian_kumulatif }}, {{ 100 - $capaian_kumulatif }}],
-    //         backgroundColor: ["#FF914D", "#F7DED0"]
-    //     }]
-    // };
-
-    // new Chart(document.getElementById('capaianKumulatifChart'), {
-    //     type: 'doughnut',
-    //     data: capaianKumulatifData
-    // });
-
-    // Capaian Kumulatif Chart (Doughnut)
-    const capaianKumulatifData = {
-        labels: ["Tercapai", "Belum Tercapai"],
+const ctx = document.getElementById('grafikKomponen').getContext('2d');
+const barChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {!! json_encode($data->pluck('komponen')) !!},
         datasets: [{
-            data: [{{ $capaian_kumulatif }}, {{ 100 - $capaian_kumulatif }}],
-            backgroundColor: ["#1E5377", "#FF914D"]
+            label: 'Tercapai (%)',
+            data: {!! json_encode($data->pluck('persentase')) !!},
+            backgroundColor: 'rgba(54, 162, 235, 0.7)'
         }]
-    };
-
-    const ctx = document.getElementById('capaianKumulatifChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'doughnut',
-        data: capaianKumulatifData,
-        options: {
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            let value = tooltipItem.raw;
-                            return value.toFixed(2) + '%'; // Display value as percentage
-                        }
-                    }
-                }
+    },
+    options: {
+        indexAxis: 'y',
+        scales: {
+            x: {
+                beginAtZero: true,
+                max: 100
             }
         }
-    });
-
-    // Capaian Kumulatif Komponen Chart (Bar)
-    const komponenLabels = @json(array_column($komponen_chart, 'komponen'));
-    const komponenValues = @json(array_column($komponen_chart, 'persentase'));
-
-    new Chart(document.getElementById('komponenChart'), {
-        type: 'bar',
-        data: {
-            labels: komponenLabels,
-            datasets: [{
-                label: 'Capaian (%)',
-                data: komponenValues,
-                backgroundColor: "#FF914D"
-            }]
-        }
-    });
+    }
+});
 </script>
+
 @stop

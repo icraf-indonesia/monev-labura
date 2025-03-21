@@ -58,11 +58,31 @@ class HomeController extends Controller
 
         $keluaran_table = $keluaran_table->paginate(5);
 
-        // return view('pages.beranda', ['keluaran_tables' => $keluaran_table]);
+        // Step 1: Get each indicator's percentage
+        $indikators = DB::table('monev_indikators')
+            ->leftJoin('monev_komponens', 'monev_indikators.id_komponen', '=', 'monev_komponens.id')
+            ->select(
+                'monev_komponens.komponen',
+                DB::raw('monev_indikators.capaian'),
+                DB::raw('monev_indikators.target'),
+                DB::raw('CASE WHEN monev_indikators.target > 0 THEN (monev_indikators.capaian / monev_indikators.target) * 100 ELSE 0 END AS persentase_indikator')
+            )
+            ->get();
+
+        // Step 2: Group by Komponen and calculate the average of persentase_indikator
+        $grouped = $indikators->groupBy('komponen')->map(function ($group) {
+            $average = $group->avg('persentase_indikator');
+            return [
+                'komponen' => $group->first()->komponen,
+                'persentase' => round($average, 2)
+            ];
+        })->values();
+
         return view('pages.beranda', [
             'keluaran_tables' => $keluaran_table,
             'tahun_list' => $tahun_list,
-            'selected_tahun' => $tahun
+            'selected_tahun' => $tahun,
+            'data' => $grouped
         ]);
     }
 
@@ -160,56 +180,27 @@ class HomeController extends Controller
 
     public function grafik(Request $request)
     {
-        $kegiatan_tables = DB::table('monev_indikator_keluarans')
-            ->leftJoin('monev_komponens', 'monev_indikator_keluarans.id_komponen', '=', 'monev_komponens.id')
-            ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
-            ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
-            ->leftJoin('monev_subkegiatans', 'monev_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
-            ->leftJoin('monev_instansis', 'monev_indikator_keluarans.id_instansi', '=', 'monev_instansis.id')
-            ->leftJoin('monev_capaians', 'monev_indikator_keluarans.id', '=', 'monev_capaians.id_keluaran')
+        // Step 1: Get each indicator's percentage
+        $indikators = DB::table('monev_indikators')
+            ->leftJoin('monev_komponens', 'monev_indikators.id_komponen', '=', 'monev_komponens.id')
             ->select(
                 'monev_komponens.komponen',
-                'monev_programs.program',
-                'monev_kegiatans.kegiatan',
-                'monev_subkegiatans.subkegiatan',
-                'monev_indikator_keluarans.indikator_keluaran',
-                'monev_indikator_keluarans.target',
-                'monev_instansis.instansi',
-                'monev_capaians.sumber_pembiayaan',
-                'monev_capaians.capaian',
-                'monev_capaians.status',
-                DB::raw('ROUND((monev_capaians.capaian / NULLIF(monev_indikator_keluarans.target, 0)) * 100, 2) as persentase')
+                DB::raw('monev_indikators.capaian'),
+                DB::raw('monev_indikators.target'),
+                DB::raw('CASE WHEN monev_indikators.target > 0 THEN (monev_indikators.capaian / monev_indikators.target) * 100 ELSE 0 END AS persentase_indikator')
             )
             ->get();
-        
-            dd($kegiatan_tables);
-        // Calculate component-wise achievement (average per component)
-        $komponen_data = DB::table('monev_capaians')
-            ->join('monev_indikator_keluarans', 'monev_capaians.id_keluaran', '=', 'monev_indikator_keluarans.id')
-            ->join('monev_komponens', 'monev_indikator_keluarans.id_komponen', '=', 'monev_komponens.id')
-            ->select(
-                'monev_komponens.komponen',
-                DB::raw('AVG(monev_capaians.capaian / NULLIF(monev_indikator_keluarans.target, 0) * 100) as avg_persentase')
-            )
-            ->groupBy('monev_komponens.komponen')
-            ->get();
 
-        // Calculate the final "capaian_kumulatif" as the average of component achievements
-        $capaian_kumulatif = round($komponen_data->avg('avg_persentase'), 2);
-
-        // Prepare data for the bar chart
-        $komponen_chart = $komponen_data->map(function ($item) {
+        // Step 2: Group by Komponen and calculate the average of persentase_indikator
+        $grouped = $indikators->groupBy('komponen')->map(function ($group) {
+            $average = $group->avg('persentase_indikator');
             return [
-                'komponen' => $item->komponen,
-                'persentase' => round($item->avg_persentase, 2),
+                'komponen' => $group->first()->komponen,
+                'persentase' => round($average, 2)
             ];
-        })->toArray();
+        })->values();
 
-        return view('pages.beranda_grafik', [
-            'kegiatan_tables' => $kegiatan_tables,
-            'capaian_kumulatif' => $capaian_kumulatif,
-            'komponen_chart' => $komponen_chart
-        ]);
+        // Step 3: Pass the correct data to the view
+        return view('pages.beranda_grafik', ['data' => $grouped]);
     }
-
 }

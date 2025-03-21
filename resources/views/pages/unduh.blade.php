@@ -42,14 +42,14 @@
 
 @section('content')
     <div class="container-fluid" style="max-width: 1170px; margin: auto;">
-        <h2 style="padding-bottom:20px;">Pembelajaran</h2>
-        <p>Halaman pembelajaran ini akan menjadi modul yang memuat sejumlah informasi dalam berbagai bentuk (bahan ajar,
+        <h2 style="padding-bottom:20px;">Unduh</h2>
+        <!-- <p>Halaman pembelajaran ini akan menjadi modul yang memuat sejumlah informasi dalam berbagai bentuk (bahan ajar,
             regulasi, maupun video) untuk mendukung penguatan kapasitas para pemangku kepentingan di Kabupaten Labuhanbatu
             Utara dalam rangka pembangunan kelapa sawit berkelanjutan. Sedikitnya modul ini akan memuat seputar (masih dapat
             dikembangkan):</p>
         <p align="center">
             <img src="dist/assets/img/Pembelajaran.png" alt="">
-        </p>
+        </p> -->
         <table id="tabel-data" class="table table-bordered table-striped" style="width:100%; border:0; font-size:12;">
             <tr>
                 <th>Dokumen</th>
@@ -71,15 +71,23 @@
                         disini</a></td>
             </tr>
             <tr>
-                <td>Pengantar Good Agriculture Practices (GAP) dalam pengelolaan sawit</td>
+                <td>Pelatihan GAP dalam pengelolaan sawit</td>
                 <td><a href="/the_url" class="btn btn-danger">Klik disini</a></td>
             </tr>
             <tr>
-                <td>Pengelolaan Agroforestri Kelapa Sawit</td>
+                <td>Pengantar Sawit Berkelanjutan</td>
                 <td><a href="/the_url" class="btn btn-danger">Klik disini</a></td>
             </tr>
+            <tr>
+                <td>Pelatihan Berkebun Sawit sebagai Bisnis Berkelanjutan</td>
+                <td><a href="https://drive.google.com/file/d/1jKzKU4z326s4sug76Te8JZviewqgGNlh/view" class="btn btn-danger">Klik disini</a></td>
+            </tr>
+            <tr>
+                <td>Kumpulan Materi Pelatihan Penyuluh Pengelolaan GAP Sawit Berkelanjutan</td>
+                <td><a href="https://drive.google.com/drive/folders/1jVKNnR-ZGTS5ihX4g89GR3SxAz12ghQi" class="btn btn-danger">Klik disini</a></td>
+            </tr>
         </table>
-        <h2 style="padding-bottom:20px;">Kebijakan Pengelolaan Sawit</h2>
+        <!-- <h2 style="padding-bottom:20px;">Kebijakan Pengelolaan Sawit</h2>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4">
@@ -114,7 +122,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 @stop
 
 @section('js')

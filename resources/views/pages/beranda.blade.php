@@ -176,22 +176,26 @@
                 </table>
 
                 <!-- Pagination -->
-                <div class="d-flex justify-content-center">
+                <!-- <div class="d-flex justify-content-center">
                     {{ $keluaran_tables->appends(['tahun' => request('tahun')])->links() }}
-                </div>
+                </div> -->
             </div>
-            <!-- <nav aria-label="Page navigation">
+            <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li class="page-item"><a class="page-link"
-                            href="{{ $keluaran_tables->url($keluaran_tables->onFirstPage()) }}">First</a></li>
-                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->previousPageUrl() }}">Previous</a>
+                            href="{{ $keluaran_tables->url($keluaran_tables->onFirstPage()) }}">Awal</a></li>
+                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->previousPageUrl() }}">Sebelum</a>
                     </li>
                     <li class="page-item"><a class="page-link" href="#">{{ $keluaran_tables->currentPage() }}</a></li>
-                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->nextPageUrl() }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->nextPageUrl() }}">Selanjutnya</a></li>
                     <li class="page-item"><a class="page-link"
-                            href="{{ $keluaran_tables->url($keluaran_tables->lastPage()) }}">Last</a></li>
+                            href="{{ $keluaran_tables->url($keluaran_tables->lastPage()) }}">Akhir</a></li>
                 </ul>
-            </nav> -->
+            </nav>
+            <h2 style="padding-bottom:20px;">Ketercapaian Komponen Indikator Kunci RAD KSB</h2>
+            <canvas id="grafikKomponen"></canvas>
+            <h2 style="padding-bottom:20px;">Peta Kelapa Sawit Berkelanjutan</h2>
+            <div id="map" style="height: 600px;"></div>
         </div>
         <div class="row" style="padding-top: 50px;">
             <div class="hidden-xs hidden-sm">
@@ -199,8 +203,13 @@
                 <p align="center"><img src="dist/assets/img/logoall-fin.png" alt="" style="max-width:50%;"></p>
             </div>
         </div>
-
     </div>
+@stop
+
+@section('customJSLibrary')
+    <script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script>
+    <script src='https://unpkg.com/leaflet@1.8.0/dist/leaflet.js' crossorigin=''></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @stop
 
 @section('js')
@@ -213,140 +222,70 @@
     </script>
 @stop
 
-@section('customJSLibrary')
-    <script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script>
-    <script src='https://unpkg.com/leaflet@1.8.0/dist/leaflet.js' crossorigin=''></script>
-@stop
-
 @section('customJS')
-    let map, markers = [];
-
-    function initMap() {
-    map = L.map('map', {
-    center: {
-    lat: -2.412288070373402,
-    lng: 120.08931533060061,
-    },
-    zoom: 9
+    const ctx = document.getElementById('grafikKomponen').getContext('2d');
+    const barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($data->pluck('komponen')) !!},
+            datasets: [{
+                label: 'Tercapai (%)',
+                data: {!! json_encode($data->pluck('persentase')) !!},
+                backgroundColor: [
+                    '#4e79a7', // Komponen 1
+                    '#f28e2b', // Komponen 2
+                    '#e15759', // Komponen 3
+                    '#76b7b2', // Komponen 4
+                    '#59a14f', // Komponen 5
+                ]
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
     });
 
+    <!-- var map = L.map('map').setView([2.1, 99.8], 9); // Adjust center and zoom to Labura -->
+    var map = L.map('map').setView([-1.5, 101.8833], 10); // Adjust center and zoom to Bungo
+
+    // Add base map layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap'
+        maxZoom: 19
     }).addTo(map);
 
-    const info = L.control();
+    // List your shapefiles hosted publicly or serve from your /public folder
+    const layers = [
+        { name: "Planning Unit", file: 'storage/shapefiles/Planning unit.zip' },
+        { name: "Village Potential", file: 'storage/shapefiles/Village potential.zip' }
+    ];
 
-    info.onAdd = function(map) {
-    this._div = L.DomUtil.create('div', 'info');
-    this.update();
-    return this._div;
-    }
+    var overlayMaps = {};
 
-    info.update = function (props) {
-    this._div.innerHTML = '<h4>Peta Intervensi</h4>' + (props ?
-    '<b>' + props.Intrv + '</b>'
-    : 'Arahkan pointer ke peta');
-    };
-
-    info.addTo(map);
-
-    var geo = L.geoJson({features:[]}, {
-    style,
-    onEachFeature: function popUp(f, l) {
-    //var out = [];
-    //if (f.properties){
-    // for(var key in f.properties){
-    // out.push(key + ": " + f.properties[key]);
-    // }
-    // l.bindPopup(out.join("<br />"));
-    //}
-    l.on({
-    mouseover: highlightFeature,
-    mouseout: resetHighlight,
-    click: zoomToFeature
-    });
-    }
-    }).addTo(map);
-
-    var base = '{{ url('') }}/shp/Invervention_map_v1_J_F.zip';
-    shp(base).then(function(data){
-    geo.addData(data);
+    layers.forEach(layer => {
+        shp(layer.file).then(function (geojson) {
+            var layerGroup = L.geoJSON(geojson, {
+                style: { color: getRandomColor(), weight: 2 }
+            }).addTo(map);
+            overlayMaps[layer.name] = layerGroup;
+        });
     });
 
-    map.on('click', mapClicked);
-    }
+    // Add Layer Control
+    setTimeout(() => {
+        L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
+    }, 1500);
 
-    initMap();
-
-    function highlightFeature(e) {
-    const layer = e.target;
-    layer.setStyle({
-    weight: 5,
-    color: '#666',
-    dashArray: '',
-    fillOpacity: 0.7
-    });
-
-    layer.bringToFront();
-
-    info.update(layer.feature.properties);
-    }
-
-    function resetHighlight(e) {
-    geo.resetStyle(e.target);
-    info.update();
-    }
-
-    function zoomToFeature(e){
-    map.fitBounds(e.target.getBounds());
-    }
-
-    function getColor(i) {
-    return i === 0 ? '#b2182b' :
-    i === 1 ? '#d6604d' :
-    i === 2 ? '#f4a582' :
-    i === 3 ? '#fddbc7' :
-    i === 4 ? '#f7f7f7' :
-    i === 5 ? '#d1e5f0' :
-    i === 6 ? '#92c5de' :
-    i === 7 ? '#4393c3' :
-    '#2166ac';
-    }
-
-    function style(feature) {
-    return {
-    weight: 2,
-    opacity: 1,
-    color: 'white',
-    dashArray: '3',
-    fillOpacity: 0.7,
-    fillColor: getColor(feature.properties.Value)
-    };
-    }
-
-    function generateMarker(data, index) {
-    return L.marker(data.position, {
-    draggable: data.draggable
-    })
-    .on('click', (event) => markerClicked(event, index))
-    .on('dragend', (event) => markerDragEnd(event, index));
-    }
-
-    /* ------------------------- Handle Map Click Event ------------------------- */
-    function mapClicked($event) {
-    console.log(map);
-    console.log($event.latlng.lat, $event.latlng.lng);
-    }
-
-    /* ------------------------ Handle Marker Click Event ----------------------- */
-    function markerClicked($event, index) {
-    console.log(map);
-    console.log($event.latlng.lat, $event.latlng.lng);
-    }
-
-    /* ----------------------- Handle Marker DragEnd Event ---------------------- */
-    function markerDragEnd($event, index) {
-    console.log(map);
-    console.log($event.target.getLatLng());
+    // Random color generator
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 2; i++) color += letters[Math.floor(Math.random() * 16)];
+        return color;
     }
 @stop
