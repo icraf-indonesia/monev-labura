@@ -43,7 +43,6 @@
                                             <th>Kegiatan</th>
                                             <th>Sub Kegiatan</th>
                                             <th>Indikator Keluaran</th>
-                                            {{-- <th>Waktu Pelaksanaan</th> --}}
                                             <th>Lembaga Penanggung Jawab</th>
                                             <th>Target</th>
                                             <th>Dokumen Pendukung</th>
@@ -53,12 +52,13 @@
                                     <tbody>
                                         @foreach ($kegiatans as $k)
                                             <tr>
-                                                <td width="1%">{{ (($kegiatans->currentPage() * 10) - 10) + $loop->iteration }}</td>
+                                                <td width="1%">
+                                                    {{ ($kegiatans->currentPage() - 1) * $kegiatans->perPage() + $loop->iteration }}
+                                                </td>
                                                 <td width="10%">{{ $k->program }}</td>
                                                 <td width="10%">{{ $k->kegiatan }}</td>
                                                 <td width="10%">{{ $k->subkegiatan }}</td>
                                                 <td width="10%">{{ $k->indikator_keluaran }}</td>
-                                                {{-- <td width="10%">{{ $k->tahun }}</td> --}}
                                                 <td width="10%">{{ $k->instansi }}</td>
                                                 <td width="1%">{{ $k->target }}</td>
                                                 @if (empty($k->dokumen_pendukung))

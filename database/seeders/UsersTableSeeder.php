@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Akun Admin',
             'username' => 'admin',
             'email'=>'admin@mail.com',
+            'id_instansi' => 99,
             'role'=>'admin',
             'password'=>Hash::make('123456')
         ]);
@@ -29,6 +30,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Akun Kontributor',
             'username' => 'kontributor',
             'email'=>'kontributor@mail.com',
+            'id_instansi' => 99,
             'role'=>'kontributor',
             'password'=>Hash::make('123456')
         ]);
@@ -36,6 +38,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Sekda Labura',
             'username' => 'monevsekda',
             'email'=>'monevsekda@mail.com',
+            'id_instansi' => 99,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev01')
         ]);
@@ -43,6 +46,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Bappeda Labura',
             'username' => 'monevbappeda',
             'email'=>'monevbappeda@mail.com',
+            'id_instansi' => 1,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev02')
         ]);
@@ -50,6 +54,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Distan Labura',
             'username' => 'monevdistan',
             'email'=>'monevdistan@mail.com',
+            'id_instansi' => 10,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev03')
         ]);
@@ -57,6 +62,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Diskominfo Labura',
             'username' => 'monevdiskominfo',
             'email'=>'monevdiskominfo@mail.com',
+            'id_instansi' => 5,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev04')
         ]);
@@ -64,6 +70,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'DLH Labura',
             'username' => 'monevdlh',
             'email'=>'monevdlh@mail.com',
+            'id_instansi' => 6,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev05')
         ]);
@@ -71,6 +78,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Dispedag Labura',
             'username' => 'monevdisperdag',
             'email'=>'monevdisperdag@mail.com',
+            'id_instansi' => 9,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev06')
         ]);
@@ -78,6 +86,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Balitbangda Labura',
             'username' => 'monevbalitbangda',
             'email'=>'monevbalitbangda@mail.com',
+            'id_instansi' => 1,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev07')
         ]);
@@ -85,6 +94,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'BPBD Labura',
             'username' => 'monevbpbd',
             'email'=>'monevbpbd@mail.com',
+            'id_instansi' => 2,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev08')
         ]);
@@ -92,6 +102,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'BPS Labura',
             'username' => 'monevbps',
             'email'=>'monevbps@mail.com',
+            'id_instansi' => 3,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev09')
         ]);
@@ -99,6 +110,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Damkar Labura',
             'username' => 'monevdamkar',
             'email'=>'monevdamkar@mail.com',
+            'id_instansi' => 8,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev10')
         ]);
@@ -106,6 +118,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'DKP Labura',
             'username' => 'monevdkp',
             'email'=>'monevdkp@mail.com',
+            'id_instansi' => 4,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev11')
         ]);
@@ -113,6 +126,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'PUPR Labura',
             'username' => 'monevpupr',
             'email'=>'monevpupr@mail.com',
+            'id_instansi' => 7,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev12')
         ]);
@@ -120,6 +134,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Perkim Labura',
             'username' => 'monevperkim',
             'email'=>'monevperkim@mail.com',
+            'id_instansi' => 11,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev13')
         ]);
@@ -127,6 +142,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'KPH Aek Kanopan',
             'username' => 'monevkph5',
             'email'=>'monevkph5@mail.com',
+            'id_instansi' => 13,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev14')
         ]);
@@ -134,6 +150,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'KPH Kisaran',
             'username' => 'monevkph3',
             'email'=>'monevkph3@mail.com',
+            'id_instansi' => 13,
             'role'=>'kontributor',
             'password'=>Hash::make('Monev15')
         ]);

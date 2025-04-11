@@ -193,6 +193,14 @@
                 </ul>
             </nav>
             <h2 style="padding-bottom:20px;">Ketercapaian Komponen Indikator Kunci RAD KSB</h2>
+            <p>RAD KSB Labuhanbatu Utara mencakup lima (5) komponen utama, yaitu:</p>
+                <ul>
+                    <li>Komponen A: Penguatan data, koordinasi, dan infrastruktur (14 indikator)</li>
+                    <li>Komponen B: Peningkatan kapasitas dan kapabilitas pekebun (12 indikator)</li>
+                    <li>Komponen C: Pengelolaan dan pemantauan lingkungan (21 indikator)</li>
+                    <li>Komponen D: Tata kelola perkebunan dan penanganan sengketa (9 indikator)</li>
+                    <li>Komponen E: Dukungan percepatan pelaksanaan sertifikasi ISPO dan peningkatan akses pasar produk kelapa sawit (6 indikator)</li>
+                </ul>
             <canvas id="grafikKomponen"></canvas>
             <h2 style="padding-bottom:20px;">Peta Kelapa Sawit Berkelanjutan</h2>
             <div id="map" style="height: 600px;"></div>
@@ -229,7 +237,7 @@
         data: {
             labels: {!! json_encode($data->pluck('komponen')) !!},
             datasets: [{
-                label: 'Tercapai (%)',
+                label: '',
                 data: {!! json_encode($data->pluck('persentase')) !!},
                 backgroundColor: [
                     '#4e79a7', // Komponen 1
@@ -246,6 +254,11 @@
                 x: {
                     beginAtZero: true,
                     max: 100
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false // Hides the legend
                 }
             }
         }

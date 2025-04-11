@@ -23,7 +23,7 @@ Route::get('/', [HomeController::class, 'index'])->name('beranda');
 Route::get('/beranda/pelaksanaan', [HomeController::class, 'pelaksanaan']);
 Route::get('/beranda/monitoring', [HomeController::class, 'monitoring']);
 Route::get('/beranda/dampak', [HomeController::class, 'dampak']);
-Route::get('/grafik', [HomeController::class, 'grafik']);
+// Route::get('/grafik', [HomeController::class, 'grafik']);
 
 Route::get('/perencanaan', [HomeController::class, 'perencanaan']);
 Route::get('/export-pdf', [PDFController::class, 'exportPDF']);
@@ -51,6 +51,11 @@ Route::post('/kontributor/store_indikator', [KontributorController::class, 'stor
 Route::get('/kontributor/indikator/tambah', [KontributorController::class, 'inputIndikator'])->name('addIndikator');
 Route::get('/kontributor/kegiatan', [KontributorController::class, 'kegiatan'])->name('kegiatan');
 Route::get('/kontributor/kegiatan/tambah', [KontributorController::class, 'inputKegiatan'])->name('addKegiatan');
+Route::get('/get-indikator-detail', [KontributorController::class, 'getIndikatorDetail']);
+// Route::get('/get-programs', [KontributorController::class, 'getPrograms']);
+// Route::get('/get-kegiatans', [KontributorController::class, 'getKegiatans']);
+// Route::get('/get-subkegiatans', [KontributorController::class, 'getSubkegiatans']);
+// Route::get('/get-indikator', [KontributorController::class, 'getIndikator']);
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin/indikator/edit', [AdminController::class, 'editIndikator']);

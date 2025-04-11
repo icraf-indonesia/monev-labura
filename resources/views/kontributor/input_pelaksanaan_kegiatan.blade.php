@@ -38,12 +38,12 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Komponen</label>
+                                    <label class="col-lg-3 col-form-label">Indikator Keluaran</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="komponen" id="komponen">
+                                        <select class="form-control select" name="indikator" id="indikator">
                                             <option value="">== Pilih Komponen ==</option>
                                             @foreach ($inputkegiatan_tables as $inputkegiatan_table)
-                                                <option value="{{ $inputkegiatan_table->id }}">{{ $inputkegiatan_table->komponen }}</option>
+                                                <option value="{{ $inputkegiatan_table->id }}">{{ $inputkegiatan_table->indikator_keluaran }}</option>
                                             @endforeach
                                         </select>
                                         <span class="form-text text-muted">Pilih salah satu <b>komponen</b> yang
@@ -51,82 +51,71 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Komponen</label>
+                                    <div class="col-lg-9">
+                                        <input name="komponen" class="form-control" placeholder="" type="text" disabled
+                                            id="komponen">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Program</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="program" id="program">
-                                            <option value="">== Pilih Program ==</option>
-                                        </select>
-                                        <span class="form-text text-muted">Pilih salah satu <b>program</b> yang
-                                            sesuai</span>
+                                        <input name="program" class="form-control" placeholder="" type="text" disabled
+                                            id="program">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Kegiatan</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="kegiatan" id="kegiatan">
-                                            <option value="">== Pilih Kegiatan ==</option>
-                                        </select>
-                                        <span class="form-text text-muted">Pilih salah satu <b>kegiatan</b> yang
-                                            sesuai</span>
+                                        <input name="kegiatan" class="form-control" placeholder="" type="text" disabled
+                                            id="kegiatan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Subkegiatan</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="subkegiatan" id="subkegiatan">
-                                            <option value="">== Pilih Subkegiatan ==</option>
-                                        </select>
-                                        <span class="form-text text-muted">Pilih salah satu <b>subkegiatan</b> yang
-                                            sesuai</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Indikator Keluaran</label>
-                                    <div class="col-lg-9">
-                                        <input name="satuan" class="form-control" placeholder="" type="text" disabled
-                                            id="satuan">
+                                        <input name="subkegiatan" class="form-control" placeholder="" type="text" disabled
+                                            id="subkegiatan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Pelaksana</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="instansi" id="instansi">
-                                            <option value="">== Pilih Pelaksana ==</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Pelaksana Lainnya</label>
-                                    <div class="col-lg-9">
-                                        <input name="capaian" class="form-control"
-                                            placeholder="" type="text">
-                                        <span class="form-text text-muted">Tulis disini apabila tidak ada <b>pelaksana</b> yang
-                                            sesuai</span>
+                                        <input name="pelaksana" class="form-control" placeholder="" type="text" disabled
+                                            id="pelaksana">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Sumber Pendanaan</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="strategi" id="strategi">
-                                            <option value="">== Pilih Sumber Pendanaan ==</option>
-                                        </select>
+                                        <input name="sumber_pembiayaan" class="form-control" placeholder="" type="text" disabled
+                                            id="sumber_pembiayaan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Sumber Pendanaan Lainnya</label>
+                                    <label class="col-lg-3 col-form-label">Target</label>
                                     <div class="col-lg-9">
-                                        <input name="capaian" class="form-control"
-                                            placeholder="" type="text">
-                                        <span class="form-text text-muted">Tulis disini apabila tidak ada <b>sumber pendanaan</b> yang
-                                            sesuai</span>
+                                        <input name="target" class="form-control" placeholder="" type="text" disabled
+                                            id="target">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Tahun</label>
+                                    <div class="col-lg-9">
+                                        <input name="tahun" class="date-own form-control @error('tahun') is-invalid @enderror" placeholder="" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Capaian</label>
+                                    <div class="col-lg-9">
+                                        <input name="capaian" class="form-control" placeholder="" type="text" id="capaian">
                                     </div>
                                 </div>
                                 <div class="m-t-20 text-center">
-                                    <button class="btn btn-primary submit-btn" type="submit">Tambah</button>
+                                    <button class="btn btn-primary submit-btn" type="submit">Perbarui</button>
                                 </div>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -145,77 +134,38 @@
 @stop
 
 @section('customJS')
-    $(document).ready(function() {
-    $('select[name="strategi"]').on('change', function() {
-    var strategiID = $(this).val();
-    if(strategiID) {
-    $.ajax({
-    url: '/intervensi/capaian/' + strategiID,
-    type: "GET",
-    dataType: "json",
-    success: function(data) {
-    $('select[name="intervensi"]').empty();
-    $('select[name="intervensi"]').append('<option value="">== Pilih Intervensi ==</option>');
-    $.each(data, function(key, value) {
-    $('select[name="intervensi"]').append('<option value="'+ key +'">'+ value +'</option>');
-    });
-    }
-    });
-    } else {
-    $('select[name="intervensi"]').empty();
-    }
-    });
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    $('select[name="intervensi"]').on('change', function() {
-    var intervensiID = $(this).val();
-    if(intervensiID) {
-    $.ajax({
-    url: '/indikator/' + intervensiID,
-    type: "GET",
-    dataType: "json",
-    success: function(data2) {
-    $('select[name="indikator"]').empty();
-    $('select[name="indikator"]').append('<option value="">== Pilih Indikator ==</option>');
-    $.each(data2, function(key, value) {
-    $('select[name="indikator"]').append('<option value="'+ key +'">'+ value +'</option>');
-    });
-    }
-    });
-    } else {
-    $('select[name="indikator"]').empty();
-    }
-    });
+<script>
+$(document).ready(function() {
+    $('#indikator').change(function() {
+        var indikatorId = $(this).val();
 
-    $('select[name="indikator"]').on('change', function() {
-    var indikatorID = $(this).val();
-    if(indikatorID) {
-    $.ajax({
-    url: '/satuan/' + indikatorID,
-    type: "GET",
-    dataType: "json",
-    success: function(data3) {
-    {{-- console.log(data3); --}}
-    $.each(data3, function(key, value) {
-    //$('input[name="satuan"]').append(' value="'+ value +'">');
-    document.getElementById('satuan').value = key;
-    $('#dokumenPendukung').text(value);
+        if (indikatorId) {
+            $.ajax({
+                url: '{{ url("get-indikator-detail") }}',
+                type: 'GET',
+                data: { id: indikatorId },
+                success: function(response) {
+                    if (response) {
+                        $('#komponen').val(response.komponen);
+                        $('#program').val(response.program);
+                        $('#kegiatan').val(response.kegiatan);
+                        $('#subkegiatan').val(response.subkegiatan);
+                        $('#target').val(response.target);
+                        $('#sumber_pembiayaan').val(response.sumber_pembiayaan);
+                        $('#pelaksana').val(response.instansi);
+                    }
+                }
+            });
+        }
     });
-    }
-    });
-    } else {
-    $('input[name="satuan"]').empty();
-    }
-    });
-    });
+});
 
-    $('.date-own').datetimepicker({
-    viewMode: 'years',
-    format: 'YYYY'
+// Initialize datepicker for Tahun input
+$('.date-own').datetimepicker({
+        viewMode: 'years',
+        format: 'YYYY'
     });
-
-    function getFormattedDate(date) {
-    var year1 = date.getFullYear();
-    var year2 = date.getFullYear() + 1;
-    return year1 + '-' + year2;
-    }
+</script>
 @stop

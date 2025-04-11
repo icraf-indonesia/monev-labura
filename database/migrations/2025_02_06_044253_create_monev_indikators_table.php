@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('tahun')->nullable();
             $table->string('capaian')->nullable();
             $table->string('dokumen_pendukung')->nullable();
-            $table->string('keterangan')->nullable();
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

@@ -84,7 +84,7 @@
                                                                 style="background-color: #0d6efd !important;color: #fff;">Menunggu</span>
                                                         @elseif($kegiatan_table->status === 1)
                                                             <span class="badge rounded-pill"
-                                                                style="background-color: #198754 !important;color: #fff;">Diterima</span>
+                                                                style="background-color: #198754 !important;color: #fff;">Diverifikasi</span>
                                                         @else
                                                             {{-- <a class="custom-badge status-green text-right"
                                                                 href="/kontributor/kegiatan/{{ $kegiatan_table->id }}">

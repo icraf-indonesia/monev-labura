@@ -112,7 +112,7 @@ $(document).ready(function() {
     // Fetch Indikator options on page load
     $.get('/get-indikators', function(data) {
         let dropdown = $('#indikator');
-        dropdown.append('<option value="">== Pilih Indikator ==</option>');
+        dropdown.append('');
         $.each(data, function(index, indikator) {
             dropdown.append(`<option value="${indikator.id}">${indikator.indikator}</option>`);
         });

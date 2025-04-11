@@ -23,7 +23,7 @@ class KontributorController extends Controller
             'monev_indikators.tahun',
             'monev_indikators.capaian',
             'monev_indikators.dokumen_pendukung',
-            'monev_indikators.keterangan'
+            'monev_indikators.status'
         )
         ->paginate(5); // Use pagination
         return view('kontributor.index', ['indikator_dampaks' => $indikator_dampak]);
@@ -99,7 +99,7 @@ class KontributorController extends Controller
                 'tahun' => $request->tahun,
                 'capaian' => $request->capaian,
                 'dokumen_pendukung' => $nama_file,
-                'keterangan' => 'Baseline'
+                'status' => 0
             ]);
 
             return redirect()->route('kontributor')->withFragment('#b')->with('status', 'Capaian indikator berhasil ditambah.');
@@ -140,7 +140,7 @@ class KontributorController extends Controller
         public function getIndikators()
     {
         $indikators = DB::table('monev_indikators')
-            ->select('id', 'indikator') // Selecting ID and Indikator
+            ->select('id', 'indikator', 'id_instansi') // Selecting ID and Indikator
             ->distinct()
             ->orderBy('indikator', 'asc')
             ->get(); // Fetching as array of objects
@@ -177,7 +177,72 @@ class KontributorController extends Controller
                 'monev_instansis.instansi',
                 'monev_capaians.sumber_pembiayaan'
             )
-        ->get()->unique('komponen'); // Execute the query and get the results
+        // ->get()->unique('komponen'); // Execute the query and get the results
+        ->get();
         return view('kontributor.input_pelaksanaan_kegiatan', ['inputkegiatan_tables' => $input_kegiatans]);
     }
+
+    public function getIndikatorDetail(Request $request)
+    {
+        $id = $request->id;
+
+        $data = DB::table('monev_indikator_keluarans')
+            ->leftJoin('monev_komponens', 'monev_indikator_keluarans.id_komponen', '=', 'monev_komponens.id')
+            ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
+            ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
+            ->leftJoin('monev_subkegiatans', 'monev_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
+            ->leftJoin('monev_instansis', 'monev_indikator_keluarans.id_instansi', '=', 'monev_instansis.id')
+            ->leftJoin('monev_capaians', 'monev_indikator_keluarans.id', '=', 'monev_capaians.id_keluaran')
+            ->select(
+                'monev_komponens.komponen',
+                'monev_programs.program',
+                'monev_kegiatans.kegiatan',
+                'monev_subkegiatans.subkegiatan',
+                'monev_indikator_keluarans.indikator_keluaran',
+                'monev_instansis.instansi',
+                'monev_capaians.sumber_pembiayaan',
+                'monev_indikator_keluarans.target',
+            )
+            ->where('monev_indikator_keluarans.id', $id)
+            ->first();
+
+        return response()->json($data);
+    }
+
+    public function getPrograms(Request $request)
+    {
+        $programs = DB::table('monev_programs')
+            ->where('id_komponen', $request->komponen_id)
+            ->pluck('program', 'id'); 
+
+        return response()->json($programs);
+    }
+
+    public function getKegiatans(Request $request)
+    {
+        $kegiatans = DB::table('monev_kegiatans')
+            ->where('id_program', $request->program_id)
+            ->pluck('kegiatan', 'id'); 
+
+        return response()->json($kegiatans);
+    }
+
+    public function getSubkegiatans(Request $request)
+    {
+        $subkegiatans = DB::table('monev_subkegiatans')
+            ->where('id_kegiatan', $request->kegiatan_id)
+            ->pluck('subkegiatan', 'id'); 
+
+        return response()->json($subkegiatans);
+    }
+
+    public function getIndikator(Request $request)
+    {
+        $indikator = DB::table('monev_indikator_keluarans')
+            ->where('id_subkegiatan', $request->subkegiatan_id)
+            ->value('indikator_keluaran'); 
+
+        return response()->json(['indikator' => $indikator]);
+    }
+
 }

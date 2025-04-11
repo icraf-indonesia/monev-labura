@@ -65,7 +65,7 @@
                                             <th>Capaian</th>
                                             <th>Satuan</th>
                                             <th>Dokumen</th>
-                                            <th>Keterangan</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -90,12 +90,17 @@
                                                         @endif
                                                     </td>
                                                     <td width="10%">
-                                                        @if ($indikator_dampak->keterangan === 'Baseline')
+                                                        @if ($indikator_dampak->status === 0)
                                                             <span class="badge rounded-pill"
-                                                                style="background-color: #ebebe2 !important;color: #000;">Baseline</span>
-                                                        @elseif($indikator_dampak->keterangan === 'Aktual')
+                                                                style="background-color: #0d6efd !important;color: #fff;">Menunggu</span>
+                                                        @elseif($indikator_dampak->status === 1)
                                                             <span class="badge rounded-pill"
-                                                                style="background-color: #198754 !important;color: #fff;">Aktual</span>
+                                                                style="background-color: #198754 !important;color: #fff;">Diverifikasi</span>
+                                                        @else
+                                                            {{-- <a class="custom-badge status-green text-right"
+                                                                href="/kontributor/kegiatan/{{ $indikator_dampak->id }}">
+                                                                Revisi
+                                                            </a> --}}
                                                         @endif
                                                     </td>
                                                 </tr>

@@ -66,7 +66,7 @@ class AdminController extends Controller
                 'monev_capaians.sumber_pembiayaan',
                 'monev_capaians.status',
             )
-            ->paginate(5); // Use pagination
+            ->paginate(10); // Use pagination
         return view('admin.manajemen_kegiatan', ['kegiatans' => $kegiatans]);
     }
 

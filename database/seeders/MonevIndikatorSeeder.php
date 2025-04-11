@@ -29,7 +29,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 1,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             1 => array (
                 'id' => 2, 
@@ -41,7 +41,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 1,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             2 => array (
                 'id' => 3, 
@@ -53,7 +53,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 5,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             3 => array (
                 'id' => 4, 
@@ -65,7 +65,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 7,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             4 => array (
                 'id' => 5, 
@@ -77,7 +77,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 10,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             5 => array (
                 'id' => 6, 
@@ -89,7 +89,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 50,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             6 => array (
                 'id' => 7, 
@@ -101,7 +101,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 2,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             7 => array (
                 'id' => 8, 
@@ -113,7 +113,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 3,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             8 => array (
                 'id' => 9, 
@@ -125,7 +125,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 20,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             9 => array (
                 'id' => 10, 
@@ -137,7 +137,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 10,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             10 => array (
                 'id' => 11, 
@@ -149,7 +149,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 1,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             11 => array (
                 'id' => 12, 
@@ -161,7 +161,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 20,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             12 => array (
                 'id' => 13, 
@@ -174,7 +174,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 7,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             13 => array (
                 'id' => 14, 
@@ -186,7 +186,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 2,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Baseline'
+                'status' => 0
             ),
             14 => array (
                 'id' => 15, 
@@ -198,7 +198,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 25,
                 'dokumen_pendukung' => 'tidak ada',
-                'keterangan' => 'Aktual'
+                'status' => 0
             )
         ));
     }
