@@ -28,55 +28,53 @@
                     </ul>
                     <div class="tab-content" style="padding-top: 10px;">
                         <div class="tab-pane active" id="edit-target">
-                            <form class="page-box" method="post" action="/admin/kegiatan/">
+                            <form class="page-box" method="post" action="/admin/kegiatan/{{ $kegiatan->id }}">
                                 @csrf
                                 @method('put')
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Periode</label>
+                                    <label class="col-lg-3 col-form-label">Program</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" type="text" name="periode" value="" disabled>
+                                        <input class="form-control" type="text" value="{{ $kegiatan->program }}" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Kegiatan</label>
                                     <div class="col-lg-9">
-                                        <textarea class="form-control @error('kegiatan') is-invalid @enderror" name="kegiatan" rows="5" disabled></textarea>
+                                        <textarea class="form-control" rows="5" disabled>{{ $kegiatan->kegiatan }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Nomenklatur Kegiatan</label>
+                                    <label class="col-lg-3 col-form-label">Subkegiatan</label>
                                     <div class="col-lg-9">
-                                        <textarea class="form-control @error('nomenklatur') is-invalid @enderror" name="nomenklatur" rows="5"></textarea>
+                                        <textarea class="form-control" rows="5" disabled>{{ $kegiatan->subkegiatan }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Indikator</label>
+                                    <label class="col-lg-3 col-form-label">Indikator Keluaran</label>
                                     <div class="col-lg-9">
-                                        <textarea class="form-control @error('indikator_kegiatan') is-invalid @enderror" name="indikator_kegiatan" rows="5"></textarea>
+                                        <textarea class="form-control" rows="5" disabled>{{ $kegiatan->indikator_keluaran }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Target Volume</label>
+                                    <label class="col-lg-3 col-form-label">Satuan</label>
                                     <div class="col-lg-9">
-                                        <input name="target_volume" class="form-control @error('target_volume') is-invalid @enderror" type="text" value="">
+                                        <input name="satuan" class="form-control @error('satuan') is-invalid @enderror" type="text" value="{{ $kegiatan->satuan }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Target Anggaran</label>
+                                    <label class="col-lg-3 col-form-label">Target</label>
                                     <div class="col-lg-9">
-                                        <input name="target_anggaran" class="form-control @error('target_anggaran') is-invalid @enderror" type="text" value="">
+                                        <input name="target" class="form-control @error('target') is-invalid @enderror" type="text" value="{{ $kegiatan->target }}">
                                     </div>
                                 </div>
                                 <div class="m-t-20 text-center">
-                                    <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                                    <button class="btn btn-primary submit-btn" type="submit">Perbarui</button>
                                 </div>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

@@ -49,18 +49,15 @@
                                     <tbody>
                                         @foreach ($indikator_dampaks as $t)
                                             <tr>
-                                                <td width="1%">{{ (($indikator_dampaks->currentPage() * 10) - 10) + $loop->iteration }}</td>
+                                                <td width="1%">
+                                                    {{ ($indikator_dampaks->currentPage() - 1) * $indikator_dampaks->perPage() + $loop->iteration }}
+                                                </td>
                                                 <td width="10%">{{ $t->indikator }}</td>
                                                 <td width="1%">{{ $t->target }}</td>
                                                 <td width="1%">{{ $t->satuan }}</td>
-                                                @if (empty($t->dokumen))
-                                                    <td width="2%">Belum ada dokumen</td>
-                                                @else
-                                                    <td width="2%">{{$t->dokumen}}</td>
-                                                @endif
+                                                <td width="2%">{{$t->jenis_dokumen}}</td>
                                                 <td width="2%">
-                                                    {{-- <a class="custom-badge status-green bg-success text-right" href="/admin/indikator/{{ $t->id }}">Ubah</a> --}}
-                                                    <a class="custom-badge status-green bg-success text-right" href="/admin/indikator/edit">Ubah</a>
+                                                    <a class="custom-badge status-green bg-success text-right" href="{{ route('admin.indikator.edit', $t->id) }}">Ubah</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -86,9 +83,6 @@
                                     <div class="col-lg-9">
                                         <select class="form-control select" name="strategi" id="strategi">
                                             <option value="">== Pilih Komponen ==</option>
-                                            {{-- @foreach ($strategi as $s)
-                                                <option value="{{$s->id}}">{{$s->strategi}}</option>
-                                            @endforeach --}}
                                         </select>
                                         <span class="form-text text-muted">Pilih salah satu <b>komponen</b> yang sesuai</span>
                                     </div>

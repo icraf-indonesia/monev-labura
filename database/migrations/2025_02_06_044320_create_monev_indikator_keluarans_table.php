@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('indikator_keluaran')->nullable();
             $table->string('target')->nullable();
+            $table->string('capaian')->nullable();
             $table->string('satuan')->nullable();
             $table->foreignId('id_komponen');
             $table->foreignId('id_program');

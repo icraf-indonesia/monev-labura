@@ -7,9 +7,9 @@
         <div class="col-lg-12 col-md-12 col-sm-12 dct-appoinment">
             <div class="row">
                 <div class="col-md-12">
-                    @if (session('status'))
+                    @if (session('success'))
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            {{ session('success') }}
                         </div>
                     @endif
                     @if ($errors->any())
@@ -28,48 +28,44 @@
                     </ul>
                     <div class="tab-content" style="padding-top: 10px;">
                         <div class="tab-pane active" id="edit-target">
-                            <form class="page-box" method="post">
-                            {{-- <form class="page-box" method="post" action="/admin/kegiatan/{{ $data->id }}/{{ $data->id_periode }}">     --}}
+                            <form class="page-box" method="post" action="{{ route('admin.indikator.update', $data->id ?? '') }}">
                                 @csrf
                                 @method('put')
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Program</label>
+                                    <label class="col-lg-3 col-form-label">Indikator Dampak</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" type="text" name="periode" value="" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Kegiatan</label>
-                                    <div class="col-lg-9">
-                                        <textarea class="form-control @error('kegiatan') is-invalid @enderror" name="kegiatan" rows="5" disabled></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Sub Kegiatan</label>
-                                    <div class="col-lg-9">
-                                        <textarea class="form-control @error('nomenklatur') is-invalid @enderror" name="nomenklatur" rows="5"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Indikator</label>
-                                    <div class="col-lg-9">
-                                        <textarea class="form-control @error('indikator_kegiatan') is-invalid @enderror" name="indikator_kegiatan" rows="5"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label">Satuan</label>
-                                    <div class="col-lg-9">
-                                        <input name="target_volume" class="form-control @error('target_volume') is-invalid @enderror" type="text" value="">
+                                        <textarea class="form-control" name="indikator_dampak" rows="5" readonly>{{ $data->indikator_dampak ?? '' }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Target</label>
                                     <div class="col-lg-9">
-                                        <input name="target_anggaran" class="form-control @error('target_anggaran') is-invalid @enderror" type="text" value="">
+                                        <input name="target" class="form-control @error('target') is-invalid @enderror" type="text" value="{{ $data->target ?? '' }}">
+                                        @error('target')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Satuan</label>
+                                    <div class="col-lg-9">
+                                        <input name="satuan" class="form-control @error('satuan') is-invalid @enderror" type="text" value="{{ $data->satuan ?? '' }}">
+                                        @error('satuan')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Jenis Dokumen</label>
+                                    <div class="col-lg-9">
+                                        <input name="jenis_dokumen" class="form-control @error('jenis_dokumen') is-invalid @enderror" type="text" value="{{ $data->jenis_dokumen ?? '' }}">
+                                        @error('jenis_dokumen')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="m-t-20 text-center">
-                                    <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                                    <button class="btn btn-primary submit-btn" type="submit">Perbarui</button>
                                 </div>
                             </form>
                         </div>

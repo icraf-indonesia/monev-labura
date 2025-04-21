@@ -91,16 +91,11 @@
                                                     </td>
                                                     <td width="10%">
                                                         @if ($indikator_dampak->status === 0)
-                                                            <span class="badge rounded-pill"
-                                                                style="background-color: #0d6efd !important;color: #fff;">Menunggu</span>
+                                                            <span class="badge rounded-pill" style="background-color: #0d6efd !important;color: #fff;">Menunggu</span>
                                                         @elseif($indikator_dampak->status === 1)
-                                                            <span class="badge rounded-pill"
-                                                                style="background-color: #198754 !important;color: #fff;">Diverifikasi</span>
-                                                        @else
-                                                            {{-- <a class="custom-badge status-green text-right"
-                                                                href="/kontributor/kegiatan/{{ $indikator_dampak->id }}">
-                                                                Revisi
-                                                            </a> --}}
+                                                            <span class="badge rounded-pill" style="background-color: #198754 !important;color: #fff;">Diverifikasi</span>
+                                                        @elseif($indikator_dampak->status === 2)
+                                                            <a href="{{ route('indikator.edit', $indikator_dampak->id) }}" class="btn btn-warning btn-sm">Revisi</a>
                                                         @endif
                                                     </td>
                                                 </tr>

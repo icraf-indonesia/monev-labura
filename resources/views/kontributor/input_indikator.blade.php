@@ -43,7 +43,8 @@
                                         <select class="form-control select" name="indikator" id="indikator">
                                             <option value="">== Pilih Indikator ==</option>
                                         </select>
-                                        <span class="form-text text-muted">Pilih salah satu <b>indikator</b> yang sesuai</span>
+                                        <span class="form-text text-muted">Pilih salah satu <b>indikator</b> yang
+                                            sesuai</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -56,7 +57,9 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Tahun</label>
                                     <div class="col-lg-9">
-                                        <input name="tahun" class="date-own form-control @error('tahun') is-invalid @enderror" placeholder="" type="text">
+                                        <input name="tahun"
+                                            class="date-own form-control @error('tahun') is-invalid @enderror"
+                                            placeholder="" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -106,36 +109,59 @@
 @stop
 
 @section('customJS')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    // Fetch Indikator options on page load
-    $.get('/get-indikators', function(data) {
-        let dropdown = $('#indikator');
-        dropdown.append('');
-        $.each(data, function(index, indikator) {
-            dropdown.append(`<option value="${indikator.id}">${indikator.indikator}</option>`);
-        });
-    });
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Fetch Indikator options filtered by user's institution
+            function loadIndikators() {
+                $.ajax({
+                    url: '/get-indikators',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        let dropdown = $('#indikator');
+                        dropdown.empty();
+                        dropdown.append('<option value="">== Pilih Indikator ==</option>');
 
-    // Fetch and populate Satuan & Target on selection change
-    $('#indikator').on('change', function() {
-        var indikatorID = $(this).val();
-        if (indikatorID) {
-            $.get(`/satuan/${indikatorID}`, function(data) {
-                $('#satuan').val(data.satuan || '');
-                $('#target').val(data.target || '');
+                        $.each(data, function(index, indikator) {
+                            dropdown.append(
+                                `<option value="${indikator.id}">${indikator.indikator}</option>`
+                                );
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error loading indicators:', error);
+                        // Optional: Show error message to user
+                        $('#indikator').html('<option value="">Error loading indicators</option>');
+                    }
+                });
+            }
+
+            // Load indicators on page load
+            loadIndikators();
+
+            // Autofill Satuan & Target when Indikator is selected
+            $('#indikator').on('change', function() {
+                const indikatorId = $(this).val();
+
+                if (indikatorId) {
+                    $.get(`/get-satuan-target/${indikatorId}`, function(data) {
+                        $('#satuan').val(data.satuan || '');
+                        $('#target').val(data.target || '');
+                    }).fail(function() {
+                        console.error("Failed to fetch Satuan & Target.");
+                        $('#satuan, #target').val('');
+                    });
+                } else {
+                    $('#satuan, #target').val('');
+                }
             });
-        } else {
-            $('#satuan, #target').val('');
-        }
-    });
 
-    // Initialize datepicker for Tahun input
-    $('.date-own').datetimepicker({
-        viewMode: 'years',
-        format: 'YYYY'
-    });
-});
-</script>
+            // Initialize datepicker
+            $('.date-own').datetimepicker({
+                viewMode: 'years',
+                format: 'YYYY'
+            });
+        });
+    </script>
 @stop

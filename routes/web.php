@@ -23,10 +23,11 @@ Route::get('/', [HomeController::class, 'index'])->name('beranda');
 Route::get('/beranda/pelaksanaan', [HomeController::class, 'pelaksanaan']);
 Route::get('/beranda/monitoring', [HomeController::class, 'monitoring']);
 Route::get('/beranda/dampak', [HomeController::class, 'dampak']);
-// Route::get('/grafik', [HomeController::class, 'grafik']);
 
 Route::get('/perencanaan', [HomeController::class, 'perencanaan']);
 Route::get('/export-pdf', [PDFController::class, 'exportPDF']);
+Route::get('/export-pdf-keluaran', [PDFController::class, 'exportPDFKeluaran']);
+Route::get('/export-csv', [KontributorController::class, 'exportToExcel'])->name('export.csv');
 
 Route::get('/unduh', [HomeController::class, 'unduh']);
 
@@ -38,48 +39,40 @@ Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontr
 Route::get('komponen/{id}', [KontributorController::class, 'komponen']);
 Route::get('indikator/{id}', [KontributorController::class, 'indikator']);
 Route::get('/get-indikators', [KontributorController::class, 'getIndikators']);
-Route::get('satuan/{id}', [KontributorController::class, 'satuan']);
-Route::get('target/{id}', [KontributorController::class, 'target']);
+Route::get('/get-indikator-detail', [KontributorController::class, 'getIndikatorDetail']);
+Route::get('/get-satuan-target/{id}', [KontributorController::class, 'getSatuanTarget']);
+Route::get('/kontributor/indikator/{id}/edit', [KontributorController::class, 'editIndikator'])->name('indikator.edit');
+Route::put('/kontributor/indikator/{id}', [KontributorController::class, 'updateIndikator'])->name('indikator.update');
+Route::get('/kontributor/kegiatan/{id}/edit', [KontributorController::class, 'editKegiatan'])->name('kegiatan.edit');
+Route::put('/kontributor/kegiatan/{id}', [KontributorController::class, 'updateKegiatan'])->name('kegiatan.update');
 
 Route::get('/kontributor/capaian/tambah', [KontributorController::class, 'tambahCapaian']);
 Route::post('/kontributor/store', [KontributorController::class, 'store']);
 Route::post('/kontributor/store_indikator', [KontributorController::class, 'storeIndikator']);
-
-// Route::get('/kontributor/indikator/{id}', [KontributorController::class, 'revisiIndikator']);
-// Route::put('/kontributor/indikator/{id}', [KontributorController::class, 'updateRevisiIndikator']);
+Route::post('/kontributor/store_kegiatan', [KontributorController::class, 'storeKegiatan']);
 
 Route::get('/kontributor/indikator/tambah', [KontributorController::class, 'inputIndikator'])->name('addIndikator');
 Route::get('/kontributor/kegiatan', [KontributorController::class, 'kegiatan'])->name('kegiatan');
 Route::get('/kontributor/kegiatan/tambah', [KontributorController::class, 'inputKegiatan'])->name('addKegiatan');
-Route::get('/get-indikator-detail', [KontributorController::class, 'getIndikatorDetail']);
-// Route::get('/get-programs', [KontributorController::class, 'getPrograms']);
-// Route::get('/get-kegiatans', [KontributorController::class, 'getKegiatans']);
-// Route::get('/get-subkegiatans', [KontributorController::class, 'getSubkegiatans']);
-// Route::get('/get-indikator', [KontributorController::class, 'getIndikator']);
+Route::get('/get-kegiatan', [KontributorController::class, 'getKegiatan']);
+
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-Route::get('/admin/indikator/edit', [AdminController::class, 'editIndikator']);
-// Route::put('/admin/indikator/{id}', [AdminController::class, 'updateIndikator']);
-// Route::delete('/admin/indikator/{id}', [AdminController::class, 'deleteIndikator']);
+Route::get('/admin/indikator/{id}/edit', [AdminController::class, 'editIndikator'])->name('admin.indikator.edit');
+Route::put('/admin/indikator/{id}', [AdminController::class, 'updateIndikator'])->name('admin.indikator.update');
 Route::get('/admin/indikator/verifikasi', [AdminController::class, 'verifikasiIndikator']);
-Route::put('/admin/indikator/verify/{id}', [AdminController::class, 'approveIndikator']);
-Route::put('/admin/indikator/reject/{id}', [AdminController::class, 'rejectIndikator']);
+Route::post('/admin/approve/{id}', [AdminController::class, 'approveIndikator'])->name('admin.approve');
+Route::post('/admin/reject/{id}', [AdminController::class, 'rejectIndikator'])->name('admin.reject');
 
 Route::get('/admin/kegiatan', [AdminController::class, 'daftarKegiatan']);
-// Route::get('/admin/kegiatan/cari', [AdminController::class, 'cariKegiatan']);
-Route::get('/admin/kegiatan/edit', [AdminController::class, 'editKegiatan']);
-// Route::put('/admin/kegiatan/{id}/{p}', [AdminController::class, 'updateKegiatan']);
+Route::get('/admin/kegiatan/{id}/edit', [AdminController::class, 'editKegiatan']);
+Route::put('/admin/kegiatan/{id}', [AdminController::class, 'updateKegiatan']);
 Route::get('/admin/kegiatan/verifikasi', [AdminController::class, 'verifikasiKegiatan']);
-Route::put('/admin/kegiatan/verify/{id}', [AdminController::class, 'approveKegiatan']);
-Route::put('/admin/kegiatan/reject/{id}', [AdminController::class, 'rejectKegiatan']);
+Route::put('/admin/kegiatan/approve/{id}', [AdminController::class, 'approveKegiatan'])->name('admin.kegiatan.approve');
+Route::put('/admin/kegiatan/reject/{id}', [AdminController::class, 'rejectKegiatan'])->name('admin.kegiatan.reject');
 
 Route::get('/admin/tambah-kegiatan', [AdminController::class, 'tambahKegiatan']);
 
 Route::get('/session/logout', [SessionController::class, 'logout'])->name('logout');
 
 });
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });

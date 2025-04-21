@@ -27,7 +27,7 @@ class MonevCapaianSeeder extends Seeder
                 'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
-                'status' => 0
+                'status' => 1
             ),
             1 => array (
                 'id' => 2, 
@@ -37,7 +37,7 @@ class MonevCapaianSeeder extends Seeder
                 'capaian' => 30,
                 'id_stakeholder' => 1,
                 'sumber_pembiayaan' => 'APBD',
-                'status' => 0
+                'status' => 2
             ),
             2 => array (
                 'id' => 3, 

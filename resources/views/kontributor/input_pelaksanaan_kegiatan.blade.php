@@ -34,20 +34,21 @@
 
                         {{-- tab insert capaian  --}}
                         <div class="tab-pane active" id="tambah-capaian">
-                            <form class="page-box" method="post" action="/kontributor/store_indikator"
+                            <form class="page-box" method="post" action="/kontributor/store_kegiatan"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Indikator Keluaran</label>
                                     <div class="col-lg-9">
                                         <select class="form-control select" name="indikator" id="indikator">
-                                            <option value="">== Pilih Komponen ==</option>
+                                            <option value="">== Pilih Indikator Keluaran ==</option>
                                             @foreach ($inputkegiatan_tables as $inputkegiatan_table)
-                                                <option value="{{ $inputkegiatan_table->id }}">{{ $inputkegiatan_table->indikator_keluaran }}</option>
+                                                <option value="{{ $inputkegiatan_table->id }}">
+                                                    {{ $inputkegiatan_table->indikator_keluaran }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        <span class="form-text text-muted">Pilih salah satu <b>komponen</b> yang
-                                            sesuai</span>
+                                        <span class="form-text text-muted">Pilih salah satu <b>Indikator Keluaran</b> yang sesuai</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -138,6 +139,16 @@
 
 <script>
 $(document).ready(function() {
+    $.get('/get-kegiatan', function(data) {
+        let dropdown = $('#indikator');
+        dropdown.empty();
+        dropdown.append('<option value="">== Pilih Indikator Keluaran ==</option>');
+        
+        $.each(data, function(index, kegiatan) {
+            dropdown.append(`<option value="${kegiatan.id}">${kegiatan.indikator_keluaran}</option>`);
+        });
+    });
+
     $('#indikator').change(function() {
         var indikatorId = $(this).val();
 

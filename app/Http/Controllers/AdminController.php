@@ -16,36 +16,109 @@ class AdminController extends Controller
             'indikator',
             'target',
             'satuan',
-            'dokumen_pendukung'
+            'jenis_dokumen',
         )
         ->paginate(5); // Use pagination
 
         return view('admin.index', ['indikator_dampaks' => $indikator_dampak]);
     }
 
-    public function editIndikator(Request $request)
+    public function editIndikator($id)
     {
-        return view('admin.edit_indikator');
+        $indikator = DB::table('monev_indikators')
+            ->select(
+                'id',
+                'indikator as indikator_dampak',
+                'target',
+                'satuan',
+                'jenis_dokumen'
+            )
+            ->where('id', $id)
+            ->first();
+
+        if (!$indikator) {
+            abort(404);
+        }
+
+        return view('admin.edit_indikator', ['data' => $indikator]);
     }
 
-    public function updateIndikator(Request $request)
+    public function updateIndikator(Request $request, $id)
     {
-        
+        $request->validate([
+            'target' => 'required',
+            'satuan' => 'required',
+            'jenis_dokumen' => 'required'
+        ]);
+
+        $updated = DB::table('monev_indikators')
+            ->where('id', $id)
+            ->update([
+                'target' => $request->target,
+                'satuan' => $request->satuan,
+                'jenis_dokumen' => $request->jenis_dokumen,
+                'updated_at' => now()
+            ]);
+
+        if ($updated) {
+            return redirect()->route('admin')->with('status', 'Indikator berhasil diperbarui');
+        }
+
+        return back()->with('error', 'Gagal memperbarui indikator');
     }
 
     public function verifikasiIndikator(Request $request)
     {
-        return view('admin.verifikasi_indikator');
+        // Get all indicator submissions with related data
+        $submissions = DB::table('monev_indikator_submissions as mis')
+            ->join('monev_indikators as mi', 'mis.indikator_id', '=', 'mi.id')
+            ->join('users', 'mis.user_id', '=', 'users.id')
+            ->select(
+                'mis.id',
+                'mi.indikator',
+                'mis.tahun',
+                'mi.target',
+                'mis.capaian',
+                'mi.satuan',
+                DB::raw("CASE 
+                    WHEN mis.status = 0 THEN 'Menunggu'
+                    WHEN mis.status = 1 THEN 'Diverifikasi'
+                    WHEN mis.status = 2 THEN 'Direvisi'
+                    ELSE 'Unknown'
+                END as status"),
+                'users.name as diverifikasi_oleh',
+                'mis.status as status_code' // For action buttons
+            )
+            ->orderBy('mis.created_at', 'desc')
+            ->paginate(10); // Adjust pagination as needed
+
+        return view('admin.verifikasi_indikator', [
+            'submissions' => $submissions
+        ]);
     }
 
-    public function approveIndikator(Request $request)
+    public function approveIndikator($id)
     {
+        DB::table('monev_indikator_submissions')
+            ->where('id', $id)
+            ->update([
+                'status' => 1, // Approved
+                'updated_at' => now()
+            ]);
 
+        return redirect()->back()->with('success', 'Submission approved successfully');
     }
 
-    public function rejectIndikator(Request $request)
+    public function rejectIndikator($id)
     {
+        DB::table('monev_indikator_submissions')
+            ->where('id', $id)
+            ->update([
+                'status' => 2, // Rejected
+                'updated_at' => now()
+            ]);
 
+        return redirect()->back()->with('success', 'Submission rejected');
     }
 
     public function daftarKegiatan(Request $request)
@@ -57,42 +130,122 @@ class AdminController extends Controller
             ->leftJoin('monev_instansis', 'monev_indikator_keluarans.id_instansi', '=', 'monev_instansis.id')
             ->leftJoin('monev_capaians', 'monev_indikator_keluarans.id', '=', 'monev_capaians.id_keluaran')
             ->select(
+                'monev_indikator_keluarans.id',
                 'monev_programs.program',
                 'monev_kegiatans.kegiatan',
                 'monev_subkegiatans.subkegiatan',
                 'monev_indikator_keluarans.indikator_keluaran',
+                'monev_indikator_keluarans.satuan',
                 'monev_indikator_keluarans.target',
-                'monev_instansis.instansi',
-                'monev_capaians.sumber_pembiayaan',
-                'monev_capaians.status',
+                'monev_capaians.tahun',
+                'monev_instansis.instansi'
             )
-            ->paginate(10); // Use pagination
+            ->paginate(10);
         return view('admin.manajemen_kegiatan', ['kegiatans' => $kegiatans]);
     }
 
-    public function editKegiatan(Request $request)
+    public function editKegiatan(Request $request, $id)
     {
-        return view('admin.edit_kegiatan');
+        $kegiatan = DB::table('monev_indikator_keluarans')
+            ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
+            ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
+            ->leftJoin('monev_subkegiatans', 'monev_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
+            ->where('monev_indikator_keluarans.id', $id)
+            ->select(
+                'monev_indikator_keluarans.id',
+                'monev_programs.program',
+                'monev_kegiatans.kegiatan',
+                'monev_subkegiatans.subkegiatan',
+                'monev_indikator_keluarans.indikator_keluaran',
+                'monev_indikator_keluarans.satuan',
+                'monev_indikator_keluarans.target'
+            )
+            ->first();
+
+        if (!$kegiatan) {
+            abort(404);
+        }
+
+        return view('admin.edit_kegiatan', ['kegiatan' => $kegiatan]);
+    }
+
+    public function updateKegiatan(Request $request, $id)
+    {
+        $request->validate([
+            'satuan' => 'required|string',
+            'target' => 'required|string',
+        ]);
+
+        DB::table('monev_indikator_keluarans')
+            ->where('id', $id)
+            ->update([
+                'satuan' => $request->satuan,
+                'target' => $request->target,
+                'updated_at' => now()
+            ]);
+
+        return redirect('/admin/kegiatan')->with('status', 'Target kegiatan berhasil diperbarui!');
     }
 
     public function verifikasiKegiatan(Request $request)
     {
-        return view('admin.verifikasi_kegiatan');
+        $submissions = DB::table('monev_keluaran_submissions as mks')
+            ->join('monev_indikator_keluarans as mik', 'mks.indikator_keluaran_id', '=', 'mik.id')
+            ->join('monev_programs as mp', 'mik.id_program', '=', 'mp.id')
+            ->join('monev_kegiatans as mk', 'mik.id_kegiatan', '=', 'mk.id')
+            ->join('monev_subkegiatans as msk', 'mik.id_subkegiatan', '=', 'msk.id')
+            ->join('monev_instansis as mi', 'mik.id_instansi', '=', 'mi.id')
+            ->join('monev_capaians as mc', 'mks.indikator_keluaran_id', '=', 'mc.id')
+            ->join('users', 'mks.user_id', '=', 'users.id')
+            ->select(
+                'mks.id',
+                'mp.program',
+                'mk.kegiatan',
+                'msk.subkegiatan',
+                'mik.indikator_keluaran',
+                'mi.instansi as pelaksana',
+                'mc.sumber_pembiayaan',
+                'mks.tahun',
+                'mks.capaian',
+                'mks.status',
+                'users.name as kontributor',
+                DB::raw("CASE 
+                    WHEN mks.status = 0 THEN 'Menunggu'
+                    WHEN mks.status = 1 THEN 'Diverifikasi'
+                    WHEN mks.status = 2 THEN 'Direvisi'
+                    ELSE 'Unknown'
+                END as status_text")
+            )
+            ->orderBy('mks.created_at', 'desc')
+            ->paginate(10);
+
+        return view('admin.verifikasi_kegiatan', [
+            'submissions' => $submissions
+        ]);
     }
 
-    public function updateKegiatan(Request $request)
+    public function approveKegiatan($id)
     {
-        
+        DB::table('monev_keluaran_submissions')
+            ->where('id', $id)
+            ->update([
+                'status' => 1, // Approved
+                'updated_at' => now()
+            ]);
+
+        return redirect()->back()->with('success', 'Kegiatan berhasil disetujui');
     }
 
-    public function approveKegiatan(Request $request)
+    public function rejectKegiatan($id)
     {
+        DB::table('monev_keluaran_submissions')
+            ->where('id', $id)
+            ->update([
+                'status' => 2, // Rejected
+                'updated_at' => now()
+            ]);
 
-    }
-
-    public function rejectKegiatan(Request $request)
-    {
-
+        return redirect()->back()->with('success', 'Kegiatan ditolak dan memerlukan revisi');
     }
 
     public function tambahKegiatan(Request $request)

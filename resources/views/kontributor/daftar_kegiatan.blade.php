@@ -85,12 +85,11 @@
                                                         @elseif($kegiatan_table->status === 1)
                                                             <span class="badge rounded-pill"
                                                                 style="background-color: #198754 !important;color: #fff;">Diverifikasi</span>
-                                                        @else
-                                                            {{-- <a class="custom-badge status-green text-right"
-                                                                href="/kontributor/kegiatan/{{ $kegiatan_table->id }}">
-                                                                Revisi
-                                                            </a> --}}
+                                                        @elseif($kegiatan_table->status === 2)
+                                                            <a href="{{ route('kegiatan.edit', $kegiatan_table->id) }}"
+                                                                class="btn btn-warning btn-sm">Revisi</a>
                                                         @endif
+                                                    </td>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -118,10 +117,11 @@
                                             href="{{ $kegiatan_tables->nextPageUrl() }}">Next</a></li>
                                     <li class="page-item"><a class="page-link"
                                             href="{{ $kegiatan_tables->url($kegiatan_tables->lastPage()) }}">Last</a></li>
+                                    <li><a href="{{ url('/export-csv') }}" class="btn btn-danger"
+                                            style="margin-left: 10px; background:#198754; color:#fff;">Unduh Tabel</a></li>
                                 </ul>
                             </nav>
                         </div>
-
                     </div>
                 </div>
             </div>

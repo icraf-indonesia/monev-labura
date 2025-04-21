@@ -29,7 +29,8 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 1,
                 'dokumen_pendukung' => 'tidak ada',
-                'status' => 0
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
+                'status' => 1
             ),
             1 => array (
                 'id' => 2, 
@@ -41,7 +42,8 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 1,
                 'dokumen_pendukung' => 'tidak ada',
-                'status' => 0
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
+                'status' => 2
             ),
             2 => array (
                 'id' => 3, 
@@ -53,6 +55,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 5,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             3 => array (
@@ -65,6 +68,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 7,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             4 => array (
@@ -77,6 +81,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 10,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             5 => array (
@@ -89,6 +94,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 50,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             6 => array (
@@ -101,6 +107,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 2,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             7 => array (
@@ -113,6 +120,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 3,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             8 => array (
@@ -125,6 +133,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 20,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             9 => array (
@@ -137,6 +146,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 10,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             10 => array (
@@ -149,6 +159,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 1,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             11 => array (
@@ -161,6 +172,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 20,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             12 => array (
@@ -174,6 +186,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 7,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             13 => array (
@@ -186,6 +199,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 2,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             ),
             14 => array (
@@ -198,6 +212,7 @@ class MonevIndikatorSeeder extends Seeder
                 'tahun' => 2024,
                 'capaian' => 25,
                 'dokumen_pendukung' => 'tidak ada',
+                'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
                 'status' => 0
             )
         ));

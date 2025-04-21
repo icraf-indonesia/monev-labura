@@ -43,9 +43,10 @@
                                             <th>Kegiatan</th>
                                             <th>Sub Kegiatan</th>
                                             <th>Indikator Keluaran</th>
+                                            <th>Satuan</th>
+                                            <th>Waktu Pelaksanaan</th>
                                             <th>Lembaga Penanggung Jawab</th>
                                             <th>Target</th>
-                                            <th>Dokumen Pendukung</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -59,16 +60,12 @@
                                                 <td width="10%">{{ $k->kegiatan }}</td>
                                                 <td width="10%">{{ $k->subkegiatan }}</td>
                                                 <td width="10%">{{ $k->indikator_keluaran }}</td>
+                                                <td width="10%">{{ $k->satuan }}</td>
+                                                <td width="10%">{{ $k->tahun }}</td>
                                                 <td width="10%">{{ $k->instansi }}</td>
                                                 <td width="1%">{{ $k->target }}</td>
-                                                @if (empty($k->dokumen_pendukung))
-                                                    <td width="2%">Belum ada dokumen</td>
-                                                @else
-                                                    <td width="2%">{{$k->dokumen_pendukung}}</td>
-                                                @endif
                                                 <td width="2%">
-                                                    {{-- <a class="custom-badge status-green bg-success text-right" href="/admin/indikator/{{ $t->id }}">Ubah</a> --}}
-                                                    <a class="custom-badge status-green bg-success text-right" href="/admin/indikator/edit">Ubah</a>
+                                                    <a class="custom-badge status-green bg-success text-right" href="/admin/kegiatan/{{ $k->id }}/edit">Ubah</a>
                                                 </td>
                                             </tr>
                                         @endforeach

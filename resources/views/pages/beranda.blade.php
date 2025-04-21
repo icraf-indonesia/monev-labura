@@ -15,6 +15,17 @@
     margin: 0 0 5px;
     color: #777;
     }
+    .legend {
+    line-height: 18px;
+    color: #555;
+    }
+    .legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+    }
 @stop
 
 @section('css')
@@ -131,9 +142,10 @@
                 <h2 style="padding-bottom:20px;">Monitoring Rencana Aksi</h2>
                 <form method="GET" action="{{ route('beranda') }}" class="mb-4" style="padding-bottom:10px;">
                     <label for="tahun" class="fw-bold me-2">Filter Tahun:</label>
-                    <select name="tahun" id="tahun" class="form-select d-inline-block" style="width: 150px;" onchange="this.form.submit()">
+                    <select name="tahun" id="tahun" class="form-select d-inline-block" style="width: 150px;"
+                        onchange="this.form.submit()">
                         <option value="">Semua Tahun</option>
-                        @foreach($tahun_list as $tahun)
+                        @foreach ($tahun_list as $tahun)
                             <option value="{{ $tahun }}" {{ request('tahun') == $tahun ? 'selected' : '' }}>
                                 {{ $tahun }}
                             </option>
@@ -157,7 +169,8 @@
                         @if ($keluaran_tables->count())
                             @foreach ($keluaran_tables as $keluaran_table)
                                 <tr>
-                                    <td>{{ ($keluaran_tables->currentPage() - 1) * $keluaran_tables->perPage() + $loop->iteration }}</td>
+                                    <td>{{ ($keluaran_tables->currentPage() - 1) * $keluaran_tables->perPage() + $loop->iteration }}
+                                    </td>
                                     <td>{{ $keluaran_table->program }}</td>
                                     <td>{{ $keluaran_table->kegiatan }}</td>
                                     <td>{{ $keluaran_table->subkegiatan }}</td>
@@ -177,8 +190,8 @@
 
                 <!-- Pagination -->
                 <!-- <div class="d-flex justify-content-center">
-                    {{ $keluaran_tables->appends(['tahun' => request('tahun')])->links() }}
-                </div> -->
+                        {{ $keluaran_tables->appends(['tahun' => request('tahun')])->links() }}
+                    </div> -->
             </div>
             <nav aria-label="Page navigation">
                 <ul class="pagination">
@@ -186,21 +199,24 @@
                             href="{{ $keluaran_tables->url($keluaran_tables->onFirstPage()) }}">Awal</a></li>
                     <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->previousPageUrl() }}">Sebelum</a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">{{ $keluaran_tables->currentPage() }}</a></li>
-                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->nextPageUrl() }}">Selanjutnya</a></li>
+                    <li class="page-item"><a class="page-link" href="#">{{ $keluaran_tables->currentPage() }}</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->nextPageUrl() }}">Selanjutnya</a>
+                    </li>
                     <li class="page-item"><a class="page-link"
                             href="{{ $keluaran_tables->url($keluaran_tables->lastPage()) }}">Akhir</a></li>
                 </ul>
             </nav>
             <h2 style="padding-bottom:20px;">Ketercapaian Komponen Indikator Kunci RAD KSB</h2>
             <p>RAD KSB Labuhanbatu Utara mencakup lima (5) komponen utama, yaitu:</p>
-                <ul>
-                    <li>Komponen A: Penguatan data, koordinasi, dan infrastruktur (14 indikator)</li>
-                    <li>Komponen B: Peningkatan kapasitas dan kapabilitas pekebun (12 indikator)</li>
-                    <li>Komponen C: Pengelolaan dan pemantauan lingkungan (21 indikator)</li>
-                    <li>Komponen D: Tata kelola perkebunan dan penanganan sengketa (9 indikator)</li>
-                    <li>Komponen E: Dukungan percepatan pelaksanaan sertifikasi ISPO dan peningkatan akses pasar produk kelapa sawit (6 indikator)</li>
-                </ul>
+            <ul>
+                <li>Komponen A: Penguatan data, koordinasi, dan infrastruktur (14 indikator)</li>
+                <li>Komponen B: Peningkatan kapasitas dan kapabilitas pekebun (12 indikator)</li>
+                <li>Komponen C: Pengelolaan dan pemantauan lingkungan (21 indikator)</li>
+                <li>Komponen D: Tata kelola perkebunan dan penanganan sengketa (9 indikator)</li>
+                <li>Komponen E: Dukungan percepatan pelaksanaan sertifikasi ISPO dan peningkatan akses pasar produk kelapa
+                    sawit (6 indikator)</li>
+            </ul>
             <canvas id="grafikKomponen"></canvas>
             <h2 style="padding-bottom:20px;">Peta Kelapa Sawit Berkelanjutan</h2>
             <div id="map" style="height: 600px;"></div>
@@ -231,74 +247,155 @@
 @stop
 
 @section('customJS')
-    const ctx = document.getElementById('grafikKomponen').getContext('2d');
-    const barChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: {!! json_encode($data->pluck('komponen')) !!},
-            datasets: [{
-                label: '',
-                data: {!! json_encode($data->pluck('persentase')) !!},
-                backgroundColor: [
-                    '#4e79a7', // Komponen 1
-                    '#f28e2b', // Komponen 2
-                    '#e15759', // Komponen 3
-                    '#76b7b2', // Komponen 4
-                    '#59a14f', // Komponen 5
-                ]
-            }]
+let map, markers = [], geo;
+
+function initMap() {
+    map = L.map('map', {
+        center: {
+            lat: 2.3300,
+            lng: 99.8125,
         },
-        options: {
-            indexAxis: 'y',
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    max: 100
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false // Hides the legend
-                }
-            }
+        zoom: 10
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    const info = L.control();
+
+    info.onAdd = function(map) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    }
+
+    info.update = function (props) {
+        this._div.innerHTML = '<h4>Peta Unit Perencanaan</h4>' +  (props ?
+            '<b>' + props.PUv2 + '</b>'
+            : 'Arahkan pointer ke peta');
+    };
+
+    info.addTo(map);
+
+    geo = L.geoJson({features:[]}, {
+        style: style,
+        onEachFeature: function popUp(f, l) {
+            l.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomToFeature
+            });
+        }
+    }).addTo(map);
+
+    var base = 'storage/shapefiles/PU_LBU_F_v2_F.zip';
+    shp(base).then(function(data){
+        geo.addData(data);
+        
+        // Debug: Check the first feature's properties
+        if(data.features && data.features.length > 0) {
+            console.log("First feature properties:", data.features[0].properties);
         }
     });
 
-    <!-- var map = L.map('map').setView([2.1, 99.8], 9); // Adjust center and zoom to Labura -->
-    var map = L.map('map').setView([-1.5, 101.8833], 10); // Adjust center and zoom to Bungo
+    map.on('click', mapClicked);
+}
 
-    // Add base map layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19
-    }).addTo(map);
+initMap();
 
-    // List your shapefiles hosted publicly or serve from your /public folder
-    const layers = [
-        { name: "Planning Unit", file: 'storage/shapefiles/Planning unit.zip' },
-        { name: "Village Potential", file: 'storage/shapefiles/Village potential.zip' }
-    ];
-
-    var overlayMaps = {};
-
-    layers.forEach(layer => {
-        shp(layer.file).then(function (geojson) {
-            var layerGroup = L.geoJSON(geojson, {
-                style: { color: getRandomColor(), weight: 2 }
-            }).addTo(map);
-            overlayMaps[layer.name] = layerGroup;
-        });
+function highlightFeature(e) {
+    const layer = e.target;
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
     });
 
-    // Add Layer Control
-    setTimeout(() => {
-        L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
-    }, 1500);
+    layer.bringToFront();
 
-    // Random color generator
-    function getRandomColor() {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 2; i++) color += letters[Math.floor(Math.random() * 16)];
-        return color;
+    info.update(layer.feature.properties);
+}
+
+function resetHighlight(e) {
+    geo.resetStyle(e.target);
+    info.update();
+}
+
+function zoomToFeature(e){
+    map.fitBounds(e.target.getBounds());
+}
+
+function getColor(value) {
+    // If value is undefined or null, return a default color
+    if(value === undefined || value === null) {
+        return '#CCCCCC'; // Light gray default
     }
+    
+    // Convert value to number if it's a string
+    const i = typeof value === 'string' ? parseInt(value) : value;
+    
+    // Return color based on value
+    return i === 0 ? '#b2182b' :
+           i === 1 ? '#d6604d' :
+           i === 2 ? '#f4a582' :
+           i === 3 ? '#fddbc7' :
+           i === 4 ? '#f7f7f7' :
+           i === 5 ? '#d1e5f0' :
+           i === 6 ? '#92c5de' :
+           i === 7 ? '#4393c3' :
+           i === 8 ? '#2166ac' :
+           i === 9 ? '#053061' :
+           i === 10 ? '#67001f' :
+           i === 11 ? '#980043' :
+           i === 12 ? '#ce1256' :
+           i === 13 ? '#e7298a' :
+           i === 14 ? '#df65b0' :
+           i === 15 ? '#c994c7' :
+           i === 16 ? '#d4b9da' :
+           i === 17 ? '#e7e1ef' :
+           i === 18 ? '#f7f4f9' :
+                      '#000000'; // default color for other values
+}
+
+function style(feature) {
+    // Debug: Check the feature properties
+    console.log("Feature properties:", feature.properties);
+    
+    // Get the value - using 'Value' property or default to 0 if not found
+    const value = feature.properties.Value !== undefined ? feature.properties.Value : 0;
+    
+    return {
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7,
+        fillColor: getColor(value)
+    };
+}
+
+function generateMarker(data, index) {
+    return L.marker(data.position, {
+            draggable: data.draggable
+        })
+        .on('click', (event) => markerClicked(event, index))
+        .on('dragend', (event) => markerDragEnd(event, index));
+}
+
+function mapClicked($event) {
+    console.log(map);
+    console.log($event.latlng.lat, $event.latlng.lng);
+}
+
+function markerClicked($event, index) {
+    console.log(map);
+    console.log($event.latlng.lat, $event.latlng.lng);
+}
+
+function markerDragEnd($event, index) {
+    console.log(map);
+    console.log($event.target.getLatLng());
+}
 @stop

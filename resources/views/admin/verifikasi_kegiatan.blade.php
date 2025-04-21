@@ -46,95 +46,54 @@
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody>                                        
-                                            <tr>
-                                                <td width="1%">1</td>
-                                                <td width="10%">Penguatan data dasar Perkebunan Kelapa Sawit untuk dukungan tata kelola perkebunan yang lebih baik</td>
-                                                <td width="1%">Penyelenggaraan Statistik Sektoral di Lingkup Daerah Kabupaten/Kota</td>
-                                                <td width="1%">Koordinasi dan Sinkronisasi Pengumpulan, Pengolahan, Analisis dan Diseminasi Data Statistik Sektora</td>
-                                                <td width="1%">Jumlah dokumen koordinasi dan sinkronisasi pengumpulan, pengolahan, analisis, dan diseminasi data statistik sektoral</td>
-                                                <td width="1%">BPS</td>
-                                                <td width="1%">APBD</td>
-                                                <td width="6%">
-                                                    {{-- @if($c->status == 0) --}}
-                                                        <form action="/admin/kegiatan/verify/" method="post" class="d-inline" style="float: left; margin-right: 5px;">
-                                                            @method('put')
-                                                            @csrf
-                                                            <input type="hidden" value="1" name="status">
-                                                            <input type="hidden" value="" name="verified_by">
-                                                            <button type="submit" class="custom-badge status-blue bg-primary" onclick="return confirm('Approve data ini?')">Approve</button>
-                                                        </form>
-                                                        <form action="/admin/kegiatan/reject/" method="post" class="d-inline">
-                                                            @method('put')
-                                                            @csrf
-                                                            <input type="hidden" value="2" name="status">
-                                                            <input type="hidden" value="" name="verified_by">
-                                                            <button type="submit" class="custom-badge status-red bg-danger" onclick="return confirm('Revisi data ini?')">Revisi</button>
-                                                        </form>
-                                                    {{-- @elseif($c->status == 2)
-                                                        <form action="/admin/capaian/verify/{{ $c->id }}" method="post" class="d-inline" style="float: left; margin-right: 5px;">
-                                                            @method('put')
-                                                            @csrf
-                                                            <input type="hidden" value="1" name="status">
-                                                            <input type="hidden" value="{{Auth::user()->name}}" name="verified_by">
-                                                            <button type="submit" class="custom-badge status-blue bg-info" onclick="return confirm('Approve data ini?')">Approve</button>
-                                                        </form>
-                                                    @endif --}}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="1%">2</td>
-                                                <td width="10%">Peningkatan Sinergitas antar kementerian/lembaga pemerintah daerah dalam hubungannya dengan usaha perkebunan kelapa sawit</td>
-                                                <td width="1%">Koordinasi dan Sinkronisasi Pengendalian Pemanfaatan Ruang Daerah Kabupaten/Kota</td>
-                                                <td width="1%">Koordinasi Pelaksanaan Penataan Ruang</td>
-                                                <td width="1%">Jumlah Dokumen Koordinasi Pelaksanaan Penataan Ruang</td>
-                                                <td width="1%">Dinas Pertanian</td>
-                                                <td width="1%">APBD</td>
-                                                <td width="6%">
-                                                    {{-- @if($c->status == 0) --}}
-                                                        <form action="/admin/kegiatan/verify/" method="post" class="d-inline" style="float: left; margin-right: 5px;">
-                                                            @method('put')
-                                                            @csrf
-                                                            <input type="hidden" value="1" name="status">
-                                                            <input type="hidden" value="" name="verified_by">
-                                                            <button type="submit" class="custom-badge status-blue bg-primary" onclick="return confirm('Approve data ini?')">Approve</button>
-                                                        </form>
-                                                        <form action="/admin/kegiatan/reject/" method="post" class="d-inline">
-                                                            @method('put')
-                                                            @csrf
-                                                            <input type="hidden" value="2" name="status">
-                                                            <input type="hidden" value="" name="verified_by">
-                                                            <button type="submit" class="custom-badge status-red bg-danger" onclick="return confirm('Revisi data ini?')">Revisi</button>
-                                                        </form>
-                                                    {{-- @elseif($c->status == 2)
-                                                        <form action="/admin/capaian/verify/{{ $c->id }}" method="post" class="d-inline" style="float: left; margin-right: 5px;">
-                                                            @method('put')
-                                                            @csrf
-                                                            <input type="hidden" value="1" name="status">
-                                                            <input type="hidden" value="{{Auth::user()->name}}" name="verified_by">
-                                                            <button type="submit" class="custom-badge status-blue bg-info" onclick="return confirm('Approve data ini?')">Approve</button>
-                                                        </form>
-                                                    @endif --}}
-                                                </td>
-                                            </tr>
+                                    <tbody>
+                                        @foreach($submissions as $index => $submission)
+                                        <tr>
+                                            <td width="1%">{{ $index + 1 }}</td>
+                                            <td width="10%">{{ $submission->program }}</td>
+                                            <td width="1%">{{ $submission->kegiatan }}</td>
+                                            <td width="1%">{{ $submission->subkegiatan }}</td>
+                                            <td width="1%">{{ $submission->indikator_keluaran }}</td>
+                                            <td width="1%">{{ $submission->pelaksana }}</td>
+                                            <td width="1%">{{ $submission->sumber_pembiayaan }}</td>
+                                            <td width="6%">
+                                                @if($submission->status == 0) <!-- Only show actions for pending -->
+                                                <form action="{{ route('admin.kegiatan.approve', $submission->id) }}" method="POST" class="d-inline" style="float: left; margin-right: 5px;">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <button type="submit" class="custom-badge status-blue bg-primary" onclick="return confirm('Approve data ini?')">Approve</button>
+                                                </form>
+                                                <form action="{{ route('admin.kegiatan.reject', $submission->id) }}" method="POST" class="d-inline">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <button type="submit" class="custom-badge status-red bg-danger" onclick="return confirm('Revisi data ini?')">Revisi</button>
+                                                </form>
+                                                @elseif($submission->status == 2)
+                                                <form action="{{ route('admin.kegiatan.approve', $submission->id) }}" method="POST" class="d-inline" style="float: left; margin-right: 5px;">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <button type="submit" class="custom-badge status-blue bg-info" onclick="return confirm('Approve data ini?')">Approve</button>
+                                                </form>
+                                                @else
+                                                <span class="badge bg-success">Telah Disetujui</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <br />
-                            {{-- <nav aria-label="Page navigation">
+                            <nav aria-label="Page navigation">
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="{{ $capaian->url($capaian->onFirstPage()) }}">First</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $capaian->previousPageUrl() }}">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">{{ $capaian->currentPage() }}</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $capaian->nextPageUrl() }}">Next</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $capaian->url($capaian->lastPage()) }}">Last</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $submissions->url(1) }}">First</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $submissions->previousPageUrl() }}">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">{{ $submissions->currentPage() }}</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $submissions->nextPageUrl() }}">Next</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $submissions->url($submissions->lastPage()) }}">Last</a></li>
                                 </ul>
-                            </nav> --}}
+                            </nav>
                         </div>
-
-                        {{-- <div class="tab-pane" id="e">
-                            <h4>Hapus Data</h4>
-                        </div> --}}
                     </div>
                 </div>
             </div>
