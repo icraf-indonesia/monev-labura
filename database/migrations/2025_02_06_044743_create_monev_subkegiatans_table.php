@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('monev_subkegiatans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_kegiatan');
             $table->string('subkegiatan')->nullable();
-            // $table->foreignId('id_kegiatan');
             $table->timestamps();
         });
     }

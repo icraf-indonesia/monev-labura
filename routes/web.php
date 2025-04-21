@@ -23,13 +23,10 @@ Route::get('/', [HomeController::class, 'index'])->name('beranda');
 Route::get('/beranda/pelaksanaan', [HomeController::class, 'pelaksanaan']);
 Route::get('/beranda/monitoring', [HomeController::class, 'monitoring']);
 Route::get('/beranda/dampak', [HomeController::class, 'dampak']);
-
+Route::get('/unduh', [HomeController::class, 'unduh']);
 Route::get('/perencanaan', [HomeController::class, 'perencanaan']);
 Route::get('/export-pdf', [PDFController::class, 'exportPDF']);
 Route::get('/export-pdf-keluaran', [PDFController::class, 'exportPDFKeluaran']);
-Route::get('/export-csv', [KontributorController::class, 'exportToExcel'])->name('export.csv');
-
-Route::get('/unduh', [HomeController::class, 'unduh']);
 
 Route::get('/session', [SessionController::class, 'index'])->name('login');
 Route::post('/session/login', [SessionController::class, 'login']);
@@ -45,6 +42,7 @@ Route::get('/kontributor/indikator/{id}/edit', [KontributorController::class, 'e
 Route::put('/kontributor/indikator/{id}', [KontributorController::class, 'updateIndikator'])->name('indikator.update');
 Route::get('/kontributor/kegiatan/{id}/edit', [KontributorController::class, 'editKegiatan'])->name('kegiatan.edit');
 Route::put('/kontributor/kegiatan/{id}', [KontributorController::class, 'updateKegiatan'])->name('kegiatan.update');
+Route::get('/export-csv', [KontributorController::class, 'exportToExcel'])->name('export.csv');
 
 Route::get('/kontributor/capaian/tambah', [KontributorController::class, 'tambahCapaian']);
 Route::post('/kontributor/store', [KontributorController::class, 'store']);
@@ -55,7 +53,6 @@ Route::get('/kontributor/indikator/tambah', [KontributorController::class, 'inpu
 Route::get('/kontributor/kegiatan', [KontributorController::class, 'kegiatan'])->name('kegiatan');
 Route::get('/kontributor/kegiatan/tambah', [KontributorController::class, 'inputKegiatan'])->name('addKegiatan');
 Route::get('/get-kegiatan', [KontributorController::class, 'getKegiatan']);
-
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin/indikator/{id}/edit', [AdminController::class, 'editIndikator'])->name('admin.indikator.edit');
@@ -72,6 +69,9 @@ Route::put('/admin/kegiatan/approve/{id}', [AdminController::class, 'approveKegi
 Route::put('/admin/kegiatan/reject/{id}', [AdminController::class, 'rejectKegiatan'])->name('admin.kegiatan.reject');
 
 Route::get('/admin/tambah-kegiatan', [AdminController::class, 'tambahKegiatan']);
+Route::get('/admin/get-programs/{komponen_id}', [AdminController::class, 'getPrograms']);
+Route::get('/admin/get-kegiatans/{program_id}', [AdminController::class, 'getKegiatans']);
+Route::get('/admin/get-subkegiatans/{kegiatan_id}', [AdminController::class, 'getSubkegiatans']);
 
 Route::get('/session/logout', [SessionController::class, 'logout'])->name('logout');
 

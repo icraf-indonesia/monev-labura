@@ -43,8 +43,9 @@
                                             <th>Target</th>
                                             <th>Capaian</th>
                                             <th>Satuan</th>
+                                            <th>Dokumen Terunggah</th>
                                             <th>Status</th>
-                                            <th>Diverifikasi oleh</th>
+                                            <th>Diinput oleh</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -57,6 +58,7 @@
                                             <td>{{ $submission->target }}</td>
                                             <td>{{ $submission->capaian }}</td>
                                             <td>{{ $submission->satuan }}</td>
+                                            <td>{{ $submission->dokumen_pendukung }}</td>
                                             <td>{{ $submission->status }}</td>
                                             <td>{{ $submission->diverifikasi_oleh ?? '-' }}</td>
                                             <td>

@@ -80,6 +80,7 @@ class AdminController extends Controller
                 'mi.target',
                 'mis.capaian',
                 'mi.satuan',
+                'mis.dokumen_pendukung',
                 DB::raw("CASE 
                     WHEN mis.status = 0 THEN 'Menunggu'
                     WHEN mis.status = 1 THEN 'Diverifikasi'
@@ -250,6 +251,58 @@ class AdminController extends Controller
 
     public function tambahKegiatan(Request $request)
     {
-        return view('admin.tambah_kegiatan');
+        $komponens = DB::table('monev_komponens')->get();
+        $instansis = DB::table('monev_instansis')->get();
+        
+        $kegiatans = DB::table('monev_indikator_keluarans')
+            ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
+            ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
+            ->leftJoin('monev_subkegiatans', 'monev_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
+            ->leftJoin('monev_instansis', 'monev_indikator_keluarans.id_instansi', '=', 'monev_instansis.id')
+            ->leftJoin('monev_capaians', 'monev_indikator_keluarans.id', '=', 'monev_capaians.id_keluaran')
+            ->select(
+                'monev_programs.program',
+                'monev_kegiatans.kegiatan',
+                'monev_subkegiatans.subkegiatan',
+                'monev_indikator_keluarans.indikator_keluaran',
+                'monev_indikator_keluarans.target',
+                'monev_instansis.instansi',
+                'monev_capaians.sumber_pembiayaan',
+                'monev_capaians.status',
+            )
+            ->paginate(10);
+            
+        return view('admin.tambah_kegiatan', [
+            'kegiatans' => $kegiatans,
+            'komponens' => $komponens,
+            'instansis' => $instansis
+        ]);
+    }
+
+    public function getPrograms($komponen_id)
+    {
+        $programs = DB::table('monev_programs')
+            ->where('id_komponen', $komponen_id)
+            ->get();
+        
+        return response()->json($programs);
+    }
+
+    public function getKegiatans($program_id)
+    {
+        $kegiatans = DB::table('monev_kegiatans')
+            ->where('id_program', $program_id)
+            ->get();
+        
+        return response()->json($kegiatans);
+    }
+
+    public function getSubkegiatans($kegiatan_id)
+    {
+        $subkegiatans = DB::table('monev_subkegiatans')
+            ->where('id_kegiatan', $kegiatan_id)
+            ->get();
+        
+        return response()->json($subkegiatans);
     }
 }
