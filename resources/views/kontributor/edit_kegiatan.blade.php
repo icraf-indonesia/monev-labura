@@ -12,7 +12,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @if ($errors->any())
+                    @if ($errors->any()))
                         <div class="alert alert-danger">
                             <strong>Whoops!</strong> Input gagal.<br><br>
                             <ul>
@@ -40,7 +40,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Capaian</label>
                                     <div class="col-lg-9">
-                                        <input name="target" class="form-control" type="text" value="{{ $indikator_keluaran->capaian }}" required>
+                                        <input name="capaian" class="form-control" type="text" value="{{ $indikator_keluaran->capaian }}" required>
                                         <span class="form-text text-muted">Masukkan <b>capaian</b> saat ini</span>
                                     </div>
                                 </div>

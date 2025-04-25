@@ -29,7 +29,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 1,
                 'id_kegiatan' => 35,
                 'id_subkegiatan' => 1,
-                'id_instansi' => 5
+                'id_instansi' => 5,
+                'status' => 1
             ),
             1 => array (
                 'id' => 2, 
@@ -41,7 +42,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 4,
                 'id_kegiatan' => 5,
                 'id_subkegiatan' => 9,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 2
             ),
             2 => array (
                 'id' => 3, 
@@ -53,7 +55,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 6,
                 'id_kegiatan' => 28,
                 'id_subkegiatan' => 11,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 2
             ),
             3 => array (
                 'id' => 4, 
@@ -65,7 +68,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 2,
                 'id_kegiatan' => 5,
                 'id_subkegiatan' => 7,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             4 => array (
                 'id' => 5, 
@@ -77,7 +81,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 1,
                 'id_kegiatan' => 1,
                 'id_subkegiatan' => 2,
-                'id_instansi' => 1
+                'id_instansi' => 1,
+                'status' => 0
             ),
             5 => array (
                 'id' => 6, 
@@ -89,7 +94,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 6,
                 'id_kegiatan' => 12,
                 'id_subkegiatan' => 10,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             6 => array (
                 'id' => 7, 
@@ -101,7 +107,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 3,
                 'id_kegiatan' => 7,
                 'id_subkegiatan' => 8,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             7 => array (
                 'id' => 8, 
@@ -113,7 +120,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 7,
                 'id_kegiatan' => 26,
                 'id_subkegiatan' => 45,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             8 => array (
                 'id' => 9, 
@@ -125,7 +133,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 7,
                 'id_kegiatan' => 31,
                 'id_subkegiatan' => 12,
-                'id_instansi' => 4
+                'id_instansi' => 4,
+                'status' => 0
             ),
             9 => array (
                 'id' => 10, 
@@ -137,7 +146,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 2,
                 'id_kegiatan' => 6,
                 'id_subkegiatan' => 5,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             10 => array (
                 'id' => 11, 
@@ -149,7 +159,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 1,
                 'id_kegiatan' => 35,
                 'id_subkegiatan' => 1,
-                'id_instansi' => 5
+                'id_instansi' => 5,
+                'status' => 0
             ),
             11 => array (
                 'id' => 12, 
@@ -161,7 +172,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 2,
                 'id_kegiatan' => 6,
                 'id_subkegiatan' => 6,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             12 => array (
                 'id' => 13, 
@@ -173,7 +185,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 1,
                 'id_kegiatan' => 14,
                 'id_subkegiatan' => 4,
-                'id_instansi' => 3
+                'id_instansi' => 3,
+                'status' => 0
             ),
             13 => array (
                 'id' => 14, 
@@ -185,7 +198,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 1,
                 'id_kegiatan' => 13,
                 'id_subkegiatan' => 3,
-                'id_instansi' => 1
+                'id_instansi' => 1,
+                'status' => 0
             ),
             14 => array (
                 'id' => 15, 
@@ -197,7 +211,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 11,
                 'id_kegiatan' => 7,
                 'id_subkegiatan' => 21,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             15 => array (
                 'id' => 16, 
@@ -209,7 +224,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 9,
                 'id_kegiatan' => 7,
                 'id_subkegiatan' => 15,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             16 => array (
                 'id' => 17, 
@@ -221,7 +237,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 8,
                 'id_kegiatan' => 28,
                 'id_subkegiatan' => 14,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             17 => array (
                 'id' => 18, 
@@ -233,7 +250,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 8,
                 'id_kegiatan' => 7,
                 'id_subkegiatan' => 13,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             18 => array (
                 'id' => 19, 
@@ -245,7 +263,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 10,
                 'id_kegiatan' => 30,
                 'id_subkegiatan' => 18,
-                'id_instansi' => 14
+                'id_instansi' => 14,
+                'status' => 0
             ),
             19 => array (
                 'id' => 20, 
@@ -257,7 +276,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 10,
                 'id_kegiatan' => 7,
                 'id_subkegiatan' => 19,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             20 => array (
                 'id' => 21, 
@@ -269,7 +289,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 11,
                 'id_kegiatan' => 24,
                 'id_subkegiatan' => 22,
-                'id_instansi' => 9
+                'id_instansi' => 9,
+                'status' => 0
             ),
             21 => array (
                 'id' => 22, 
@@ -281,7 +302,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 9,
                 'id_kegiatan' => 7,
                 'id_subkegiatan' => 16,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             22 => array (
                 'id' => 23, 
@@ -293,7 +315,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 11,
                 'id_kegiatan' => 7,
                 'id_subkegiatan' => 20,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             23 => array (
                 'id' => 24, 
@@ -305,7 +328,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 11,
                 'id_kegiatan' => 24,
                 'id_subkegiatan' => 22,
-                'id_instansi' => 9
+                'id_instansi' => 9,
+                'status' => 0
             ),
             24 => array (
                 'id' => 25, 
@@ -317,7 +341,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 11,
                 'id_kegiatan' => 32,
                 'id_subkegiatan' => 23,
-                'id_instansi' => 9
+                'id_instansi' => 9,
+                'status' => 0
             ),
             25 => array (
                 'id' => 26, 
@@ -329,7 +354,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 9,
                 'id_kegiatan' => 4,
                 'id_subkegiatan' => 17,
-                'id_instansi' => 1
+                'id_instansi' => 1,
+                'status' => 0
             ),
             26 => array (
                 'id' => 27, 
@@ -341,7 +367,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 16,
                 'id_kegiatan' => 20,
                 'id_subkegiatan' => 39,
-                'id_instansi' => 6
+                'id_instansi' => 6,
+                'status' => 0
             ),
             27 => array (
                 'id' => 28, 
@@ -353,7 +380,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 14,
                 'id_kegiatan' => 15,
                 'id_subkegiatan' => 35,
-                'id_instansi' => 8
+                'id_instansi' => 8,
+                'status' => 0
             ),
             28 => array (
                 'id' => 29, 
@@ -365,7 +393,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 13,
                 'id_kegiatan' => 25,
                 'id_subkegiatan' => 27,
-                'id_instansi' => 6
+                'id_instansi' => 6,
+                'status' => 0
             ),
             29 => array (
                 'id' => 30, 
@@ -377,7 +406,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 13,
                 'id_kegiatan' => 11,
                 'id_subkegiatan' => 26,
-                'id_instansi' => 6
+                'id_instansi' => 6,
+                'status' => 0
             ),
             30 => array (
                 'id' => 31, 
@@ -389,7 +419,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 13,
                 'id_kegiatan' => 33,
                 'id_subkegiatan' => 24,
-                'id_instansi' => 6
+                'id_instansi' => 6,
+                'status' => 0
             ),
             31 => array (
                 'id' => 32, 
@@ -401,7 +432,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 18,
                 'id_kegiatan' => 37,
                 'id_subkegiatan' => 44,
-                'id_instansi' => 9
+                'id_instansi' => 9,
+                'status' => 0
             ),
             32 => array (
                 'id' => 33, 
@@ -413,7 +445,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 13,
                 'id_kegiatan' => 38,
                 'id_subkegiatan' => 28,
-                'id_instansi' => 6
+                'id_instansi' => 6,
+                'status' => 0
             ),
             33 => array (
                 'id' => 34, 
@@ -425,7 +458,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 18,
                 'id_kegiatan' => 17,
                 'id_subkegiatan' => 41,
-                'id_instansi' => 9
+                'id_instansi' => 9,
+                'status' => 0
             ),
             34 => array (
                 'id' => 35, 
@@ -437,7 +471,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 14,
                 'id_kegiatan' => 9,
                 'id_subkegiatan' => 32,
-                'id_instansi' => 2
+                'id_instansi' => 2,
+                'status' => 0
             ),
             35 => array (
                 'id' => 36, 
@@ -449,7 +484,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 14,
                 'id_kegiatan' => 10,
                 'id_subkegiatan' => 31,
-                'id_instansi' => 2
+                'id_instansi' => 2,
+                'status' => 0
             ),
             36 => array (
                 'id' => 37, 
@@ -461,7 +497,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 14,
                 'id_kegiatan' => 18,
                 'id_subkegiatan' => 36,
-                'id_instansi' => 6
+                'id_instansi' => 6,
+                'status' => 0
             ),
             37 => array (
                 'id' => 38, 
@@ -473,7 +510,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 14,
                 'id_kegiatan' => 21,
                 'id_subkegiatan' => 29,
-                'id_instansi' => 8
+                'id_instansi' => 8,
+                'status' => 0
             ),
             38 => array (
                 'id' => 39, 
@@ -485,7 +523,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 18,
                 'id_kegiatan' => 2,
                 'id_subkegiatan' => 43,
-                'id_instansi' => 9
+                'id_instansi' => 9,
+                'status' => 0
             ),
             39 => array (
                 'id' => 40, 
@@ -497,7 +536,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 18,
                 'id_kegiatan' => 16,
                 'id_subkegiatan' => 42,
-                'id_instansi' => 9
+                'id_instansi' => 9,
+                'status' => 0
             ),
             40 => array (
                 'id' => 41, 
@@ -509,7 +549,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 14,
                 'id_kegiatan' => 10,
                 'id_subkegiatan' => 33,
-                'id_instansi' => 2
+                'id_instansi' => 2,
+                'status' => 0
             ),
             41 => array (
                 'id' => 42, 
@@ -521,7 +562,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 13,
                 'id_kegiatan' => 29,
                 'id_subkegiatan' => 25,
-                'id_instansi' => 6
+                'id_instansi' => 6,
+                'status' => 0
             ),
             42 => array (
                 'id' => 43, 
@@ -533,7 +575,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 17,
                 'id_kegiatan' => 18,
                 'id_subkegiatan' => 40,
-                'id_instansi' => 6
+                'id_instansi' => 6,
+                'status' => 0
             ),
             43 => array (
                 'id' => 44, 
@@ -545,7 +588,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 15,
                 'id_kegiatan' => 20,
                 'id_subkegiatan' => 37,
-                'id_instansi' => 6
+                'id_instansi' => 6,
+                'status' => 0
             ),
             44 => array (
                 'id' => 45, 
@@ -557,7 +601,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 15,
                 'id_kegiatan' => 20,
                 'id_subkegiatan' => 38,
-                'id_instansi' => 6
+                'id_instansi' => 6,
+                'status' => 0
             ),
             45 => array (
                 'id' => 46, 
@@ -569,7 +614,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 14,
                 'id_kegiatan' => 10,
                 'id_subkegiatan' => 30,
-                'id_instansi' => 2
+                'id_instansi' => 2,
+                'status' => 0
             ),
             46 => array (
                 'id' => 47, 
@@ -581,7 +627,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 14,
                 'id_kegiatan' => 9,
                 'id_subkegiatan' => 34,
-                'id_instansi' => 2
+                'id_instansi' => 2,
+                'status' => 0
             ),
             47 => array (
                 'id' => 48, 
@@ -593,7 +640,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 21,
                 'id_kegiatan' => 5,
                 'id_subkegiatan' => 46,
-                'id_instansi' => 7
+                'id_instansi' => 7,
+                'status' => 0
             ),
             48 => array (
                 'id' => 49, 
@@ -605,7 +653,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 23,
                 'id_kegiatan' => 22,
                 'id_subkegiatan' => 51,
-                'id_instansi' => 13
+                'id_instansi' => 13,
+                'status' => 0
             ),
             49 => array (
                 'id' => 50, 
@@ -617,7 +666,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 22,
                 'id_kegiatan' => 27,
                 'id_subkegiatan' => 48,
-                'id_instansi' => 1
+                'id_instansi' => 1,
+                'status' => 0
             ),
             50 => array (
                 'id' => 51, 
@@ -629,7 +679,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 21,
                 'id_kegiatan' => 3,
                 'id_subkegiatan' => 47,
-                'id_instansi' => 15
+                'id_instansi' => 15,
+                'status' => 0
             ),
             51 => array (
                 'id' => 52, 
@@ -641,7 +692,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 22,
                 'id_kegiatan' => 8,
                 'id_subkegiatan' => 50,
-                'id_instansi' => 13
+                'id_instansi' => 13,
+                'status' => 0
             ),
             52 => array (
                 'id' => 53, 
@@ -653,7 +705,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 20,
                 'id_kegiatan' => 26,
                 'id_subkegiatan' => 45,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             53 => array (
                 'id' => 54, 
@@ -665,7 +718,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 22,
                 'id_kegiatan' => 27,
                 'id_subkegiatan' => 49,
-                'id_instansi' => 13
+                'id_instansi' => 13,
+                'status' => 0
             ),
             54 => array (
                 'id' => 55, 
@@ -677,7 +731,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 25,
                 'id_kegiatan' => 19,
                 'id_subkegiatan' => 53,
-                'id_instansi' => 4
+                'id_instansi' => 4,
+                'status' => 0
             ),
             55 => array (
                 'id' => 56, 
@@ -689,7 +744,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 25,
                 'id_kegiatan' => 31,
                 'id_subkegiatan' => 52,
-                'id_instansi' => 4
+                'id_instansi' => 4,
+                'status' => 0
             ),
             56 => array (
                 'id' => 57, 
@@ -701,7 +757,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 27,
                 'id_kegiatan' => 7,
                 'id_subkegiatan' => 55,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             57 => array (
                 'id' => 58, 
@@ -713,7 +770,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 27,
                 'id_kegiatan' => 7,
                 'id_subkegiatan' => 58,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             58 => array (
                 'id' => 59, 
@@ -725,7 +783,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 27,
                 'id_kegiatan' => 36,
                 'id_subkegiatan' => 57,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             59 => array (
                 'id' => 60, 
@@ -737,7 +796,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 26,
                 'id_kegiatan' => 7,
                 'id_subkegiatan' => 54,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             ),
             60 => array (
                 'id' => 61, 
@@ -749,7 +809,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 29,
                 'id_kegiatan' => 34,
                 'id_subkegiatan' => 59,
-                'id_instansi' => 9
+                'id_instansi' => 9,
+                'status' => 0
             ),
             61 => array (
                 'id' => 62, 
@@ -761,7 +822,8 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_program' => 27,
                 'id_kegiatan' => 23,
                 'id_subkegiatan' => 56,
-                'id_instansi' => 10
+                'id_instansi' => 10,
+                'status' => 0
             )
         ));
     }

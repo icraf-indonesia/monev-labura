@@ -6,6 +6,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KontributorController;
 use App\Http\Controllers\PDFController;
+use Illuminate\Support\Facades\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::get('/unduh', [HomeController::class, 'unduh']);
 Route::get('/perencanaan', [HomeController::class, 'perencanaan']);
 Route::get('/export-pdf', [PDFController::class, 'exportPDF']);
 Route::get('/export-pdf-keluaran', [PDFController::class, 'exportPDFKeluaran']);
+Route::get('/map', [HomeController::class, 'map']);
 
 Route::get('/session', [SessionController::class, 'index'])->name('login');
 Route::post('/session/login', [SessionController::class, 'login']);
@@ -60,6 +62,15 @@ Route::put('/admin/indikator/{id}', [AdminController::class, 'updateIndikator'])
 Route::get('/admin/indikator/verifikasi', [AdminController::class, 'verifikasiIndikator']);
 Route::post('/admin/approve/{id}', [AdminController::class, 'approveIndikator'])->name('admin.approve');
 Route::post('/admin/reject/{id}', [AdminController::class, 'rejectIndikator'])->name('admin.reject');
+Route::get('/admin/indikator/view-document/{filename}', function($filename) {
+    $path = storage_path('app/public/dokumen/' . $filename);
+    
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path);
+})->name('view.document');
 
 Route::get('/admin/kegiatan', [AdminController::class, 'daftarKegiatan']);
 Route::get('/admin/kegiatan/{id}/edit', [AdminController::class, 'editKegiatan']);

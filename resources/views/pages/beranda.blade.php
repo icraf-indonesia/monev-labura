@@ -190,8 +190,8 @@
 
                 <!-- Pagination -->
                 <!-- <div class="d-flex justify-content-center">
-                        {{ $keluaran_tables->appends(['tahun' => request('tahun')])->links() }}
-                    </div> -->
+                                {{ $keluaran_tables->appends(['tahun' => request('tahun')])->links() }}
+                            </div> -->
             </div>
             <nav aria-label="Page navigation">
                 <ul class="pagination">
@@ -247,155 +247,188 @@
 @stop
 
 @section('customJS')
-let map, markers = [], geo;
+    const ctx = document.getElementById('grafikKomponen').getContext('2d');
+    const barChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+    labels: {!! json_encode($data->pluck('komponen')) !!},
+    datasets: [{
+    label: '',
+    data: {!! json_encode($data->pluck('persentase')) !!},
+    backgroundColor: [
+    '#4e79a7', // Komponen 1
+    '#f28e2b', // Komponen 2
+    '#e15759', // Komponen 3
+    '#76b7b2', // Komponen 4
+    '#59a14f', // Komponen 5
+    ]
+    }]
+    },
+    options: {
+    indexAxis: 'y',
+    scales: {
+    x: {
+    beginAtZero: true,
+    max: 100
+    }
+    },
+    plugins: {
+    legend: {
+    display: false // Hides the legend
+    }
+    }
+    }
+    });
 
-function initMap() {
+    let map, markers = [], geo;
+
+    function initMap() {
     map = L.map('map', {
-        center: {
-            lat: 2.3300,
-            lng: 99.8125,
-        },
-        zoom: 10
+    center: {
+    lat: 2.3300,
+    lng: 99.8125,
+    },
+    zoom: 10
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap'
+    attribution: '© OpenStreetMap'
     }).addTo(map);
 
     const info = L.control();
 
     info.onAdd = function(map) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
     }
 
     info.update = function (props) {
-        this._div.innerHTML = '<h4>Peta Unit Perencanaan</h4>' +  (props ?
-            '<b>' + props.PUv2 + '</b>'
-            : 'Arahkan pointer ke peta');
+    this._div.innerHTML = '<h4>Peta Unit Perencanaan</h4>' + (props ?
+    '<b>' + props.PUv2 + '</b>'
+    : 'Arahkan pointer ke peta');
     };
 
     info.addTo(map);
 
     geo = L.geoJson({features:[]}, {
-        style: style,
-        onEachFeature: function popUp(f, l) {
-            l.on({
-                mouseover: highlightFeature,
-                mouseout: resetHighlight,
-                click: zoomToFeature
-            });
-        }
+    style: style,
+    onEachFeature: function popUp(f, l) {
+    l.on({
+    mouseover: highlightFeature,
+    mouseout: resetHighlight,
+    click: zoomToFeature
+    });
+    }
     }).addTo(map);
 
     var base = 'storage/shapefiles/PU_LBU_F_v2_F.zip';
     shp(base).then(function(data){
-        geo.addData(data);
-        
-        // Debug: Check the first feature's properties
-        if(data.features && data.features.length > 0) {
-            console.log("First feature properties:", data.features[0].properties);
-        }
+    geo.addData(data);
+
+    // Debug: Check the first feature's properties
+    if(data.features && data.features.length > 0) {
+    console.log("First feature properties:", data.features[0].properties);
+    }
     });
 
     map.on('click', mapClicked);
-}
+    }
 
-initMap();
+    initMap();
 
-function highlightFeature(e) {
+    function highlightFeature(e) {
     const layer = e.target;
     layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
+    weight: 5,
+    color: '#666',
+    dashArray: '',
+    fillOpacity: 0.7
     });
 
     layer.bringToFront();
 
     info.update(layer.feature.properties);
-}
+    }
 
-function resetHighlight(e) {
+    function resetHighlight(e) {
     geo.resetStyle(e.target);
     info.update();
-}
+    }
 
-function zoomToFeature(e){
+    function zoomToFeature(e){
     map.fitBounds(e.target.getBounds());
-}
+    }
 
-function getColor(value) {
+    function getColor(value) {
     // If value is undefined or null, return a default color
     if(value === undefined || value === null) {
-        return '#CCCCCC'; // Light gray default
+    return '#CCCCCC'; // Light gray default
     }
-    
+
     // Convert value to number if it's a string
     const i = typeof value === 'string' ? parseInt(value) : value;
-    
+
     // Return color based on value
     return i === 0 ? '#b2182b' :
-           i === 1 ? '#d6604d' :
-           i === 2 ? '#f4a582' :
-           i === 3 ? '#fddbc7' :
-           i === 4 ? '#f7f7f7' :
-           i === 5 ? '#d1e5f0' :
-           i === 6 ? '#92c5de' :
-           i === 7 ? '#4393c3' :
-           i === 8 ? '#2166ac' :
-           i === 9 ? '#053061' :
-           i === 10 ? '#67001f' :
-           i === 11 ? '#980043' :
-           i === 12 ? '#ce1256' :
-           i === 13 ? '#e7298a' :
-           i === 14 ? '#df65b0' :
-           i === 15 ? '#c994c7' :
-           i === 16 ? '#d4b9da' :
-           i === 17 ? '#e7e1ef' :
-           i === 18 ? '#f7f4f9' :
-                      '#000000'; // default color for other values
-}
+    i === 1 ? '#d6604d' :
+    i === 2 ? '#f4a582' :
+    i === 3 ? '#fddbc7' :
+    i === 4 ? '#f7f7f7' :
+    i === 5 ? '#d1e5f0' :
+    i === 6 ? '#92c5de' :
+    i === 7 ? '#4393c3' :
+    i === 8 ? '#2166ac' :
+    i === 9 ? '#053061' :
+    i === 10 ? '#67001f' :
+    i === 11 ? '#980043' :
+    i === 12 ? '#ce1256' :
+    i === 13 ? '#e7298a' :
+    i === 14 ? '#df65b0' :
+    i === 15 ? '#c994c7' :
+    i === 16 ? '#d4b9da' :
+    i === 17 ? '#e7e1ef' :
+    i === 18 ? '#f7f4f9' :
+    '#000000'; // default color for other values
+    }
 
-function style(feature) {
+    function style(feature) {
     // Debug: Check the feature properties
     console.log("Feature properties:", feature.properties);
-    
+
     // Get the value - using 'Value' property or default to 0 if not found
     const value = feature.properties.Value !== undefined ? feature.properties.Value : 0;
-    
+
     return {
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7,
-        fillColor: getColor(value)
+    weight: 2,
+    opacity: 1,
+    color: 'white',
+    dashArray: '3',
+    fillOpacity: 0.7,
+    fillColor: getColor(value)
     };
-}
+    }
 
-function generateMarker(data, index) {
+    function generateMarker(data, index) {
     return L.marker(data.position, {
-            draggable: data.draggable
-        })
-        .on('click', (event) => markerClicked(event, index))
-        .on('dragend', (event) => markerDragEnd(event, index));
-}
+    draggable: data.draggable
+    })
+    .on('click', (event) => markerClicked(event, index))
+    .on('dragend', (event) => markerDragEnd(event, index));
+    }
 
-function mapClicked($event) {
+    function mapClicked($event) {
     console.log(map);
     console.log($event.latlng.lat, $event.latlng.lng);
-}
+    }
 
-function markerClicked($event, index) {
+    function markerClicked($event, index) {
     console.log(map);
     console.log($event.latlng.lat, $event.latlng.lng);
-}
+    }
 
-function markerDragEnd($event, index) {
+    function markerDragEnd($event, index) {
     console.log(map);
     console.log($event.target.getLatLng());
-}
+    }
 @stop

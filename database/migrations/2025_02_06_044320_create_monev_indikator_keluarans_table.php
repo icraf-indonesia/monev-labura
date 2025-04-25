@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('id_kegiatan');
             $table->foreignId('id_subkegiatan');
             $table->foreignId('id_instansi');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

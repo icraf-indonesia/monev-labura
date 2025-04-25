@@ -53,10 +53,14 @@ class KontributorController extends Controller
 
         DB::beginTransaction();
         try {
+            $user = auth()->user();
             $updateData = [
                 'capaian' => $validated['capaian'],
+                'status' => 0, // Reset status to pending
                 'updated_at' => now(),
             ];
+
+            $dokumenPath = null;
 
             // Handle file upload if present
             if ($request->hasFile('dokumen_pendukung')) {
@@ -70,18 +74,53 @@ class KontributorController extends Controller
                 }
 
                 // Store new file
-                $updateData['dokumen_pendukung'] = $request->file('dokumen_pendukung')->store('dokumen', 'public');
+                $dokumenPath = $request->file('dokumen_pendukung')->store('dokumen', 'public');
+                $updateData['dokumen_pendukung'] = $dokumenPath;
+            } else {
+                // Keep existing document path if no new file uploaded
+                $dokumenPath = DB::table('monev_indikators')
+                    ->where('id', $id)
+                    ->value('dokumen_pendukung');
             }
 
-            // Update the record
+            // Update the main indikator record
             DB::table('monev_indikators')
                 ->where('id', $id)
                 ->update($updateData);
 
+            // Create or update submission record
+            $submissionData = [
+                'capaian' => $validated['capaian'],
+                'dokumen_pendukung' => $dokumenPath,
+                'status' => 0, // Reset status to pending in submissions
+                'updated_at' => now(),
+            ];
+
+            // Check if submission exists for this user and indikator
+            $existingSubmission = DB::table('monev_indikator_submissions')
+                ->where('indikator_id', $id)
+                ->where('user_id', $user->id)
+                ->first();
+
+            if ($existingSubmission) {
+                // Update existing submission
+                DB::table('monev_indikator_submissions')
+                    ->where('id', $existingSubmission->id)
+                    ->update($submissionData);
+            } else {
+                // Create new submission
+                $submissionData['indikator_id'] = $id;
+                $submissionData['user_id'] = $user->id;
+                $submissionData['tahun'] = date('Y');
+                $submissionData['created_at'] = now();
+                
+                DB::table('monev_indikator_submissions')->insert($submissionData);
+            }
+
             DB::commit();
 
             return redirect()->route('kontributor')
-                ->with('success', 'Data berhasil diperbarui');
+                ->with('status', 'Data berhasil diperbarui dan status direset menjadi menunggu review');
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -254,7 +293,7 @@ class KontributorController extends Controller
                 'monev_instansis.instansi',
                 'monev_capaians.sumber_pembiayaan',
                 'monev_indikator_keluarans.capaian',
-                'monev_capaians.status'
+                'monev_indikator_keluarans.status'
             )
             ->paginate(10); // Use pagination
         return view('kontributor.daftar_kegiatan', ['kegiatan_tables' => $kegiatan_tables]);
@@ -276,18 +315,67 @@ class KontributorController extends Controller
     {
         // Validate the request data
         $validated = $request->validate([
-            'indikator_keluaran' => 'required',
-            'target' => 'required',
-            // Add other validation rules as needed
+            'capaian' => 'required|integer'
         ]);
 
-        // Update the record
-        DB::table('monev_indikator_keluarans')
-            ->where('id', $id)
-            ->update($validated);
+        DB::beginTransaction();
+        try {
+            $user = auth()->user();
+            $updateData = [
+                'capaian' => $validated['capaian'],
+                'status' => 0, // Reset status to pending
+                'updated_at' => now(),
+            ];
 
-        return redirect()->route('kontributor.kegiatan')
-            ->with('success', 'Data berhasil diperbarui');
+            // Update the main kegiatan record
+            // $updated = DB::table('monev_indikator_keluarans')
+            DB::table('monev_indikator_keluarans')
+                ->where('id', $id)
+                ->update($updateData);
+
+            // if ($updated === 0) {
+            //     throw new \Exception('Tidak ada data yang diupdate');
+            // }
+
+            // Create or update submission record
+            $submissionData = [
+                'capaian' => $validated['capaian'],
+                'status' => 0, // Reset status to pending
+                'updated_at' => now(),
+            ];
+
+            // Check if submission exists for this user and kegiatan
+            $existingSubmission = DB::table('monev_keluaran_submissions')
+                ->where('indikator_keluaran_id', $id)
+                ->where('user_id', $user->id)
+                ->first();
+
+            if ($existingSubmission) {
+                // Update existing submission
+                DB::table('monev_keluaran_submissions')
+                    ->where('id', $existingSubmission->id)
+                    ->update($submissionData);
+            } else {
+                // Create new submission
+                $submissionData['indikator_keluaran_id'] = $id;
+                $submissionData['user_id'] = $user->id;
+                $submissionData['tahun'] = date('Y');
+                $submissionData['created_at'] = now();
+                
+                DB::table('monev_keluaran_submissions')->insert($submissionData);
+            }
+
+            DB::commit();
+
+            return redirect()->route('kegiatan')
+                ->with('status', 'Data capaian berhasil diperbarui dan dikirim untuk review');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()
+                // ->withInput()
+                ->with('error', 'Gagal mengupdate data: ' . $e->getMessage());
+        }
     }
 
     public function getKegiatan(Request $request)

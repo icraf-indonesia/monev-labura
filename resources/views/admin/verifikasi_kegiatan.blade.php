@@ -43,6 +43,9 @@
                                             <th>Indikator Keluaran</th>
                                             <th>Pelaksana</th>
                                             <th>Sumber Pendanaan</th>
+                                            <th>Tahun</th>
+                                            <th>Capaian</th>
+                                            <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -56,26 +59,19 @@
                                             <td width="1%">{{ $submission->indikator_keluaran }}</td>
                                             <td width="1%">{{ $submission->pelaksana }}</td>
                                             <td width="1%">{{ $submission->sumber_pembiayaan }}</td>
-                                            <td width="6%">
-                                                @if($submission->status == 0) <!-- Only show actions for pending -->
-                                                <form action="{{ route('admin.kegiatan.approve', $submission->id) }}" method="POST" class="d-inline" style="float: left; margin-right: 5px;">
-                                                    @method('PUT')
+                                            <td width="1%">{{ $submission->tahun }}</td>
+                                            <td width="1%">{{ $submission->capaian }}</td>
+                                            <td width="1%">{{ $submission->status }}</td>
+                                            <td width="1%">
+                                                @if($submission->status_code == 0) <!-- Only show actions for pending -->
+                                                <form action="{{ route('admin.kegiatan.approve', $submission->id) }}" method="POST" style="display: inline;">
                                                     @csrf
-                                                    <button type="submit" class="custom-badge status-blue bg-primary" onclick="return confirm('Approve data ini?')">Approve</button>
+                                                    <button type="submit" class="btn btn-success" onclick="return confirm('Approve data ini?')">Diverifikasi</button>
                                                 </form>
-                                                <form action="{{ route('admin.kegiatan.reject', $submission->id) }}" method="POST" class="d-inline">
-                                                    @method('PUT')
+                                                <form action="{{ route('admin.kegiatan.reject', $submission->id) }}" method="POST" style="display: inline;">
                                                     @csrf
-                                                    <button type="submit" class="custom-badge status-red bg-danger" onclick="return confirm('Revisi data ini?')">Revisi</button>
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Revisi data ini?')">Revisi</button>
                                                 </form>
-                                                @elseif($submission->status == 2)
-                                                <form action="{{ route('admin.kegiatan.approve', $submission->id) }}" method="POST" class="d-inline" style="float: left; margin-right: 5px;">
-                                                    @method('PUT')
-                                                    @csrf
-                                                    <button type="submit" class="custom-badge status-blue bg-info" onclick="return confirm('Approve data ini?')">Approve</button>
-                                                </form>
-                                                @else
-                                                <span class="badge bg-success">Telah Disetujui</span>
                                                 @endif
                                             </td>
                                         </tr>

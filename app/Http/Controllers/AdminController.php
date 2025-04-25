@@ -100,26 +100,80 @@ class AdminController extends Controller
 
     public function approveIndikator($id)
     {
-        DB::table('monev_indikator_submissions')
-            ->where('id', $id)
-            ->update([
-                'status' => 1, // Approved
-                'updated_at' => now()
-            ]);
+        DB::beginTransaction();
+        try {
+            // Get the submission data
+            $submission = DB::table('monev_indikator_submissions')
+                ->where('id', $id)
+                ->first();
 
-        return redirect()->back()->with('success', 'Submission approved successfully');
+            if (!$submission) {
+                return redirect()->back()->with('error', 'Submission not found');
+            }
+
+            // Update submission status
+            DB::table('monev_indikator_submissions')
+                ->where('id', $id)
+                ->update([
+                    'status' => 1, // Approved
+                    'updated_at' => now()
+                ]);
+
+            // Update main indikator table
+            DB::table('monev_indikators')
+                ->where('id', $submission->indikator_id)
+                ->update([
+                    'capaian' => $submission->capaian,
+                    'dokumen_pendukung' => $submission->dokumen_pendukung,
+                    'status' => 1, // Approved
+                    'updated_at' => now()
+                ]);
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Submission approved successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Failed to approve: ' . $e->getMessage());
+        }
     }
 
     public function rejectIndikator($id)
     {
-        DB::table('monev_indikator_submissions')
-            ->where('id', $id)
-            ->update([
-                'status' => 2, // Rejected
-                'updated_at' => now()
-            ]);
+        DB::beginTransaction();
+        try {
+            // Get the submission data
+            $submission = DB::table('monev_indikator_submissions')
+                ->where('id', $id)
+                ->first();
 
-        return redirect()->back()->with('success', 'Submission rejected');
+            if (!$submission) {
+                return redirect()->back()->with('error', 'Submission not found');
+            }
+
+            // Update submission status
+            DB::table('monev_indikator_submissions')
+                ->where('id', $id)
+                ->update([
+                    'status' => 2, // Rejected
+                    'updated_at' => now()
+                ]);
+
+            // Update main indikator table
+            DB::table('monev_indikators')
+                ->where('id', $submission->indikator_id)
+                ->update([
+                    'status' => 2, // Rejected
+                    'updated_at' => now()
+                ]);
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Submission rejected');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Failed to reject: ' . $e->getMessage());
+        }
     }
 
     public function daftarKegiatan(Request $request)
@@ -208,14 +262,14 @@ class AdminController extends Controller
                 'mc.sumber_pembiayaan',
                 'mks.tahun',
                 'mks.capaian',
-                'mks.status',
                 'users.name as kontributor',
                 DB::raw("CASE 
                     WHEN mks.status = 0 THEN 'Menunggu'
                     WHEN mks.status = 1 THEN 'Diverifikasi'
                     WHEN mks.status = 2 THEN 'Direvisi'
                     ELSE 'Unknown'
-                END as status_text")
+                END as status"),
+                'mks.status as status_code' // For action buttons
             )
             ->orderBy('mks.created_at', 'desc')
             ->paginate(10);
@@ -227,26 +281,80 @@ class AdminController extends Controller
 
     public function approveKegiatan($id)
     {
-        DB::table('monev_keluaran_submissions')
-            ->where('id', $id)
-            ->update([
-                'status' => 1, // Approved
-                'updated_at' => now()
-            ]);
+        DB::beginTransaction();
+        try {
+            // Get the submission data
+            $submission = DB::table('monev_keluaran_submissions')
+                ->where('id', $id)
+                ->first();
 
-        return redirect()->back()->with('success', 'Kegiatan berhasil disetujui');
+            if (!$submission) {
+                return redirect()->back()->with('error', 'Data submission tidak ditemukan');
+            }
+
+            // Update submission status
+            DB::table('monev_keluaran_submissions')
+                ->where('id', $id)
+                ->update([
+                    'status' => 1, // Approved
+                    'updated_at' => now()
+                ]);
+
+            // Update main kegiatan table with submission data
+            DB::table('monev_indikator_keluarans')
+                ->where('id', $submission->indikator_keluaran_id)
+                ->update([
+                    'indikator_keluaran' => $submission->indikator_keluaran,
+                    'capaian' => $submission->capaian,
+                    'status' => 1, // Approved
+                    'updated_at' => now()
+                ]);
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Kegiatan berhasil disetujui dan data utama telah diperbarui');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal menyetujui: ' . $e->getMessage());
+        }
     }
 
     public function rejectKegiatan($id)
     {
-        DB::table('monev_keluaran_submissions')
-            ->where('id', $id)
-            ->update([
-                'status' => 2, // Rejected
-                'updated_at' => now()
-            ]);
+        DB::beginTransaction();
+        try {
+            // Get the submission data
+            $submission = DB::table('monev_keluaran_submissions')
+                ->where('id', $id)
+                ->first();
 
-        return redirect()->back()->with('success', 'Kegiatan ditolak dan memerlukan revisi');
+            if (!$submission) {
+                return redirect()->back()->with('error', 'Data submission tidak ditemukan');
+            }
+
+            // Update submission status
+            DB::table('monev_keluaran_submissions')
+                ->where('id', $id)
+                ->update([
+                    'status' => 2, // Rejected
+                    'updated_at' => now()
+                ]);
+
+            // Update main kegiatan table status only
+            DB::table('monev_indikator_keluarans')
+                ->where('id', $submission->indikator_keluaran_id)
+                ->update([
+                    'status' => 2, // Rejected
+                    'updated_at' => now()
+                ]);
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Kegiatan ditolak dan status data utama diperbarui');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal menolak: ' . $e->getMessage());
+        }
     }
 
     public function tambahKegiatan(Request $request)

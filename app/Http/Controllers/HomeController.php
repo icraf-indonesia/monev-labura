@@ -203,4 +203,10 @@ class HomeController extends Controller
         // Step 3: Pass the correct data to the view
         return view('pages.beranda_grafik', ['data' => $grouped]);
     }
+
+    public function map(Request $request)
+    {
+        return view('pages.map')->with('page_title', 'Peta Kelapa Sawit Berkelanjutan');
+    }
+
 }
