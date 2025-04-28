@@ -10,17 +10,32 @@ class AdminController extends Controller
     //
     public function index(Request $request)
     {
-        $indikator_dampak = DB::table('monev_indikators')
-        ->select(
-            'id',
-            'indikator',
-            'target',
-            'satuan',
-            'jenis_dokumen',
-        )
-        ->paginate(5); // Use pagination
+        $cari = $request->kata;
 
-        return view('admin.index', ['indikator_dampaks' => $indikator_dampak]);
+        $query = DB::table('monev_indikators')
+            ->select(
+                'id',
+                'indikator',
+                'target',
+                'satuan',
+                'jenis_dokumen'
+            );
+
+        if (!empty($cari)) {
+            $query->where(function($q) use ($cari) {
+                $q->where('indikator', 'like', '%'.$cari.'%')
+                ->orWhere('target', 'like', '%'.$cari.'%')
+                ->orWhere('satuan', 'like', '%'.$cari.'%')
+                ->orWhere('jenis_dokumen', 'like', '%'.$cari.'%');
+            });
+        }
+
+        $indikator_dampak = $query->paginate(5);
+
+        return view('admin.index', [
+            'indikator_dampaks' => $indikator_dampak,
+            'kata' => $cari
+        ]);
     }
 
     public function editIndikator($id)
@@ -178,7 +193,9 @@ class AdminController extends Controller
 
     public function daftarKegiatan(Request $request)
     {
-        $kegiatans = DB::table('monev_indikator_keluarans')
+        $cari = $request->kata;
+
+        $query = DB::table('monev_indikator_keluarans')
             ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
             ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
             ->leftJoin('monev_subkegiatans', 'monev_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
@@ -194,9 +211,26 @@ class AdminController extends Controller
                 'monev_indikator_keluarans.target',
                 'monev_capaians.tahun',
                 'monev_instansis.instansi'
-            )
-            ->paginate(10);
-        return view('admin.manajemen_kegiatan', ['kegiatans' => $kegiatans]);
+            );
+
+        if (!empty($cari)) {
+            $query->where(function($q) use ($cari) {
+                $q->where('monev_programs.program', 'like', '%'.$cari.'%')
+                ->orWhere('monev_kegiatans.kegiatan', 'like', '%'.$cari.'%')
+                ->orWhere('monev_subkegiatans.subkegiatan', 'like', '%'.$cari.'%')
+                ->orWhere('monev_indikator_keluarans.indikator_keluaran', 'like', '%'.$cari.'%')
+                ->orWhere('monev_indikator_keluarans.target', 'like', '%'.$cari.'%')
+                ->orWhere('monev_instansis.instansi', 'like', '%'.$cari.'%')
+                ->orWhere('monev_capaians.tahun', 'like', '%'.$cari.'%');
+            });
+        }
+
+        $kegiatans = $query->paginate(10);
+
+        return view('admin.manajemen_kegiatan', [
+            'kegiatans' => $kegiatans,
+            'kata' => $cari
+        ]);
     }
 
     public function editKegiatan(Request $request, $id)

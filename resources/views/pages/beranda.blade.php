@@ -2,32 +2,6 @@
 
 @section('page_title', 'Beranda')
 
-@section('customCSS')
-    .info {
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border-radius: 5px;
-    }
-    .info h4 {
-    margin: 0 0 5px;
-    color: #777;
-    }
-    .legend {
-    line-height: 18px;
-    color: #555;
-    }
-    .legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-    }
-@stop
-
 @section('css')
     <style type="text/css">
         * {
@@ -72,6 +46,52 @@
 
         p {
             text-align: left;
+        }
+
+        /* Map specific styles */
+        #map { 
+            height: 600px; 
+            width: 100%;
+            z-index: 1;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        .info h4 {
+            margin: 0 0 5px;
+            color: #777;
+        }
+        .legend {
+            text-align: left;
+            line-height: 18px;
+            color: #555;
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: rgba(255,255,255,0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
 
         /* Responsive columns - one column layout (vertical) on small screens */
@@ -160,8 +180,8 @@
                             <th>Kegiatan</th>
                             <th>Subkegiatan</th>
                             <th>Indikator Keluaran</th>
-                            <th>Target</th>
-                            <th>Capaian</th>
+                            <th>Target*</th>
+                            <th>Capaian*</th>
                             <!-- <th>Tahun</th> -->
                         </tr>
                     </thead>
@@ -187,6 +207,7 @@
                         @endif
                     </tbody>
                 </table>
+                <p>* Angka pada kolom ini masih data contoh</p>
 
                 <!-- Pagination -->
                 <!-- <div class="d-flex justify-content-center">
@@ -219,7 +240,9 @@
             </ul>
             <canvas id="grafikKomponen"></canvas>
             <h2 style="padding-bottom:20px;">Peta Kelapa Sawit Berkelanjutan</h2>
-            <div id="map" style="height: 600px;"></div>
+            <div id="map">
+                <div class="loading">Memuat data peta...</div>
+            </div>
         </div>
         <div class="row" style="padding-top: 50px;">
             <div class="hidden-xs hidden-sm">
@@ -231,9 +254,9 @@
 @stop
 
 @section('customJSLibrary')
-    <script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script>
-    <script src='https://unpkg.com/leaflet@1.8.0/dist/leaflet.js' crossorigin=''></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 @stop
 
 @section('js')
@@ -247,188 +270,203 @@
 @stop
 
 @section('customJS')
+    // Chart for Komponen
     const ctx = document.getElementById('grafikKomponen').getContext('2d');
     const barChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-    labels: {!! json_encode($data->pluck('komponen')) !!},
-    datasets: [{
-    label: '',
-    data: {!! json_encode($data->pluck('persentase')) !!},
-    backgroundColor: [
-    '#4e79a7', // Komponen 1
-    '#f28e2b', // Komponen 2
-    '#e15759', // Komponen 3
-    '#76b7b2', // Komponen 4
-    '#59a14f', // Komponen 5
-    ]
-    }]
-    },
-    options: {
-    indexAxis: 'y',
-    scales: {
-    x: {
-    beginAtZero: true,
-    max: 100
-    }
-    },
-    plugins: {
-    legend: {
-    display: false // Hides the legend
-    }
-    }
-    }
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($data->pluck('komponen')) !!},
+            datasets: [{
+                label: '',
+                data: {!! json_encode($data->pluck('persentase')) !!},
+                backgroundColor: [
+                    '#4e79a7', // Komponen 1
+                    '#f28e2b', // Komponen 2
+                    '#e15759', // Komponen 3
+                    '#76b7b2', // Komponen 4
+                    '#59a14f', // Komponen 5
+                ]
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false // Hides the legend
+                }
+            }
+        }
     });
 
-    let map, markers = [], geo;
+    // Interactive Map Script
+    document.addEventListener('DOMContentLoaded', function() {
+        try {
+            // Initialize the map centered on Labuhanbatu Utara
+            const map = L.map('map').setView([2.3333, 99.75], 10); // Coordinates for Labuhanbatu Utara
+            
+            // Add tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
 
-    function initMap() {
-    map = L.map('map', {
-    center: {
-    lat: 2.3300,
-    lng: 99.8125,
-    },
-    zoom: 10
+            // Discrete color function for categories
+            function getCategoryColor(category) {
+                const colorMap = {
+                    "Kawasan Lindung": "#2E8B57",
+                    "Kawasan Lindung – PS Definitif": "#3CB371",
+                    "Kawasan Lindung – PS Pencadangan": "#20B2AA",
+                    "Kawasan Lindung – PS Potensi": "#5F9EA0",
+                    "Kawasan Lindung – LSD": "#4682B4",
+                    "Area Produksi": "#FF8C00",
+                    "Area Produksi – PS Definitif": "#FFA500",
+                    "Area Produksi – PS Pencadangan": "#FFD700",
+                    "Area Produksi – PS Potensi": "#DAA520",
+                    "Area Produksi – PS Pencadangan, LSD": "#B8860B",
+                    "Area Produksi – LSD": "#CD853F",
+                    "Area Pertanian": "#32CD32",
+                    "Area Pertanian – PS Definitif": "#9ACD32",
+                    "Area Pertanian – LSD": "#6B8E23",
+                    "Area Penggunaan Lain": "#A0522D",
+                    "Area Penggunaan Lain – PS Pencadangan": "#D2691E",
+                    "Area Penggunaan Lain – LSD": "#8B4513",
+                    "Area Penggunaan Lain – PS Potensi": "#A52A2A",
+                    "Lainnya": "#696969"
+                };
+                
+                return colorMap[category] || "#CCCCCC";
+            }
+
+            // Style function
+            function style(feature) {
+                const category = feature.properties.PUv2;
+                return {
+                    fillColor: getCategoryColor(category),
+                    weight: 1,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.7
+                };
+            }
+
+            // Info control
+            const info = L.control();
+
+            info.onAdd = function(map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+
+            info.update = function(props) {
+                this._div.innerHTML = '<h4>Unit Perencanaan</h4>' + (props ?
+                    `<b>ID: ${props.IDSv2}</b><br/>
+                    Kategori: ${props.PUv2}` :
+                    'Arahkan kursor ke area');
+            };
+
+            info.addTo(map);
+
+            {{-- // Create legend
+            const legend = L.control({position: 'bottomright'});
+
+            legend.onAdd = function(map) {
+                const div = L.DomUtil.create('div', 'legend');
+                div.innerHTML = '<h4>Kategori</h4>';
+                
+                const categories = [
+                    "Kawasan Lindung",
+                    "Kawasan Lindung – PS Definitif",
+                    "Kawasan Lindung – PS Pencadangan",
+                    "Kawasan Lindung – PS Potensi",
+                    "Kawasan Lindung – LSD",
+                    "Area Produksi",
+                    "Area Produksi – PS Definitif",
+                    "Area Produksi – PS Pencadangan",
+                    "Area Produksi – PS Potensi",
+                    "Area Produksi – PS Pencadangan, LSD",
+                    "Area Produksi – LSD",
+                    "Area Pertanian",
+                    "Area Pertanian – PS Definitif",
+                    "Area Pertanian – LSD",
+                    "Area Penggunaan Lain",
+                    "Area Penggunaan Lain – PS Pencadangan",
+                    "Area Penggunaan Lain – LSD",
+                    "Area Penggunaan Lain – PS Potensi",
+                    "Lainnya"
+                ];
+                
+                categories.forEach(category => {
+                    div.innerHTML += 
+                        `<i style="background:${getCategoryColor(category)}"></i> ${category}<br>`;
+                });
+
+                return div;
+            };
+
+            legend.addTo(map); --}}
+
+            // Load shapefile
+            const shapefileUrl = "{{ asset('storage/shapefiles/PU_LBU_F_v2_F.zip') }}";
+            const loadingElement = document.querySelector('.loading');
+            
+            loadingElement.textContent = 'Memuat data shapefile...';
+            
+            shp(shapefileUrl).then(function(geojson) {
+                // Remove loading indicator
+                loadingElement.remove();
+                
+                // Add GeoJSON layer
+                const geojsonLayer = L.geoJSON(geojson, {
+                    style: style,
+                    onEachFeature: function(feature, layer) {
+                        layer.on({
+                            mouseover: function(e) {
+                                const layer = e.target;
+                                layer.setStyle({
+                                    weight: 3,
+                                    color: '#666',
+                                    dashArray: '',
+                                    fillOpacity: 0.9
+                                });
+                                layer.bringToFront();
+                                info.update(layer.feature.properties);
+                            },
+                            mouseout: function(e) {
+                                geojsonLayer.resetStyle(e.target);
+                                info.update();
+                            },
+                            click: function(e) {
+                                map.fitBounds(e.target.getBounds());
+                            }
+                        });
+                    }
+                }).addTo(map);
+
+                // Fit map to layer bounds
+                map.fitBounds(geojsonLayer.getBounds());
+
+            }).catch(function(error) {
+                console.error('Error loading shapefile:', error);
+                loadingElement.textContent = 'Gagal memuat data peta. Silakan cek konsol.';
+                loadingElement.style.color = 'red';
+                
+                // Add a fallback marker
+                L.marker([2.3333, 99.75]).addTo(map)
+                    .bindPopup('Gagal memuat data shapefile')
+                    .openPopup();
+            });
+
+        } catch (error) {
+            console.error('Map initialization error:', error);
+            alert('Gagal menginisialisasi peta: ' + error.message);
+        }
     });
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap'
-    }).addTo(map);
-
-    const info = L.control();
-
-    info.onAdd = function(map) {
-    this._div = L.DomUtil.create('div', 'info');
-    this.update();
-    return this._div;
-    }
-
-    info.update = function (props) {
-    this._div.innerHTML = '<h4>Peta Unit Perencanaan</h4>' + (props ?
-    '<b>' + props.PUv2 + '</b>'
-    : 'Arahkan pointer ke peta');
-    };
-
-    info.addTo(map);
-
-    geo = L.geoJson({features:[]}, {
-    style: style,
-    onEachFeature: function popUp(f, l) {
-    l.on({
-    mouseover: highlightFeature,
-    mouseout: resetHighlight,
-    click: zoomToFeature
-    });
-    }
-    }).addTo(map);
-
-    var base = 'storage/shapefiles/PU_LBU_F_v2_F.zip';
-    shp(base).then(function(data){
-    geo.addData(data);
-
-    // Debug: Check the first feature's properties
-    if(data.features && data.features.length > 0) {
-    console.log("First feature properties:", data.features[0].properties);
-    }
-    });
-
-    map.on('click', mapClicked);
-    }
-
-    initMap();
-
-    function highlightFeature(e) {
-    const layer = e.target;
-    layer.setStyle({
-    weight: 5,
-    color: '#666',
-    dashArray: '',
-    fillOpacity: 0.7
-    });
-
-    layer.bringToFront();
-
-    info.update(layer.feature.properties);
-    }
-
-    function resetHighlight(e) {
-    geo.resetStyle(e.target);
-    info.update();
-    }
-
-    function zoomToFeature(e){
-    map.fitBounds(e.target.getBounds());
-    }
-
-    function getColor(value) {
-    // If value is undefined or null, return a default color
-    if(value === undefined || value === null) {
-    return '#CCCCCC'; // Light gray default
-    }
-
-    // Convert value to number if it's a string
-    const i = typeof value === 'string' ? parseInt(value) : value;
-
-    // Return color based on value
-    return i === 0 ? '#b2182b' :
-    i === 1 ? '#d6604d' :
-    i === 2 ? '#f4a582' :
-    i === 3 ? '#fddbc7' :
-    i === 4 ? '#f7f7f7' :
-    i === 5 ? '#d1e5f0' :
-    i === 6 ? '#92c5de' :
-    i === 7 ? '#4393c3' :
-    i === 8 ? '#2166ac' :
-    i === 9 ? '#053061' :
-    i === 10 ? '#67001f' :
-    i === 11 ? '#980043' :
-    i === 12 ? '#ce1256' :
-    i === 13 ? '#e7298a' :
-    i === 14 ? '#df65b0' :
-    i === 15 ? '#c994c7' :
-    i === 16 ? '#d4b9da' :
-    i === 17 ? '#e7e1ef' :
-    i === 18 ? '#f7f4f9' :
-    '#000000'; // default color for other values
-    }
-
-    function style(feature) {
-    // Debug: Check the feature properties
-    console.log("Feature properties:", feature.properties);
-
-    // Get the value - using 'Value' property or default to 0 if not found
-    const value = feature.properties.Value !== undefined ? feature.properties.Value : 0;
-
-    return {
-    weight: 2,
-    opacity: 1,
-    color: 'white',
-    dashArray: '3',
-    fillOpacity: 0.7,
-    fillColor: getColor(value)
-    };
-    }
-
-    function generateMarker(data, index) {
-    return L.marker(data.position, {
-    draggable: data.draggable
-    })
-    .on('click', (event) => markerClicked(event, index))
-    .on('dragend', (event) => markerDragEnd(event, index));
-    }
-
-    function mapClicked($event) {
-    console.log(map);
-    console.log($event.latlng.lat, $event.latlng.lng);
-    }
-
-    function markerClicked($event, index) {
-    console.log(map);
-    console.log($event.latlng.lat, $event.latlng.lng);
-    }
-
-    function markerDragEnd($event, index) {
-    console.log(map);
-    console.log($event.target.getLatLng());
-    }
 @stop

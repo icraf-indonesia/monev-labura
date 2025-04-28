@@ -16,19 +16,52 @@ class KontributorController extends Controller
     {
         $cari = $request->kata;
 
-        $indikator_dampak = DB::table('monev_indikators')
-        ->select(
-            'monev_indikators.id',
-            'monev_indikators.indikator',
-            'monev_indikators.target',
-            'monev_indikators.satuan',
-            'monev_indikators.tahun',
-            'monev_indikators.capaian',
-            'monev_indikators.dokumen_pendukung',
-            'monev_indikators.status'
-        )
-        ->paginate(5); // Use pagination
-        return view('kontributor.index', ['indikator_dampaks' => $indikator_dampak]);
+        $query = DB::table('monev_indikators')
+            ->select(
+                'monev_indikators.id',
+                'monev_indikators.indikator',
+                'monev_indikators.target',
+                'monev_indikators.satuan',
+                'monev_indikators.tahun',
+                'monev_indikators.capaian',
+                'monev_indikators.dokumen_pendukung',
+                'monev_indikators.id_instansi',
+                'monev_indikators.status'
+            );
+
+        // Add search condition if search term exists
+        if (!empty($cari)) {
+            $query->where(function($q) use ($cari) {
+                $q->where('indikator', 'like', '%'.$cari.'%')
+                ->orWhere('tahun', 'like', '%'.$cari.'%')
+                ->orWhere('target', 'like', '%'.$cari.'%')
+                ->orWhere('capaian', 'like', '%'.$cari.'%')
+                ->orWhere('satuan', 'like', '%'.$cari.'%');
+            });
+        }
+
+        $indikator_dampak = $query->paginate(5);
+
+        // Get all indikator IDs that need revision for the current user
+        // $userRevisions = DB::table('monev_indikator_submissions')
+        //     ->where('user_id', auth()->id())
+        //     ->where('status', 2)
+        //     ->pluck('indikator_id')
+        //     ->toArray();
+
+        // Check if current user is the special user (ID = 99)  
+        // $isSpecialUser = (auth()->id() == 99);
+
+        // Check if current user's instansi is 99
+        $currentUserInstansiId = auth()->user()->id_instansi;
+        $isSpecialUser = ($currentUserInstansiId == 99);
+
+        return view('kontributor.index', [
+            'indikator_dampaks' => $indikator_dampak,
+            'currentUserInstansiId' => $currentUserInstansiId,
+            'isSpecialUser' => $isSpecialUser,
+            'kata' => $cari // Pass the search term back to the view
+        ]);
     }
 
     public function editIndikator($id)
@@ -275,7 +308,9 @@ class KontributorController extends Controller
 
     public function kegiatan(Request $request)
     {
-        $kegiatan_tables = DB::table('monev_indikator_keluarans')
+        $cari = $request->kata;
+
+        $query = DB::table('monev_indikator_keluarans')
             ->leftJoin('monev_komponens', 'monev_indikator_keluarans.id_komponen', '=', 'monev_komponens.id')
             ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
             ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
@@ -293,10 +328,37 @@ class KontributorController extends Controller
                 'monev_instansis.instansi',
                 'monev_capaians.sumber_pembiayaan',
                 'monev_indikator_keluarans.capaian',
-                'monev_indikator_keluarans.status'
-            )
-            ->paginate(10); // Use pagination
-        return view('kontributor.daftar_kegiatan', ['kegiatan_tables' => $kegiatan_tables]);
+                'monev_indikator_keluarans.status',
+                'monev_indikator_keluarans.id_instansi' // Add this to check ownership
+            );
+
+        // Add search condition if search term exists
+        if (!empty($cari)) {
+            $query->where(function($q) use ($cari) {
+                $q->where('monev_indikator_keluarans.indikator_keluaran', 'like', '%'.$cari.'%')
+                ->orWhere('monev_komponens.komponen', 'like', '%'.$cari.'%')
+                ->orWhere('monev_programs.program', 'like', '%'.$cari.'%')
+                ->orWhere('monev_kegiatans.kegiatan', 'like', '%'.$cari.'%')
+                ->orWhere('monev_subkegiatans.subkegiatan', 'like', '%'.$cari.'%')
+                ->orWhere('monev_instansis.instansi', 'like', '%'.$cari.'%')
+                ->orWhere('monev_capaians.sumber_pembiayaan', 'like', '%'.$cari.'%')
+                ->orWhere('monev_indikator_keluarans.target', 'like', '%'.$cari.'%')
+                ->orWhere('monev_indikator_keluarans.capaian', 'like', '%'.$cari.'%');
+            });
+        }
+
+        $kegiatan_tables = $query->paginate(10);
+
+        // Check if current user's instansi is 99
+        $currentUserInstansiId = auth()->user()->id_instansi;
+        $isSpecialUser = ($currentUserInstansiId == 99);
+
+        return view('kontributor.daftar_kegiatan', [
+            'kegiatan_tables' => $kegiatan_tables,
+            'kata' => $cari, // Pass the search term back to the view
+            'isSpecialUser' => $isSpecialUser,
+            'currentUserInstansiId' => $currentUserInstansiId
+        ]);
     }
 
     public function editKegiatan($id)

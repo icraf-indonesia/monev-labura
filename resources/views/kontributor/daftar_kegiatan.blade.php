@@ -32,13 +32,16 @@
                     </ul>
                     <div class="tab-content" style="padding-top: 10px;">
                         <div class="row">
-                            <form method='get' action="{{ url('') }}/kontributor/kegiatan">
-                                <div class="col-md-4">
-                                    <input class="form-control" type="text" name="kata" placeholder="Cari Kegiatan .."
-                                        value="{{ old('kata') }}">
+                            <form method='get' action="{{ url('kontributor/kegiatan') }}">
+                                <div class="col-md-3">
+                                    <input class="form-control" type="text" name="kata" 
+                                           placeholder="Temukan..." value="{{ request('kata') }}">
                                 </div>
-                                <div class="col-md-1" style="padding-left: 0px;margin-bottom: 10px;">
-                                    <input class="form-control" type="submit" value="Cari">
+                                <div class="col-md-2" style="padding-left: 0px;margin-bottom: 10px;">
+                                    <input class="btn btn-primary" type="submit" value="Telusuri">
+                                    @if(request('kata'))
+                                        <a href="{{ url('kontributor/kegiatan') }}" class="btn btn-secondary" style="background: tomato;">Bersihkan</a>
+                                    @endif
                                 </div>
                             </form>
                         </div>
@@ -80,16 +83,16 @@
                                                     <td width="10%">{{ $kegiatan_table->sumber_pembiayaan }}</td>
                                                     <td width="10%">
                                                         @if ($kegiatan_table->status === 0)
-                                                            <span class="badge rounded-pill"
-                                                                style="background-color: #0d6efd !important;color: #fff;">Menunggu</span>
+                                                            <span class="badge rounded-pill" style="background-color: #0d6efd !important;color: #fff;">Menunggu</span>
                                                         @elseif($kegiatan_table->status === 1)
-                                                            <span class="badge rounded-pill"
-                                                                style="background-color: #198754 !important;color: #fff;">Diverifikasi</span>
+                                                            <span class="badge rounded-pill" style="background-color: #198754 !important;color: #fff;">Diverifikasi</span>
                                                         @elseif($kegiatan_table->status === 2)
-                                                            <a href="{{ route('kegiatan.edit', $kegiatan_table->id) }}"
-                                                                class="btn btn-warning btn-sm">Revisi</a>
+                                                            @if(($kegiatan_table->id_instansi == $currentUserInstansiId) || $isSpecialUser)
+                                                                <a href="{{ route('kegiatan.edit', $kegiatan_table->id) }}" class="btn btn-warning btn-sm">Revisi</a>
+                                                            @else
+                                                                <span class="badge rounded-pill" style="background-color: #dc3545 !important;color: #fff;">Perlu Revisi</span>
+                                                            @endif
                                                         @endif
-                                                    </td>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -106,19 +109,12 @@
                             <br />
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link"
-                                            href="{{ $kegiatan_tables->url($kegiatan_tables->onFirstPage()) }}">First</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link"
-                                            href="{{ $kegiatan_tables->previousPageUrl() }}">Previous</a></li>
-                                    <li class="page-item"><a class="page-link"
-                                            href="#">{{ $kegiatan_tables->currentPage() }}</a></li>
-                                    <li class="page-item"><a class="page-link"
-                                            href="{{ $kegiatan_tables->nextPageUrl() }}">Next</a></li>
-                                    <li class="page-item"><a class="page-link"
-                                            href="{{ $kegiatan_tables->url($kegiatan_tables->lastPage()) }}">Last</a></li>
-                                    <li><a href="{{ url('/export-csv') }}" class="btn btn-danger"
-                                            style="margin-left: 10px; background:#198754; color:#fff;">Unduh Tabel</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $kegiatan_tables->appends(['kata' => request('kata')])->url($kegiatan_tables->onFirstPage()) }}">First</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $kegiatan_tables->appends(['kata' => request('kata')])->previousPageUrl() }}">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">{{ $kegiatan_tables->currentPage() }}</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $kegiatan_tables->appends(['kata' => request('kata')])->nextPageUrl() }}">Next</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $kegiatan_tables->appends(['kata' => request('kata')])->url($kegiatan_tables->lastPage()) }}">Last</a></li>
+                                    <li><a href="{{ url('/export-csv') . (request('kata') ? '?kata=' . request('kata') : '') }}" class="btn btn-danger" style="margin-left: 10px; background:#198754; color:#fff;">Unduh Tabel</a></li>
                                 </ul>
                             </nav>
                         </div>

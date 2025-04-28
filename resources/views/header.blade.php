@@ -31,8 +31,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Leaflet CSS & JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <!-- Shapefile plugin -->
     <script src="https://unpkg.com/shpjs@latest/dist/shp.min.js"></script>
 </head>
 

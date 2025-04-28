@@ -70,15 +70,6 @@
                 <td><a href="https://drive.google.com/file/d/1oBLzccdfy0IAhP_HSRg7Q8a4kz780en1/view?usp=sharing" class="btn btn-danger">Klik
                         disini</a></td>
             </tr>
-            <tr>
-                <td>Pelatihan GAP dalam pengelolaan sawit</td>
-                <td><a href="/the_url" class="btn btn-danger">Klik disini</a></td>
-            </tr>
-            <tr>
-                <td>Pengantar Sawit Berkelanjutan</td>
-                <td><a href="/the_url" class="btn btn-danger">Klik disini</a></td>
-            </tr>
-            <tr>
                 <td>Pelatihan Berkebun Sawit sebagai Bisnis Berkelanjutan</td>
                 <td><a href="https://drive.google.com/file/d/1jKzKU4z326s4sug76Te8JZviewqgGNlh/view" class="btn btn-danger">Klik disini</a></td>
             </tr>

@@ -50,6 +50,15 @@ Route::get('/kontributor/capaian/tambah', [KontributorController::class, 'tambah
 Route::post('/kontributor/store', [KontributorController::class, 'store']);
 Route::post('/kontributor/store_indikator', [KontributorController::class, 'storeIndikator']);
 Route::post('/kontributor/store_kegiatan', [KontributorController::class, 'storeKegiatan']);
+Route::get('/kontributor/indikator/view-document/{filename}', function($filename) {
+    $path = storage_path('app/public/dokumen/' . $filename);
+    
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path);
+})->name('view.document');
 
 Route::get('/kontributor/indikator/tambah', [KontributorController::class, 'inputIndikator'])->name('addIndikator');
 Route::get('/kontributor/kegiatan', [KontributorController::class, 'kegiatan'])->name('kegiatan');
@@ -76,8 +85,8 @@ Route::get('/admin/kegiatan', [AdminController::class, 'daftarKegiatan']);
 Route::get('/admin/kegiatan/{id}/edit', [AdminController::class, 'editKegiatan']);
 Route::put('/admin/kegiatan/{id}', [AdminController::class, 'updateKegiatan']);
 Route::get('/admin/kegiatan/verifikasi', [AdminController::class, 'verifikasiKegiatan']);
-Route::put('/admin/kegiatan/approve/{id}', [AdminController::class, 'approveKegiatan'])->name('admin.kegiatan.approve');
-Route::put('/admin/kegiatan/reject/{id}', [AdminController::class, 'rejectKegiatan'])->name('admin.kegiatan.reject');
+Route::post('/admin/kegiatan/approve/{id}', [AdminController::class, 'approveKegiatan'])->name('admin.kegiatan.approve');
+Route::post('/admin/kegiatan/reject/{id}', [AdminController::class, 'rejectKegiatan'])->name('admin.kegiatan.reject');
 
 Route::get('/admin/tambah-kegiatan', [AdminController::class, 'tambahKegiatan']);
 Route::get('/admin/get-programs/{komponen_id}', [AdminController::class, 'getPrograms']);

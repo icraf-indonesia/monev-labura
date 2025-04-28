@@ -126,57 +126,6 @@ class HomeController extends Controller
         return view('pages.beranda_dampak');
     }
 
-    // public function grafik(Request $request)
-    // {
-    //     $kegiatan_tables = DB::table('monev_indikator_keluarans')
-    //         ->leftJoin('monev_komponens', 'monev_indikator_keluarans.id_komponen', '=', 'monev_komponens.id')
-    //         ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
-    //         ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
-    //         ->leftJoin('monev_subkegiatans', 'monev_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
-    //         ->leftJoin('monev_instansis', 'monev_indikator_keluarans.id_instansi', '=', 'monev_instansis.id')
-    //         ->leftJoin('monev_capaians', 'monev_indikator_keluarans.id', '=', 'monev_capaians.id_keluaran')
-    //         ->select(
-    //             'monev_komponens.komponen',
-    //             'monev_programs.program',
-    //             'monev_kegiatans.kegiatan',
-    //             'monev_subkegiatans.subkegiatan',
-    //             'monev_indikator_keluarans.indikator_keluaran',
-    //             'monev_indikator_keluarans.target',
-    //             'monev_instansis.instansi',
-    //             'monev_capaians.sumber_pembiayaan',
-    //             'monev_capaians.capaian',
-    //             'monev_capaians.status'
-    //         )
-    //         ->get();
-            
-    //     // Calculate component-wise achievement (average per component)
-    //     $komponen_data = DB::table('monev_capaians')
-    //         ->join('monev_indikator_keluarans', 'monev_capaians.id_keluaran', '=', 'monev_indikator_keluarans.id')
-    //         ->join('monev_komponens', 'monev_indikator_keluarans.id_komponen', '=', 'monev_komponens.id')
-    //         ->select(
-    //             'monev_komponens.komponen',
-    //             DB::raw('AVG(monev_capaians.capaian * 100) as avg_persentase')
-    //         )
-    //         ->groupBy('monev_komponens.komponen')
-    //         ->get();
-    //     dd($komponen_data);    
-    //     // Calculate the final "capaian_kumulatif" as the average of component achievements
-    //     $capaian_kumulatif = round($komponen_data->avg('avg_persentase'), 2);
-
-    //     // Prepare data for the bar chart
-    //     $komponen_chart = $komponen_data->map(function ($item) {
-    //         return [
-    //             'komponen' => $item->komponen,
-    //             'persentase' => round($item->avg_persentase, 2),
-    //         ];
-    //     })->toArray();
-
-    //     return view('pages.beranda_grafik', [
-    //         'kegiatan_tables' => $kegiatan_tables,
-    //         'capaian_kumulatif' => $capaian_kumulatif,
-    //         'komponen_chart' => $komponen_chart
-    //     ]);
-    // }
 
     public function grafik(Request $request)
     {
@@ -206,7 +155,7 @@ class HomeController extends Controller
 
     public function map(Request $request)
     {
-        return view('pages.map')->with('page_title', 'Peta Kelapa Sawit Berkelanjutan');
+        return view('pages.map2');
     }
 
 }

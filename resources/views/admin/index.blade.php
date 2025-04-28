@@ -31,6 +31,20 @@
                     </ul>
                     
                     <div class="tab-content" style="padding-top: 10px;">
+                        <div class="row">
+                            <form method='get' action="{{ url('') }}/admin">
+                                <div class="col-md-3">
+                                    <input class="form-control" type="text" name="kata" 
+                                           placeholder="Temukan..." value="{{ request('kata') }}">
+                                </div>
+                                <div class="col-md-3" style="padding-left: 0px;margin-bottom: 10px;">
+                                    <input class="btn btn-primary" type="submit" value="Telusuri">
+                                    @if(request('kata'))
+                                        <a href="{{ url('') }}/admin" class="btn btn-secondary" style="background: tomato;">Bersihkan</a>
+                                    @endif
+                                </div>
+                            </form>
+                        </div>
                         {{-- tab daftar target --}}
                         <div class="tab-pane active" id="daftar-target">
                             <div class="table-responsive">
@@ -67,11 +81,11 @@
                             <br />
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->url($indikator_dampaks->onFirstPage()) }}">First</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->previousPageUrl() }}">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->appends(['kata' => request('kata')])->url(1) }}">First</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->appends(['kata' => request('kata')])->previousPageUrl() }}">Previous</a></li>
                                     <li class="page-item"><a class="page-link" href="#">{{ $indikator_dampaks->currentPage() }}</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->nextPageUrl() }}">Next</a></li>
-                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->url($indikator_dampaks->lastPage()) }}">Last</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->appends(['kata' => request('kata')])->nextPageUrl() }}">Next</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ $indikator_dampaks->appends(['kata' => request('kata')])->url($indikator_dampaks->lastPage()) }}">Last</a></li>
                                 </ul>
                             </nav>
                         </div>
