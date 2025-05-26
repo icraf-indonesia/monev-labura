@@ -30,7 +30,7 @@ class MonevIndikatorSeeder extends Seeder
                 'capaian' => 1,
                 'dokumen_pendukung' => 'tidak ada',
                 'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
-                'status' => 1
+                'status' => 0
             ),
             1 => array (
                 'id' => 2, 
@@ -43,7 +43,7 @@ class MonevIndikatorSeeder extends Seeder
                 'capaian' => 1,
                 'dokumen_pendukung' => 'tidak ada',
                 'jenis_dokumen' => 'belum ada definisi dokumen yang dibutuhkan',
-                'status' => 2
+                'status' => 0
             ),
             2 => array (
                 'id' => 3, 

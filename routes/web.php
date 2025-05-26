@@ -81,12 +81,13 @@ Route::get('/admin/indikator/view-document/{filename}', function($filename) {
     return response()->file($path);
 })->name('view.document');
 
-Route::get('/admin/kegiatan', [AdminController::class, 'daftarKegiatan']);
+Route::get('/admin/kegiatan', [AdminController::class, 'daftarKegiatan'])->name('admin.kegiatan');
 Route::get('/admin/kegiatan/{id}/edit', [AdminController::class, 'editKegiatan']);
 Route::put('/admin/kegiatan/{id}', [AdminController::class, 'updateKegiatan']);
 Route::get('/admin/kegiatan/verifikasi', [AdminController::class, 'verifikasiKegiatan']);
 Route::post('/admin/kegiatan/approve/{id}', [AdminController::class, 'approveKegiatan'])->name('admin.kegiatan.approve');
 Route::post('/admin/kegiatan/reject/{id}', [AdminController::class, 'rejectKegiatan'])->name('admin.kegiatan.reject');
+Route::post('/admin/kegiatan', [AdminController::class, 'storeKegiatan'])->name('admin.kegiatan.store');
 
 Route::get('/admin/tambah-kegiatan', [AdminController::class, 'tambahKegiatan']);
 Route::get('/admin/get-programs/{komponen_id}', [AdminController::class, 'getPrograms']);

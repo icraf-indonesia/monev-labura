@@ -447,4 +447,53 @@ class AdminController extends Controller
         
         return response()->json($subkegiatans);
     }
+
+    public function storeKegiatan(Request $request)
+    {
+        $validated = $request->validate([
+            'komponen' => 'required',
+            'program' => 'required',
+            'kegiatan' => 'required',
+            'subkegiatan' => 'required',
+            'indikator_keluaran' => 'required',
+            'target_volume' => 'required',
+            'satuan' => 'required',
+            'tahun' => 'required|numeric',
+            'lembaga_penanggung_jawab' => 'required',
+        ]);
+
+        // Handle "other" lembaga selection
+        if ($request->lembaga_penanggung_jawab === 'lainnya' && $request->other_lembaga) {
+            $lembaga = $request->other_lembaga;
+            
+            // Optionally save the new lembaga to database
+            $instansiId = DB::table('monev_instansis')->insertGetId([
+                'instansi' => $lembaga,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        } else {
+            $lembaga = $request->lembaga_penanggung_jawab;
+            $instansiId = DB::table('monev_instansis')
+                ->where('instansi', $lembaga)
+                ->value('id');
+        }
+
+        // Save the kegiatan data
+        DB::table('monev_indikator_keluarans')->insert([
+            'id_komponen' => $request->komponen,
+            'id_program' => $request->program,
+            'id_kegiatan' => $request->kegiatan,
+            'id_subkegiatan' => $request->subkegiatan,
+            'indikator_keluaran' => $request->indikator_keluaran,
+            'target' => $request->target_volume,
+            'satuan' => $request->satuan,
+            'tahun' => $request->tahun,
+            'id_instansi' => $instansiId,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return redirect()->route('admin.kegiatan')->with('success', 'Kegiatan berhasil ditambahkan');
+    }
 }

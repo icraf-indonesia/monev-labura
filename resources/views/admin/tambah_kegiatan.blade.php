@@ -28,7 +28,7 @@
                     </ul>
                     <div class="tab-content" style="padding-top: 10px;">
                         <div class="tab-pane active" id="add-kegiatan">
-                            <form class="page-box" method="post" action="/admin/kegiatan/">
+                            <form class="page-box" method="post" action="{{ route('admin.kegiatan.store') }}">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Komponen</label>
@@ -74,13 +74,13 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Indikator Keluaran</label>
                                     <div class="col-lg-9">
-                                        <input name="target_volume" class="form-control" type="text" value="">
+                                        <input name="indikator_keluaran" class="form-control" type="text" value="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Satuan</label>
                                     <div class="col-lg-9">
-                                        <input name="target_volume" class="form-control" type="text" value="">
+                                        <input name="satuan" class="form-control" type="text" value="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -111,7 +111,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Target</label>
                                     <div class="col-lg-9">
-                                        <input name="target_volume" class="form-control" type="text" value="">
+                                        <input name="target_volume" class="form-control" type="number" value="">
                                     </div>
                                 </div>
                                 <div class="m-t-20 text-center">

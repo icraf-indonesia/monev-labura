@@ -31,7 +31,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_kegiatan' => 35,
                 'id_subkegiatan' => 1,
                 'id_instansi' => 5,
-                'status' => 1
+                'status' => 0
             ),
             1 => array (
                 'id' => 2, 
@@ -45,7 +45,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_kegiatan' => 5,
                 'id_subkegiatan' => 9,
                 'id_instansi' => 10,
-                'status' => 2
+                'status' => 0
             ),
             2 => array (
                 'id' => 3, 
@@ -59,7 +59,7 @@ class MonevIndikatorKeluaranSeeder extends Seeder
                 'id_kegiatan' => 28,
                 'id_subkegiatan' => 11,
                 'id_instansi' => 10,
-                'status' => 2
+                'status' => 0
             ),
             3 => array (
                 'id' => 4, 
