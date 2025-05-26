@@ -1,5 +1,7 @@
 @extends('header')
 
+@section('page_title', 'Perencanaan')
+
 @section('content')
     <div class="container-fluid" style="max-width: 1170px; margin: auto;">
         <h2 style="padding-bottom:20px;">Halaman Perencanaan</h2>
@@ -57,7 +59,8 @@
                                 <td width="10%">{{ $perencanaan_table->subkegiatan }}</td>
                                 <td width="10%">{{ $perencanaan_table->indikator_keluaran }}</td>
                                 <td width="10%">{{ $perencanaan_table->instansi }}</td>
-                                <td width="10%">{{ $perencanaan_table->sumber_pembiayaan }}</td>
+                                {{-- <td width="10%">{{ $perencanaan_table->sumber_pembiayaan }}</td> --}}
+                                <td width="10%">APBD</td>
                             </tr>
                         @endforeach
                     @else

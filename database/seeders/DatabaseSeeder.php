@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
        $this->call(MonevKomponenSeeder::class);
        $this->call(MonevAktualSeeder::class);
        $this->call(UsersTableSeeder::class);
+       $this->call(ListIndikatorDampakSeeder::class);
+       $this->call(ListIndikatorKeluaranSeeder::class);
        /***** END UPDATE *****/
     }
 }

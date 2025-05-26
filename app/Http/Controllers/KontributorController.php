@@ -25,6 +25,7 @@ class KontributorController extends Controller
                 'monev_indikators.tahun',
                 'monev_indikators.capaian',
                 'monev_indikators.dokumen_pendukung',
+                'monev_indikators.jenis_dokumen',
                 'monev_indikators.id_instansi',
                 'monev_indikators.status'
             );
@@ -41,16 +42,6 @@ class KontributorController extends Controller
         }
 
         $indikator_dampak = $query->paginate(5);
-
-        // Get all indikator IDs that need revision for the current user
-        // $userRevisions = DB::table('monev_indikator_submissions')
-        //     ->where('user_id', auth()->id())
-        //     ->where('status', 2)
-        //     ->pluck('indikator_id')
-        //     ->toArray();
-
-        // Check if current user is the special user (ID = 99)  
-        // $isSpecialUser = (auth()->id() == 99);
 
         // Check if current user's instansi is 99
         $currentUserInstansiId = auth()->user()->id_instansi;
@@ -73,11 +64,22 @@ class KontributorController extends Controller
             abort(404);
         }
 
-        return view('kontributor.edit_indikator', ['indikator' => $indikator]);
+        return view('kontributor.edit_indikator', [
+            'indikator' => $indikator,
+            'target' => $indikator->target // Make sure this field exists in your table
+        ]);
     }
 
     public function updateIndikator(Request $request, $id)
     {
+        $user = auth()->user();
+    
+        // Check if user ID is 99
+        if ($user->id_instansi == 99) {
+            return redirect()->back()
+                ->with('error', 'Anda tidak memiliki izin untuk memperbarui indikator ini.');
+        }
+
         // Validate the request data
         $validated = $request->validate([
             'capaian' => 'required|numeric',
@@ -180,6 +182,14 @@ class KontributorController extends Controller
 
     public function storeIndikator(Request $request)
     {
+        $user = auth()->user();
+    
+        // Check if user ID is 99
+        if ($user->id_instansi == 99) {
+            return redirect()->back()
+                ->with('error', 'Anda tidak memiliki izin untuk memperbarui indikator ini.');
+        }
+
         $request->validate([
             'indikator' => 'required|exists:monev_indikators,id',
             'tahun' => 'required|digits:4|integer',
@@ -189,7 +199,6 @@ class KontributorController extends Controller
 
         DB::beginTransaction();
         try {
-            $user = auth()->user();
             $indikatorId = $request->indikator;
 
             // Check submission limit
@@ -210,7 +219,36 @@ class KontributorController extends Controller
                 $nama_file = $request->file('dokumen')->store('dokumen', 'public');
             }
 
-            // Create new submission
+            // Get base indikator data
+            $baseIndikator = DB::table('monev_indikators')->where('id', $indikatorId)->first();
+
+            // Check if record exists for this year
+            $existingRecord = DB::table('monev_indikators')
+                ->where('indikator', $baseIndikator->indikator)
+                ->where('tahun', $request->tahun)
+                ->first();
+
+            if (!$existingRecord) {
+                // Create new record for this year
+                $newIndikatorId = DB::table('monev_indikators')->insertGetId([
+                    'indikator' => $baseIndikator->indikator,
+                    'id_komponen' => $baseIndikator->id_komponen,
+                    'id_instansi' => $baseIndikator->id_instansi,
+                    'target' => $baseIndikator->target,
+                    'satuan' => $baseIndikator->satuan,
+                    'tahun' => $request->tahun,
+                    'capaian' => $request->capaian,
+                    'dokumen_pendukung' => $nama_file,
+                    'jenis_dokumen' => $baseIndikator->jenis_dokumen,
+                    'status' => 0,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+                
+                $indikatorId = $newIndikatorId;
+            }
+
+            // Create submission record
             DB::table('monev_indikator_submissions')->insert([
                 'indikator_id' => $indikatorId,
                 'user_id' => $user->id,
@@ -222,7 +260,7 @@ class KontributorController extends Controller
                 'updated_at' => now(),
             ]);
 
-            // Update main table with latest values
+            // Update main table
             DB::table('monev_indikators')
                 ->where('id', $indikatorId)
                 ->update([
@@ -243,12 +281,12 @@ class KontributorController extends Controller
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-
+    
     public function getIndikators(Request $request)
     {
         $user = auth()->user();
         
-        $indikators = DB::table('monev_indikators')
+        $indikators = DB::table('list_indikator_dampaks')
             ->select('id', 'indikator', 'id_instansi')
             ->when($user->id_instansi != 99, function ($query) use ($user) {
                 return $query->where('id_instansi', $user->id_instansi);
@@ -299,6 +337,7 @@ class KontributorController extends Controller
                 'monev_instansis.instansi',
                 'monev_capaians.sumber_pembiayaan',
                 'monev_indikator_keluarans.target',
+                'monev_indikator_keluarans.satuan'
             )
             ->where('monev_indikator_keluarans.id', $id)
             ->first();
@@ -327,7 +366,9 @@ class KontributorController extends Controller
                 'monev_indikator_keluarans.target',
                 'monev_instansis.instansi',
                 'monev_capaians.sumber_pembiayaan',
+                'monev_indikator_keluarans.satuan',
                 'monev_indikator_keluarans.capaian',
+                'monev_indikator_keluarans.tahun',
                 'monev_indikator_keluarans.status',
                 'monev_indikator_keluarans.id_instansi' // Add this to check ownership
             );
@@ -370,11 +411,22 @@ class KontributorController extends Controller
             abort(404);
         }
 
-        return view('kontributor.edit_kegiatan', ['indikator_keluaran' => $indikator]);
+        return view('kontributor.edit_kegiatan', [
+            'indikator_keluaran' => $indikator,
+            'target' => $indikator->target
+        ]);
     }
 
     public function updateKegiatan(Request $request, $id)
     {
+        $user = auth()->user();
+    
+        // Check if user ID is 99
+        if ($user->id_instansi == 99) {
+            return redirect()->back()
+                ->with('error', 'Anda tidak memiliki izin untuk memperbarui kegiatan ini.');
+        }
+
         // Validate the request data
         $validated = $request->validate([
             'capaian' => 'required|integer'
@@ -444,14 +496,10 @@ class KontributorController extends Controller
     {
         $user = auth()->user();
         
-        $kegiatan = DB::table('monev_indikator_keluarans')
-            ->select(
-                'monev_indikator_keluarans.id',
-                'monev_indikator_keluarans.indikator_keluaran',
-                'monev_indikator_keluarans.id_instansi'
-            )
+        $kegiatan = DB::table('list_indikator_keluarans')
+            ->select('id', 'indikator_keluaran', 'id_instansi')
             ->when($user->id_instansi != 99, function ($query) use ($user) {
-                return $query->where('monev_indikator_keluarans.id_instansi', $user->id_instansi);
+                return $query->where('id_instansi', $user->id_instansi);
             })
             ->distinct()
             ->orderBy('indikator_keluaran', 'asc')
@@ -472,10 +520,56 @@ class KontributorController extends Controller
         try {
             $user = auth()->user();
             $indikatorkeluaranId = $request->indikator;
+            $tahun = $request->tahun;
+
+            // Get the original indikator data
+            $originalIndikator = DB::table('monev_indikator_keluarans')
+                ->where('id', $indikatorkeluaranId)
+                ->first();
+
+            if (!$originalIndikator) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Indikator tidak ditemukan.');
+            }
+
+            // Check if a record exists for this indikator and year
+            $existingRecord = DB::table('monev_indikator_keluarans')
+                ->where('indikator_keluaran', $originalIndikator->indikator_keluaran)
+                ->where('tahun', $tahun)
+                ->where('id_komponen', $originalIndikator->id_komponen)
+                ->where('id_program', $originalIndikator->id_program)
+                ->where('id_kegiatan', $originalIndikator->id_kegiatan)
+                ->where('id_subkegiatan', $originalIndikator->id_subkegiatan)
+                ->where('id_instansi', $originalIndikator->id_instansi)
+                ->first();
+
+            $targetIndikatorId = $indikatorkeluaranId;
+
+            // If no record exists, create a new one
+            if (!$existingRecord) {
+                $targetIndikatorId = DB::table('monev_indikator_keluarans')->insertGetId([
+                    'indikator_keluaran' => $originalIndikator->indikator_keluaran,
+                    'target' => $originalIndikator->target,
+                    'capaian' => $request->capaian,
+                    'tahun' => $tahun,
+                    'satuan' => $originalIndikator->satuan,
+                    'id_komponen' => $originalIndikator->id_komponen,
+                    'id_program' => $originalIndikator->id_program,
+                    'id_kegiatan' => $originalIndikator->id_kegiatan,
+                    'id_subkegiatan' => $originalIndikator->id_subkegiatan,
+                    'id_instansi' => $originalIndikator->id_instansi,
+                    'status' => $originalIndikator->status,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            } else {
+                $targetIndikatorId = $existingRecord->id;
+            }
 
             // Check submission limit
             $submissionCount = DB::table('monev_keluaran_submissions')
-                ->where('indikator_keluaran_id', $indikatorkeluaranId)
+                ->where('indikator_keluaran_id', $targetIndikatorId)
                 ->where('user_id', $user->id)
                 ->count();
 
@@ -487,9 +581,9 @@ class KontributorController extends Controller
 
             // Create new submission with minimal required fields
             DB::table('monev_keluaran_submissions')->insert([
-                'indikator_keluaran_id' => $indikatorkeluaranId,
+                'indikator_keluaran_id' => $targetIndikatorId,
                 'user_id' => $user->id,
-                'tahun' => $request->tahun,
+                'tahun' => $tahun,
                 'capaian' => $request->capaian,
                 'status' => 0,
                 'created_at' => now(),
@@ -498,7 +592,7 @@ class KontributorController extends Controller
 
             // Update main table with latest capaian
             DB::table('monev_indikator_keluarans')
-                ->where('id', $indikatorkeluaranId)
+                ->where('id', $targetIndikatorId)
                 ->update([
                     'capaian' => $request->capaian,
                     'updated_at' => now(),

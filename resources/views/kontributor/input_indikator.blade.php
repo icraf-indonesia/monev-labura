@@ -7,10 +7,14 @@
         <div class="col-lg-12 col-md-12 col-sm-12 dct-appoinment">
             <div class="row">
                 <div class="col-md-12">
-                    {{-- <h3>Penambahan</h3> --}}
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
                         </div>
                     @endif
                     @if ($errors->any())
@@ -25,10 +29,9 @@
                     @endif
                     <ul class="nav nav-tabs paitent-app-tab">
                         <li><a href="{{ url('') }}/kontributor">Daftar Indikator Dampak</a></li>
-                        <li class="active"><a href="{{ url('') }}/kontributor/indikator/tambah">Input Indikator
-                                Dampak</a></li>
-                        <li><a href="{{ url('') }}/kontributor/kegiatan">Pelaksanaan Kegiatan</a></li>
-                        <li><a href="{{ url('') }}/kontributor/kegiatan/tambah">Daftar Input Kegiatan</a></li>
+                        <li><a href="{{ url('') }}/kontributor/kegiatan">Daftar Kegiatan</a></li>
+                        <li class="active"><a href="{{ url('') }}/kontributor/indikator/tambah">Input Capaian Indikator Dampak</a></li>
+                        <li><a href="{{ url('') }}/kontributor/kegiatan/tambah">Input Capaian Kegiatan</a></li>
                     </ul>
                     <div class="tab-content" style="padding-top: 10px;">
 
@@ -43,30 +46,29 @@
                                         <select class="form-control select" name="indikator" id="indikator">
                                             <option value="">== Pilih Indikator ==</option>
                                         </select>
-                                        <span class="form-text text-muted">Pilih salah satu <b>indikator</b> yang
+                                        <span class="form-text text-muted" style="font-size: 12px">Pilih salah satu <b>indikator</b> yang
                                             sesuai</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Target</label>
                                     <div class="col-lg-9">
-                                        <input name="target" class="form-control" placeholder="" type="text" disabled
+                                        <input name="target" class="form-control" placeholder="" type="number" disabled
                                             id="target">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Tahun</label>
                                     <div class="col-lg-9">
-                                        <input name="tahun"
-                                            class="date-own form-control @error('tahun') is-invalid @enderror"
-                                            placeholder="" type="text">
+                                        <input name="tahun" class="date-own form-control @error('tahun') is-invalid @enderror" placeholder="" type="text">
+                                        <span class="form-text text-muted" style="font-size: 12px;">Pilih <b>tahun</b> penginputan capaian</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Capaian Indikator</label>
                                     <div class="col-lg-9">
-                                        <input name="capaian" class="form-control @error('capaian') is-invalid @enderror"
-                                            placeholder="" type="text">
+                                        <input name="capaian" class="form-control @error('capaian') is-invalid @enderror" placeholder="" type="number">
+                                        <span class="form-text text-muted" style="font-size: 12px;">Masukkan <b>capaian</b> saat ini dengan angka tanpa satuan</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -81,8 +83,8 @@
                                     <div class="col-lg-9">
                                         <input class="form-control @error('dokumen') is-invalid @enderror" type="file"
                                             name="dokumen">
-                                        <span class="form-text text-muted" id="dokumenPendukung">Catatan:</span><span
-                                            class="form-text text-muted"> (Ukuran file max. 5 mb)</span>
+                                        <span class="form-text text-muted" id="dokumenPendukung" style="font-size: 12px">Catatan:</span><span
+                                            class="form-text text-muted" style="font-size: 12px"> Sesuaikan dengan Jenis Data yang perlu diinput untuk setiap indikator (Ukuran file max. 5 mb)</span>
                                     </div>
                                 </div>
                                 <div class="m-t-20 text-center">

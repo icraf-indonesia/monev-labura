@@ -4207,7 +4207,12 @@ a.status-grey {
 
 #map {
     width: "100%";
-    height: 400px;
+    height: 500px;
+    z-index: 1;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 .infobox {

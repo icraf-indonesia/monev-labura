@@ -25,9 +25,9 @@
                     @endif
                     <ul class="nav nav-tabs paitent-app-tab">
                         <li class="active"><a href="{{ url('') }}/kontributor">Daftar Indikator Dampak</a></li>
-                        <li><a href="{{ url('') }}/kontributor/indikator/tambah">Input Indikator Dampak</a></li>
-                        <li><a href="{{ url('') }}/kontributor/kegiatan">Pelaksanaan Kegiatan</a></li>
-                        <li><a href="{{ url('') }}/kontributor/kegiatan/tambah">Daftar Input Kegiatan</a></li>
+                        <li><a href="{{ url('') }}/kontributor/kegiatan">Daftar Kegiatan</a></li>
+                        <li><a href="{{ url('') }}/kontributor/indikator/tambah">Input Capaian Indikator Dampak</a></li>
+                        <li><a href="{{ url('') }}/kontributor/kegiatan/tambah">Input Capaian Kegiatan</a></li>
                     </ul>
                     <div class="tab-content" style="padding-top: 10px;">
                         {{-- <div class="row">
@@ -66,7 +66,8 @@
                                             <th>Target</th>
                                             <th>Capaian</th>
                                             <th>Satuan</th>
-                                            <th>Dokumen</th>
+                                            <th>Jenis Dokumen</th>
+                                            <th>Lampiran Dokumen</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -82,6 +83,7 @@
                                                     <td width="10%">{{ $indikator_dampak->target }}</td>
                                                     <td width="10%">{{ $indikator_dampak->capaian }}</td>
                                                     <td width="10%">{{ $indikator_dampak->satuan }}</td>
+                                                    <td width="10%">{{ $indikator_dampak->jenis_dokumen }}</td>
                                                     <td width="10%">
                                                         @if ($indikator_dampak->dokumen_pendukung)
                                                             <a href="{{ route('view.document', basename($indikator_dampak->dokumen_pendukung)) }}"
@@ -94,14 +96,14 @@
                                                     </td>
                                                     <td width="10%">
                                                         @if ($indikator_dampak->status === 0)
-                                                            <span class="badge rounded-pill" style="background-color: #0d6efd !important;color: #fff;">Menunggu</span>
+                                                            <span class="badge rounded-pill" style="background-color: #0d6efd !important;color: #fff; font-size: 16px;">Menunggu</span>
                                                         @elseif($indikator_dampak->status === 1)
-                                                            <span class="badge rounded-pill" style="background-color: #198754 !important;color: #fff;">Diverifikasi</span>
+                                                            <span class="badge rounded-pill" style="background-color: #198754 !important;color: #fff; font-size: 16px;">Diverifikasi</span>
                                                         @elseif($indikator_dampak->status === 2)
                                                             @if(($indikator_dampak->id_instansi == $currentUserInstansiId) || $isSpecialUser)
-                                                                <a href="{{ route('indikator.edit', $indikator_dampak->id) }}" class="btn btn-warning btn-sm">Revisi</a>
+                                                                <a href="{{ route('indikator.edit', $indikator_dampak->id) }}" class="btn btn-warning btn-sm" style="width: 100%;"><b>Klik untuk Revisi</b></a>
                                                             @else
-                                                                <span class="badge rounded-pill" style="background-color: #dc3545 !important;color: #fff;">Perlu Revisi</span>
+                                                                <span class="badge rounded-pill" style="background-color: #dc3545 !important;color: #fff; font-size: 16px;">Perlu Revisi</span>
                                                             @endif
                                                         @endif
                                                     </td>

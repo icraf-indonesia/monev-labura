@@ -25,10 +25,9 @@
                     @endif
                     <ul class="nav nav-tabs paitent-app-tab">
                         <li><a href="{{ url('') }}/kontributor">Daftar Indikator Dampak</a></li>
-                        <li><a href="{{ url('') }}/kontributor/indikator/tambah">Input Indikator
-                                Dampak</a></li>
-                        <li><a href="{{ url('') }}/kontributor/kegiatan">Pelaksanaan Kegiatan</a></li>
-                        <li class="active"><a href="{{ url('') }}/kontributor/kegiatan/tambah">Daftar Input Kegiatan</a></li>
+                        <li><a href="{{ url('') }}/kontributor/kegiatan">Daftar Kegiatan</a></li>
+                        <li><a href="{{ url('') }}/kontributor/indikator/tambah">Input Capaian Indikator Dampak</a></li>
+                        <li class="active"><a href="{{ url('') }}/kontributor/kegiatan/tambah">Input Capaian Kegiatan</a></li>
                     </ul>
                     <div class="tab-content" style="padding-top: 10px;">
 
@@ -48,7 +47,7 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <span class="form-text text-muted">Pilih salah satu <b>Indikator Keluaran</b> yang sesuai</span>
+                                        <span class="form-text text-muted" style="font-size: 12px">Pilih salah satu <b>Indikator Keluaran</b> yang sesuai</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -96,20 +95,29 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Target</label>
                                     <div class="col-lg-9">
-                                        <input name="target" class="form-control" placeholder="" type="text" disabled
+                                        <input name="target" class="form-control" placeholder="" type="number" disabled
                                             id="target">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Satuan</label>
+                                    <div class="col-lg-9">
+                                        <input name="satuan" class="form-control" placeholder="" type="text" disabled
+                                            id="satuan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Tahun</label>
                                     <div class="col-lg-9">
                                         <input name="tahun" class="date-own form-control @error('tahun') is-invalid @enderror" placeholder="" type="text">
+                                        <span class="form-text text-muted" style="font-size: 12px;">Pilih <b>tahun</b> penginputan capaian</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Capaian</label>
                                     <div class="col-lg-9">
-                                        <input name="capaian" class="form-control" placeholder="" type="text" id="capaian">
+                                        <input name="capaian" class="form-control" placeholder="" type="number" id="capaian">
+                                        <span class="form-text text-muted" style="font-size: 12px;">Masukkan <b>capaian</b> saat ini dengan angka tanpa satuan</span>
                                     </div>
                                 </div>
                                 <div class="m-t-20 text-center">
@@ -164,6 +172,7 @@ $(document).ready(function() {
                         $('#kegiatan').val(response.kegiatan);
                         $('#subkegiatan').val(response.subkegiatan);
                         $('#target').val(response.target);
+                        $('#satuan').val(response.satuan);
                         $('#sumber_pembiayaan').val(response.sumber_pembiayaan);
                         $('#pelaksana').val(response.instansi);
                     }

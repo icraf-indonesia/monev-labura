@@ -23,12 +23,11 @@
                         </div>
                     @endif
                     <ul class="nav nav-tabs paitent-app-tab">
-                        <li><a href="{{ url('') }}/admin">Manajemen Target Indikator</a></li>
-                        <li class="active"><a href="{{ url('') }}/admin/indikator/verifikasi">Verifikasi Input
-                                Indikator</a></li>
-                        <li><a href="{{ url('') }}/admin/kegiatan">Manajemen Target Kegiatan</a></li>
-                        <li><a href="{{ url('') }}/admin/kegiatan/verifikasi">Verifikasi Input Kegiatan</a></li>
-                        <li><a href="{{ url('') }}/admin/tambah-kegiatan">Tambah Kegiatan</a></li>
+                        <li><a href="{{url('')}}/admin">Manajemen Target Indikator Dampak</a></li>
+                        <li><a href="{{url('')}}/admin/kegiatan">Manajemen Target Kegiatan</a></li>
+                        <li class="active"><a href="{{url('')}}/admin/indikator/verifikasi">Verifikasi Input Indikator Dampak</a></li>
+                        <li><a href="{{url('')}}/admin/kegiatan/verifikasi">Verifikasi Input Kegiatan</a></li>
+                        <li><a href="{{url('')}}/admin/tambah-kegiatan">Tambah Kegiatan</a></li>
                     </ul>
                     <div class="tab-content" style="padding-top: 10px;">
                         {{-- tab verifikasi indikator --}}

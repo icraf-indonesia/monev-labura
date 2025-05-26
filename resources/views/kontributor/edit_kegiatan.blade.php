@@ -12,7 +12,12 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @if ($errors->any()))
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    @if ($errors->any())
                         <div class="alert alert-danger">
                             <strong>Whoops!</strong> Input gagal.<br><br>
                             <ul>
@@ -28,20 +33,26 @@
                     </ul>
                     <div class="tab-content" style="padding-top: 10px;">
                         <div class="tab-pane active" id="edit-kegiatan">
-                            <form class="page-box" method="post" action="{{ route('kegiatan.update', $indikator_keluaran->id) }}" enctype="multipart/form-data">
+                            <form class="page-box" method="post" action="{{ route('kegiatan.update', $indikator_keluaran->id) }}" enctype="multipart/form-data" onsubmit="return validateCapaian()">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Indikator</label>
                                     <div class="col-lg-9">
-                                        <input name="indikator_keluaran" class="form-control" type="text" value="{{ $indikator_keluaran->indikator_keluaran }}" disabled>
+                                        <input id="indikator_keluaran" class="form-control" type="text" value="{{ $indikator_keluaran->indikator_keluaran }}" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Target</label>
+                                    <div class="col-lg-9">
+                                        <input id="target" class="form-control" type="number" value="{{ $indikator_keluaran->target }}" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Capaian</label>
                                     <div class="col-lg-9">
-                                        <input name="capaian" class="form-control" type="text" value="{{ $indikator_keluaran->capaian }}" required>
-                                        <span class="form-text text-muted">Masukkan <b>capaian</b> saat ini</span>
+                                        <input id="capaian" class="form-control" type="number" value="{{ $indikator_keluaran->capaian }}" required>
+                                        <span class="form-text text-muted" style="font-size: 12px;">Masukkan <b>capaian</b> saat ini dengan angka tanpa satuan</span>
                                     </div>
                                 </div>
                                 <div class="m-t-20 text-center">
@@ -55,4 +66,19 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section("customJS")
+    function validateCapaian() {
+        const capaian = parseFloat(document.getElementById('capaian').value);
+        const target = parseFloat(document.getElementById('target').value);
+        
+        if (capaian > target) {
+            if (!confirm('Capaian melebihi target. Apakah Anda yakin ingin melanjutkan?')) {
+                return false;
+            }
+        }
+        
+        return confirm('Apakah sudah yakin dengan revisi ini?');
+    }
 @endsection

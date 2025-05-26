@@ -46,8 +46,8 @@ class HomeController extends Controller
                 'monev_subkegiatans.subkegiatan',
                 'monev_indikator_keluarans.indikator_keluaran',
                 'monev_indikator_keluarans.target',
-                'monev_capaians.capaian',
-                'monev_capaians.tahun'
+                'monev_indikator_keluarans.capaian',
+                'monev_indikator_keluarans.tahun'
             );
             // ->paginate(5); // Use pagination
 
@@ -56,7 +56,7 @@ class HomeController extends Controller
             $keluaran_table->where('monev_capaians.tahun', $tahun);
         }
 
-        $keluaran_table = $keluaran_table->paginate(5);
+        $keluaran_table = $keluaran_table->get();
 
         // Step 1: Get each indicator's percentage
         $indikators = DB::table('monev_indikators')
@@ -88,17 +88,17 @@ class HomeController extends Controller
 
     public function perencanaan(Request $request)
     {
-        $perencanaan_table = DB::table('monev_indikator_keluarans')
-            ->leftJoin('monev_programs', 'monev_indikator_keluarans.id_program', '=', 'monev_programs.id')
-            ->leftJoin('monev_kegiatans', 'monev_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
-            ->leftJoin('monev_subkegiatans', 'monev_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
-            ->leftJoin('monev_instansis', 'monev_indikator_keluarans.id_instansi', '=', 'monev_instansis.id')
-            ->leftJoin('monev_capaians', 'monev_indikator_keluarans.id', '=', 'monev_capaians.id_keluaran')
+        $perencanaan_table = DB::table('list_indikator_keluarans')
+            ->leftJoin('monev_programs', 'list_indikator_keluarans.id_program', '=', 'monev_programs.id')
+            ->leftJoin('monev_kegiatans', 'list_indikator_keluarans.id_kegiatan', '=', 'monev_kegiatans.id')
+            ->leftJoin('monev_subkegiatans', 'list_indikator_keluarans.id_subkegiatan', '=', 'monev_subkegiatans.id')
+            ->leftJoin('monev_instansis', 'list_indikator_keluarans.id_instansi', '=', 'monev_instansis.id')
+            ->leftJoin('monev_capaians', 'list_indikator_keluarans.id_keluaran', '=', 'monev_capaians.id_keluaran')
             ->select(
                 'monev_programs.program',
                 'monev_kegiatans.kegiatan',
                 'monev_subkegiatans.subkegiatan',
-                'monev_indikator_keluarans.indikator_keluaran',
+                'list_indikator_keluarans.indikator_keluaran',
                 'monev_instansis.instansi',
                 'monev_capaians.sumber_pembiayaan'
             )

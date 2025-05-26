@@ -25,10 +25,9 @@
                     @endif
                     <ul class="nav nav-tabs paitent-app-tab">
                         <li><a href="{{ url('') }}/kontributor">Daftar Indikator Dampak</a></li>
-                        <li><a href="{{ url('') }}/kontributor/indikator/tambah">Input Indikator
-                                Dampak</a></li>
-                        <li class="active"><a href="{{ url('') }}/kontributor/kegiatan">Pelaksanaan Kegiatan</a></li>
-                        <li><a href="{{ url('') }}/kontributor/kegiatan/tambah">Daftar Input Kegiatan</a></li>
+                        <li class="active"><a href="{{ url('') }}/kontributor/kegiatan">Daftar Kegiatan</a></li>
+                        <li><a href="{{ url('') }}/kontributor/indikator/tambah">Input Capaian Indikator Dampak</a></li>
+                        <li><a href="{{ url('') }}/kontributor/kegiatan/tambah">Input Capaian Kegiatan</a></li>
                     </ul>
                     <div class="tab-content" style="padding-top: 10px;">
                         <div class="row">
@@ -59,9 +58,11 @@
                                             <th>Sub Kegiatan</th>
                                             <th>Indikator Keluaran</th>
                                             <th>Pelaksana</th>
+                                            <th>Satuan</th>
                                             <th>Target</th>
                                             <th>Capaian</th>
-                                            <th>Sumber Pendanaan</th>
+                                            <th>Tahun</th>
+                                            {{-- <th>Sumber Pendanaan</th> --}}
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -78,19 +79,21 @@
                                                     <td width="10%">{{ $kegiatan_table->subkegiatan }}</td>
                                                     <td width="10%">{{ $kegiatan_table->indikator_keluaran }}</td>
                                                     <td width="10%">{{ $kegiatan_table->instansi }}</td>
+                                                    <td width="10%">{{ $kegiatan_table->satuan }}</td>
                                                     <td width="10%">{{ $kegiatan_table->target }}</td>
                                                     <td width="10%">{{ $kegiatan_table->capaian }}</td>
-                                                    <td width="10%">{{ $kegiatan_table->sumber_pembiayaan }}</td>
+                                                    <td width="10%">{{ $kegiatan_table->tahun }}</td>
+                                                    {{-- <td width="10%">{{ $kegiatan_table->sumber_pembiayaan }}</td> --}}
                                                     <td width="10%">
                                                         @if ($kegiatan_table->status === 0)
-                                                            <span class="badge rounded-pill" style="background-color: #0d6efd !important;color: #fff;">Menunggu</span>
+                                                            <span class="badge rounded-pill" style="background-color: #0d6efd !important;color: #fff; font-size: 16px;">Menunggu</span>
                                                         @elseif($kegiatan_table->status === 1)
-                                                            <span class="badge rounded-pill" style="background-color: #198754 !important;color: #fff;">Diverifikasi</span>
+                                                            <span class="badge rounded-pill" style="background-color: #198754 !important;color: #fff; font-size: 16px;">Diverifikasi</span>
                                                         @elseif($kegiatan_table->status === 2)
                                                             @if(($kegiatan_table->id_instansi == $currentUserInstansiId) || $isSpecialUser)
-                                                                <a href="{{ route('kegiatan.edit', $kegiatan_table->id) }}" class="btn btn-warning btn-sm">Revisi</a>
+                                                                <a href="{{ route('kegiatan.edit', $kegiatan_table->id) }}" class="btn btn-warning btn-sm" style="width: 100%;"><b>Klik untuk Revisi</b></a>
                                                             @else
-                                                                <span class="badge rounded-pill" style="background-color: #dc3545 !important;color: #fff;">Perlu Revisi</span>
+                                                                <span class="badge rounded-pill" style="background-color: #dc3545 !important;color: #fff; font-size: 16px;">Perlu Revisi</span>
                                                             @endif
                                                         @endif
                                                     </td>

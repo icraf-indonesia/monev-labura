@@ -24,9 +24,14 @@
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/dist/assets/css/datatable.min.css" />
     <script src="{{ url('') }}/dist/assets/js/utils.js"></script>
     <link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' crossorigin='' />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <!-- slider -->
-    <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous"
+        defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet"
+        crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/rubik?styles=19495" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Leaflet CSS & JS -->
@@ -35,6 +40,86 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/shpjs@latest/dist/shp.min.js"></script>
+    <style>
+        .navbar {
+            transition: all 0.3s ease;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            padding-top: 70px;
+        }
+
+        .container-body {
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        /* Responsive text sizing */
+        .content-section {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .navbar {
+                padding: 10px 0;
+            }
+
+            .content-section {
+                font-size: 0.9rem;
+            }
+
+            #menu li,
+            .mobile-sidemenu li {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content-section {
+                font-size: 0.85rem;
+            }
+
+            .header-navbar-lft,
+            .header-navbar-rht {
+                padding-left: 15px !important;
+                padding-right: 15px !important;
+            }
+        }
+
+        .header-navbar-rht ul {
+            display: block;
+            padding: 22px 0px 10px 10px;
+        }
+
+        /* Ensure content doesn't get hidden */
+        section.container-body {
+            min-height: calc(100vh - 120px);
+            overflow: visible;
+        }
+
+        /* Base styles for navigation buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-wrap: wrap;
+        }
+    </style>
 </head>
 
 <body class="innerpage-body">
@@ -44,21 +129,7 @@
             <div class="container-fluid" style="width: 1170px">
                 <div class="row">
                     <div class="col-md-8 col-sm-12 header-navbar-lft text-center" style="padding-left: 0px;">
-                        <a class="web-logo1 visible-xs visible-sm" href="{{ url('') }}/"><img
-                                src="{{ url('') }}/dist/assets/img/header-kab-small-labura.png" class="img-responsive" alt=""></a>
-
-                        <div class="hamburger navbar-toggle collapsed mob-icon-menu img-responsive visible-xs visible-sm"
-                            data-toggle="slide-collapse" data-target="#slide-navbar-collapse" aria-expanded="false">
-                            <div class="burger-main">
-                                <div class="burger-inner">
-                                    <span class="top"></span>
-                                    <span class="mid"></span>
-                                    <span class="bot"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <ul id="menu" class="hidden-xs hidden-sm" style="padding-right:0px; padding-left:0px;">
+                        <ul id="menu" style="padding-right:0px; padding-left:0px;">
                             <li><a class="web-logo" href="{{ url('') }}/"><img
                                         src="{{ url('') }}/dist/assets/img/header-kab-small-labura.png"
                                         class="img-responsive" alt=""></a></li>
@@ -74,11 +145,12 @@
                             @endif
                         </ul>
                     </div>
-                    <div class="col-md-4 col-sm-5 header-navbar-rht hidden-xs hidden-sm" style="padding-left: 0px;">
-                        <ul class="text-right m-t-13">
+                    <div class="col-md-4 col-sm-5 header-navbar-rht" style="padding-left: 0px;">
+                        <ul class="nav-buttons">
                             @if (Auth::check())
                                 <li>
-                                    <a style="font-size: 13px; pointer-events: none; position: relative; top: -5px">{{ Auth::user()->name }}</a>
+                                    <a
+                                        style="font-size: 13px; pointer-events: none; position: relative; top: -5px">{{ Auth::user()->name }}</a>
                                 </li>
 
                                 <li>
@@ -96,7 +168,7 @@
                         <ul>
                             <li><a class="home" href="{{ url('') }}/">Beranda</a></li>
                             <li><a class="home" href="{{ url('') }}/perencanaan">Perencanaan</a></li>
-                            <li><a class="home" href="{{ url('') }}/pembelajaran">Pembelajaran</a></li>
+                            <li><a class="home" href="{{ url('') }}/unduh">Unduh</a></li>
                             @if (Auth::check())
                                 @if (Auth::user()->role === 'admin')
                                     <li><a href="{{ url('') }}/admin">Admin</a></li>
@@ -146,6 +218,46 @@
         @yield('customJS')
     </script>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var Closed = false;
+
+            $('.hamburger').click(function() {
+                if (Closed == true) {
+                    $(this).removeClass('open');
+                    $(this).addClass('closed');
+                    Closed = false;
+                } else {
+                    $(this).removeClass('closed');
+                    $(this).addClass('open');
+                    Closed = true;
+                }
+            });
+
+            // Navbar scroll behavior
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.navbar').addClass('scrolled');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                }
+            });
+        });
+
+        $('[data-toggle="slide-collapse"]').on('click', function() {
+            $navMenuCont = $($(this).data('target'));
+            $navMenuCont.animate({
+                'width': 'toggle'
+            }, 350);
+            $(".menu-overlay").fadeIn(500);
+        });
+
+        $(".menu-overlay").click(function(event) {
+            $(".navbar-toggle").trigger("click");
+            $(".menu-overlay").fadeOut(500);
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             $("#patientfilter").DataTable({
@@ -166,6 +278,7 @@
             });
         });
     </script>
+
     <!-- datatable -->
     <script>
         $(document).ready(function($) {
@@ -279,9 +392,10 @@
         });
     </script>
     <script type="text/javascript">
-        $('document').ready(function() {
+        $(document).ready(function() {
             var Closed = false;
 
+            // Mobile menu toggle
             $('.hamburger').click(function() {
                 if (Closed == true) {
                     $(this).removeClass('open');
@@ -293,6 +407,37 @@
                     Closed = true;
                 }
             });
+
+            // Navbar scroll behavior
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.navbar').addClass('scrolled');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                }
+            });
+
+            // Ensure mobile menu closes when clicking a link
+            $('.mobile-sidemenu a').click(function() {
+                $('.hamburger').click();
+            });
+
+            // Window resize handler
+            $(window).resize(function() {
+                // Reset mobile menu if window is resized to desktop size
+                if ($(window).width() > 768) {
+                    $('#slide-navbar-collapse').removeClass('in');
+                    $('.hamburger').addClass('closed').removeClass('open');
+                    Closed = false;
+                }
+            });
+        });
+
+        $('[data-toggle="slide-collapse"]').on('click', function() {
+            $navMenuCont = $($(this).data('target'));
+            $navMenuCont.animate({
+                'width': 'toggle'
+            }, 350);
         });
     </script>
     <script>
@@ -338,147 +483,6 @@
             plugins: {
                 legend: false,
                 title: false
-            }
-        });
-    </script>
-
-    <script id="script-construct">
-        var chart = new Chart('chart-0', {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    backgroundColor: Samples.color(0),
-                    borderColor: Samples.color(0),
-                    data: Samples.numbers({
-                        count: DATA_COUNT,
-                        min: -100,
-                        max: 100
-                    })
-                }]
-            },
-            options: {
-                plugins: {
-                    datalabels: {
-                        align: function(context) {
-                            var index = context.dataIndex;
-                            var curr = context.dataset.data[index];
-                            var prev = context.dataset.data[index - 1];
-                            var next = context.dataset.data[index + 1];
-                            return prev < curr && next < curr ? 'end' :
-                                prev > curr && next > curr ? 'start' :
-                                'center';
-                        },
-                        backgroundColor: 'rgba(255, 255, 255, 0.7)',
-                        borderColor: 'rgba(128, 128, 128, 0.7)',
-                        borderRadius: 4,
-                        borderWidth: 1,
-                        color: function(context) {
-                            var i = context.dataIndex;
-                            var value = context.dataset.data[i];
-                            var prev = context.dataset.data[i - 1];
-                            var diff = prev !== undefined ? value - prev : 0;
-                            return diff < 0 ? Samples.color(0) :
-                                diff > 0 ? Samples.color(1) :
-                                'gray';
-                        },
-                        font: {
-                            size: 11,
-                            weight: 600
-                        },
-                        offset: 8,
-                        formatter: function(value, context) {
-                            var i = context.dataIndex;
-                            var prev = context.dataset.data[i - 1];
-                            var diff = prev !== undefined ? prev - value : 0;
-                            var glyph = diff < 0 ? '\u25B2' : diff > 0 ? '\u25BC' : '\u25C6';
-                            return glyph + ' ' + Math.round(value);
-                        }
-                    }
-                }
-            }
-        });
-    </script>
-
-    <script id="script-init1">
-        var DATA_COUNT = 5;
-        var labels = [
-            'Earth',
-            'Mars',
-            'Saturn',
-            'Jupiter',
-            'Others'
-        ];
-
-        Samples.srand(0);
-
-        Chart.helpers.merge(Chart.defaults.global, {
-            aspectRatio: 4 / 3,
-            tooltips: false,
-            layout: {
-                padding: {
-                    top: 32,
-                    right: 24,
-                    bottom: 20,
-                    left: 0
-                }
-            },
-            elements: {
-                line: {
-                    fill: false
-                }
-            },
-            plugins: {
-                legend: false,
-                title: false
-            }
-        });
-    </script>
-
-    <script id="script-construct1">
-        var chart = new Chart('chart-1', {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    backgroundColor: Samples.color(0),
-                    data: Samples.numbers({
-                        count: DATA_COUNT,
-                        min: 0,
-                        max: 100
-                    })
-                }]
-            },
-            options: {
-                plugins: {
-                    datalabels: {
-                        align: 'end',
-                        anchor: 'end',
-                        color: function(context) {
-                            return context.dataset.backgroundColor;
-                        },
-                        font: function(context) {
-                            var w = context.chart.width;
-                            return {
-                                size: w < 512 ? 12 : 14
-                            };
-                        },
-                        formatter: function(value, context) {
-                            return context.chart.data.labels[context.dataIndex];
-                        }
-                    }
-                },
-                scales: {
-                    xAxes: [{
-                        display: false,
-                        offset: true
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
             }
         });
     </script>

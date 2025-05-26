@@ -49,15 +49,6 @@
         }
 
         /* Map specific styles */
-        #map { 
-            height: 600px; 
-            width: 100%;
-            z-index: 1;
-            background: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
         .info {
             padding: 6px 8px;
             font: 14px/16px Arial, Helvetica, sans-serif;
@@ -70,17 +61,48 @@
             margin: 0 0 5px;
             color: #777;
         }
-        .legend {
-            text-align: left;
-            line-height: 18px;
-            color: #555;
+
+        .info.legend {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 7px rgba(0,0,0,0.4);
+            font: 12px/14px Arial, Helvetica, sans-serif;
         }
-        .legend i {
+
+        .info.legend h4 {
+            margin: 0 0 10px;
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .legend-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .legend-color {
             width: 18px;
             height: 18px;
-            float: left;
             margin-right: 8px;
-            opacity: 0.7;
+            border: 1px solid #999;
+            opacity: 0.8;
+        }
+
+        .legend-label {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Optional: Add scroll if too many items */
+        .legend-scroll {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 5px;
         }
         .loading {
             position: absolute;
@@ -108,10 +130,10 @@
 @section('content')
     <div class="container-fluid" style="max-width: 1170px; margin: auto;">
         <div class="row">
-            <h1 align="center" style="color:#80b441; padding-bottom:30px;"><b>Monitoring dan evaluasi Rencana Aksi Daerah
+            <h1 align="center" style="color:#80b441; padding-bottom:30px;"><b>Monitoring dan Evaluasi Rencana Aksi Daerah
                     Kelapa Sawit Berkelanjutan (RAD KSB) di Kabupaten Labuhanbatu Utara</b></h1>
             <div
-                class="swiffy-slider slider-item-ratio slider-item-ratio-21x9 slider-item-nogap slider-nav-autoplay slider-indicators-round slider-nav-animation slider-nav-animation-fadein slider-nav-animation-slow">
+                class="swiffy-slider slider-item-ratio slider-item-ratio-21x9 slider-item-nogap slider-nav-autoplay slider-nav-autopause slider-indicators-round slider-nav-animation slider-nav-animation-fadein slider-nav-animation-slow" data-slider-nav-autoplay-interval="8000">
                 <ul class="slider-container">
                     <li class="slide-visible">
                         <img src="dist/assets/img/slider labura.jpg">
@@ -131,7 +153,7 @@
                     <li class=""></li>
                 </ul>
             </div>
-            <div class="hidden-xs hidden-sm">
+            <div>
                 <h2 style="padding-bottom:20px;">Pelaksanaan Rencana Aksi</h2>
                 <p>Kelapa sawit merupakan komoditas strategis yang berperan penting dalam perekonomian Indonesia, tidak
                     hanya sebagai sumber devisa negara tetapi juga sebagai penyedia lapangan pekerjaan bagi jutaan
@@ -160,7 +182,7 @@
             </div>
             <div class="dct-dashbd-lft hidden-xs hidden-sm">
                 <h2 style="padding-bottom:20px;">Monitoring Rencana Aksi</h2>
-                <form method="GET" action="{{ route('beranda') }}" class="mb-4" style="padding-bottom:10px;">
+                {{-- <form method="GET" action="{{ route('beranda') }}" class="mb-4" style="padding-bottom:10px;">
                     <label for="tahun" class="fw-bold me-2">Filter Tahun:</label>
                     <select name="tahun" id="tahun" class="form-select d-inline-block" style="width: 150px;"
                         onchange="this.form.submit()">
@@ -171,8 +193,8 @@
                             </option>
                         @endforeach
                     </select>
-                </form>
-                <table id="tabel-data" class="table table-bordered table-striped" style="width:100%; font-size:12px;">
+                </form> --}}
+                <table id="tabeldata" class="table table-bordered table-striped" style="width:100%; font-size:12px;">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -182,22 +204,21 @@
                             <th>Indikator Keluaran</th>
                             <th>Target*</th>
                             <th>Capaian*</th>
-                            <!-- <th>Tahun</th> -->
+                            <th>Tahun</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if ($keluaran_tables->count())
                             @foreach ($keluaran_tables as $keluaran_table)
                                 <tr>
-                                    <td>{{ ($keluaran_tables->currentPage() - 1) * $keluaran_tables->perPage() + $loop->iteration }}
-                                    </td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $keluaran_table->program }}</td>
                                     <td>{{ $keluaran_table->kegiatan }}</td>
                                     <td>{{ $keluaran_table->subkegiatan }}</td>
                                     <td>{{ $keluaran_table->indikator_keluaran }}</td>
                                     <td>{{ $keluaran_table->target }}</td>
                                     <td>{{ $keluaran_table->capaian }}</td>
-                                    <!-- <td>{{ $keluaran_table->tahun }}</td> -->
+                                    <td>{{ $keluaran_table->tahun }}</td>
                                 </tr>
                             @endforeach
                         @else
@@ -208,26 +229,7 @@
                     </tbody>
                 </table>
                 <p>* Angka pada kolom ini masih data contoh</p>
-
-                <!-- Pagination -->
-                <!-- <div class="d-flex justify-content-center">
-                                {{ $keluaran_tables->appends(['tahun' => request('tahun')])->links() }}
-                            </div> -->
             </div>
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link"
-                            href="{{ $keluaran_tables->url($keluaran_tables->onFirstPage()) }}">Awal</a></li>
-                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->previousPageUrl() }}">Sebelum</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">{{ $keluaran_tables->currentPage() }}</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="{{ $keluaran_tables->nextPageUrl() }}">Selanjutnya</a>
-                    </li>
-                    <li class="page-item"><a class="page-link"
-                            href="{{ $keluaran_tables->url($keluaran_tables->lastPage()) }}">Akhir</a></li>
-                </ul>
-            </nav>
             <h2 style="padding-bottom:20px;">Ketercapaian Komponen Indikator Kunci RAD KSB</h2>
             <p>RAD KSB Labuhanbatu Utara mencakup lima (5) komponen utama, yaitu:</p>
             <ul>
@@ -239,13 +241,13 @@
                     sawit (6 indikator)</li>
             </ul>
             <canvas id="grafikKomponen"></canvas>
-            <h2 style="padding-bottom:20px;">Peta Kelapa Sawit Berkelanjutan</h2>
-            <div id="map">
+            <h2 style="padding-bottom:20px;">Peta Intervensi Kelapa Sawit Berkelanjutan</h2>
+            <div id="map" style="">
                 <div class="loading">Memuat data peta...</div>
             </div>
         </div>
         <div class="row" style="padding-top: 50px;">
-            <div class="hidden-xs hidden-sm">
+            <div>
                 <h4 style="text-align: center"><b>Didukung oleh</b></h4>
                 <p align="center"><img src="dist/assets/img/logoall-fin.png" alt="" style="max-width:50%;"></p>
             </div>
@@ -293,13 +295,53 @@
             scales: {
                 x: {
                     beginAtZero: true,
-                    max: 100
+                    max: 100,
+                    ticks: {
+                        font: {
+                            size: 14 // Change x-axis font size
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Persentase (%)', // X-axis label
+                        font: {
+                            size: 16 // X-axis label font size
+                        }
+                    }
+                },
+                y: {
+                    ticks: {
+                        font: {
+                            size: 14 // Change x-axis font size
+                        },
+                        callback: function(value, index) {
+                            return String.fromCharCode(65 + index); // Override labels
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Komponen', // Y-axis label
+                        font: {
+                            size: 16 // Y-axis label font size
+                        }
+                    }
                 }
             },
             plugins: {
                 legend: {
                     display: false // Hides the legend
                 }
+                {{-- title: {
+                    display: true,
+                    text: 'Judul Grafik Anda', // Chart title
+                    font: {
+                        size: 18 // Title font size
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                } --}}
             }
         }
     });
@@ -316,39 +358,31 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
 
-            // Discrete color function for categories
-            function getCategoryColor(category) {
+            // Discrete color function for intervention categories
+            function getInterventionColor(intervention) {
                 const colorMap = {
-                    "Kawasan Lindung": "#2E8B57",
-                    "Kawasan Lindung – PS Definitif": "#3CB371",
-                    "Kawasan Lindung – PS Pencadangan": "#20B2AA",
-                    "Kawasan Lindung – PS Potensi": "#5F9EA0",
-                    "Kawasan Lindung – LSD": "#4682B4",
-                    "Area Produksi": "#FF8C00",
-                    "Area Produksi – PS Definitif": "#FFA500",
-                    "Area Produksi – PS Pencadangan": "#FFD700",
-                    "Area Produksi – PS Potensi": "#DAA520",
-                    "Area Produksi – PS Pencadangan, LSD": "#B8860B",
-                    "Area Produksi – LSD": "#CD853F",
-                    "Area Pertanian": "#32CD32",
-                    "Area Pertanian – PS Definitif": "#9ACD32",
-                    "Area Pertanian – LSD": "#6B8E23",
-                    "Area Penggunaan Lain": "#A0522D",
-                    "Area Penggunaan Lain – PS Pencadangan": "#D2691E",
-                    "Area Penggunaan Lain – LSD": "#8B4513",
-                    "Area Penggunaan Lain – PS Potensi": "#A52A2A",
-                    "Lainnya": "#696969"
+                    "Tidak diintervensi": "#CCCCCC",
+                    "Intervensi 1 - Perlindungan hutan terutama dalam zonasi ruang lindung dan konservasi": "#2E8B57",
+                    "Intervensi 2 - Restorasi hutan pada area kritis dan terdegradasi di luar area perkebunan": "#3CB371",
+                    "Intervensi 3 - Pengembangan sawah sebagai bagian strategi ketahanan pangan lokal": "#32CD32",
+                    "Intervensi 4 - Intensifikasi kelapa sawit melalui penerapan praktik pertanian baik": "#FF8C00",
+                    "Intervensi 5 - Intensifikasi budidaya karet berbasis praktik pertanian baik": "#FFA500",
+                    "Intervensi 6 - Intensifikasi kelapa melalui pendekatan praktik pertanian baik": "#FFD700",
+                    "Pengembangan agroforestri kelapa sawit, karet, dan kelapa dengan mempertimbangkan kesesuaian lahan": "#9ACD32",
+                    "Intervensi 8 - Revitalisasi budidaya sawit, karet, dan kelapa dengan menggunakan benih unggul": "#DAA520",
+                    "Intervensi 9 - Kemitraan usaha perkebunan dengan fasilitasi praktik pertanian berkelanjutan": "#6B8E23",
+                    "Badan air": "#4682B4"
                 };
                 
-                return colorMap[category] || "#CCCCCC";
+                return colorMap[intervention] || "#696969";
             }
 
             // Style function
             function style(feature) {
-                const category = feature.properties.PUv2;
+                const intervention = feature.properties.PUv2;
                 return {
-                    fillColor: getCategoryColor(category),
-                    weight: 1,
+                    fillColor: getInterventionColor(intervention),
+                    weight: 0,
                     opacity: 1,
                     color: 'white',
                     dashArray: '3',
@@ -366,55 +400,17 @@
             };
 
             info.update = function(props) {
-                this._div.innerHTML = '<h4>Unit Perencanaan</h4>' + (props ?
-                    `<b>ID: ${props.IDSv2}</b><br/>
-                    Kategori: ${props.PUv2}` :
-                    'Arahkan kursor ke area');
+                this._div.innerHTML = '<h4>Intervensi Labuhanbatu Utara</h4>' + (props ?
+                    `<span style="font-size: 16px; font-weight: bold; color: #2E8B57; display: inline-block;">
+                        ${props.PUv2}
+                    </span>` :
+                    '<h5>Arahkan kursor ke area</h5>');
             };
 
             info.addTo(map);
 
-            {{-- // Create legend
-            const legend = L.control({position: 'bottomright'});
-
-            legend.onAdd = function(map) {
-                const div = L.DomUtil.create('div', 'legend');
-                div.innerHTML = '<h4>Kategori</h4>';
-                
-                const categories = [
-                    "Kawasan Lindung",
-                    "Kawasan Lindung – PS Definitif",
-                    "Kawasan Lindung – PS Pencadangan",
-                    "Kawasan Lindung – PS Potensi",
-                    "Kawasan Lindung – LSD",
-                    "Area Produksi",
-                    "Area Produksi – PS Definitif",
-                    "Area Produksi – PS Pencadangan",
-                    "Area Produksi – PS Potensi",
-                    "Area Produksi – PS Pencadangan, LSD",
-                    "Area Produksi – LSD",
-                    "Area Pertanian",
-                    "Area Pertanian – PS Definitif",
-                    "Area Pertanian – LSD",
-                    "Area Penggunaan Lain",
-                    "Area Penggunaan Lain – PS Pencadangan",
-                    "Area Penggunaan Lain – LSD",
-                    "Area Penggunaan Lain – PS Potensi",
-                    "Lainnya"
-                ];
-                
-                categories.forEach(category => {
-                    div.innerHTML += 
-                        `<i style="background:${getCategoryColor(category)}"></i> ${category}<br>`;
-                });
-
-                return div;
-            };
-
-            legend.addTo(map); --}}
-
             // Load shapefile
-            const shapefileUrl = "{{ asset('storage/shapefiles/PU_LBU_F_v2_F.zip') }}";
+            const shapefileUrl = "{{ asset('storage/shapefiles/Intervensi_Labura_j_dis_simple.zip') }}";
             const loadingElement = document.querySelector('.loading');
             
             loadingElement.textContent = 'Memuat data shapefile...';
@@ -431,7 +427,7 @@
                             mouseover: function(e) {
                                 const layer = e.target;
                                 layer.setStyle({
-                                    weight: 3,
+                                    weight: 0,
                                     color: '#666',
                                     dashArray: '',
                                     fillOpacity: 0.9
@@ -468,5 +464,24 @@
             console.error('Map initialization error:', error);
             alert('Gagal menginisialisasi peta: ' + error.message);
         }
+    });
+
+    $(document).ready(function() {
+        $('#tabeldata').DataTable({
+            initComplete: function() {
+                // Add sort indicators to headers (excluding the "No." column)
+                this.api().columns().every(function() {
+                    var column = this;
+                    var title = $(column.header()).text();
+                    
+                    if (title !== 'No.') {
+                        $(column.header()).append('');
+                    }
+                });
+            },
+            ordering: true,
+            paging: true,
+            lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]]
+        });
     });
 @stop

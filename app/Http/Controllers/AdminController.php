@@ -209,7 +209,7 @@ class AdminController extends Controller
                 'monev_indikator_keluarans.indikator_keluaran',
                 'monev_indikator_keluarans.satuan',
                 'monev_indikator_keluarans.target',
-                'monev_capaians.tahun',
+                'monev_indikator_keluarans.tahun',
                 'monev_instansis.instansi'
             );
 

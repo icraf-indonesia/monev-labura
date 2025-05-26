@@ -13,19 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('monev_indikator_keluarans', function (Blueprint $table) {
+        Schema::create('list_indikator_keluarans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_keluaran');
             $table->string('indikator_keluaran')->nullable();
             $table->string('target')->nullable();
-            $table->string('capaian')->nullable();
-            $table->string('tahun')->nullable();
             $table->string('satuan')->nullable();
             $table->foreignId('id_komponen');
             $table->foreignId('id_program');
             $table->foreignId('id_kegiatan');
             $table->foreignId('id_subkegiatan');
             $table->foreignId('id_instansi');
-            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }
@@ -37,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('monev_indikator_keluarans');
+        Schema::dropIfExists('list_indikator_keluarans');
     }
 };

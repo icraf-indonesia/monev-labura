@@ -1,5 +1,7 @@
 @extends('header')
 
+@section('page_title', 'Unduh')
+
 @section('css')
     table {
     width: 100%;
@@ -56,26 +58,25 @@
                 <th>Unduh</th>
             </tr>
             <tr>
-                <td>Regulasi Kelapa Sawit Berkelanjutan</td>
-                <td><a href="https://drive.google.com/file/d/1Ht8eOd5S5L2dfk93vEEMsHATZE_2EI45/view?usp=sharing" class="btn btn-danger">Klik
-                        disini</a></td>
+                <td>SK Bupati tahun 2022 tentang Pembentukan Tim Penyusun RAD KSB</td>
+                <td><a href="https://drive.google.com/file/d/1Ht8eOd5S5L2dfk93vEEMsHATZE_2EI45/view?usp=sharing" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Klik disini</a></td>
             </tr>
             <tr>
-                <td>RAN KSB</td>
-                <td><a href="https://drive.google.com/file/d/1nDgSjU_2_cVbpQFsw8DsmPBIu_yoTX1J/view?usp=sharing" class="btn btn-danger">Klik
+                <td>INPRES No. 6 tahun 2019 tentang RAN Perkebunan Kelapa Sawit Berkelanjutan</td>
+                <td><a href="https://drive.google.com/file/d/1nDgSjU_2_cVbpQFsw8DsmPBIu_yoTX1J/view?usp=sharing" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Klik
                         disini</a></td>
             </tr>
             <tr>
                 <td>Panduan Penyusunan dan Pelaksanaan RAD KSB</td>
-                <td><a href="https://drive.google.com/file/d/1oBLzccdfy0IAhP_HSRg7Q8a4kz780en1/view?usp=sharing" class="btn btn-danger">Klik
+                <td><a href="https://drive.google.com/file/d/1oBLzccdfy0IAhP_HSRg7Q8a4kz780en1/view?usp=sharing" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Klik
                         disini</a></td>
             </tr>
                 <td>Pelatihan Berkebun Sawit sebagai Bisnis Berkelanjutan</td>
-                <td><a href="https://drive.google.com/file/d/1jKzKU4z326s4sug76Te8JZviewqgGNlh/view" class="btn btn-danger">Klik disini</a></td>
+                <td><a href="https://drive.google.com/file/d/1jKzKU4z326s4sug76Te8JZviewqgGNlh/view" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Klik disini</a></td>
             </tr>
             <tr>
                 <td>Kumpulan Materi Pelatihan Penyuluh Pengelolaan GAP Sawit Berkelanjutan</td>
-                <td><a href="https://drive.google.com/drive/folders/1jVKNnR-ZGTS5ihX4g89GR3SxAz12ghQi" class="btn btn-danger">Klik disini</a></td>
+                <td><a href="https://drive.google.com/drive/folders/1jVKNnR-ZGTS5ihX4g89GR3SxAz12ghQi" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Klik disini</a></td>
             </tr>
         </table>
         <!-- <h2 style="padding-bottom:20px;">Kebijakan Pengelolaan Sawit</h2>

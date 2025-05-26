@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'monevbappeda',
             'email'=>'monevbappeda@mail.com',
             'id_instansi' => 1,
-            'role'=>'kontributor',
+            'role'=>'admin',
             'password'=>Hash::make('Monev02')
         ]);
         DB::table('users')->insert([
@@ -75,7 +75,7 @@ class UsersTableSeeder extends Seeder
             'password'=>Hash::make('Monev05')
         ]);
         DB::table('users')->insert([
-            'name' => 'Dispedag Labura',
+            'name' => 'Disperdag Labura',
             'username' => 'monevdisperdag',
             'email'=>'monevdisperdag@mail.com',
             'id_instansi' => 9,
