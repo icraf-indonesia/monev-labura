@@ -451,13 +451,13 @@ class AdminController extends Controller
     public function storeKegiatan(Request $request)
     {
         $validated = $request->validate([
-            'komponen' => 'required',
-            'program' => 'required',
-            'kegiatan' => 'required',
-            'subkegiatan' => 'required',
-            'indikator_keluaran' => 'required',
-            'target_volume' => 'required',
-            'satuan' => 'required',
+            'komponen' => 'required|exists:monev_komponens,id',
+            'program' => 'required|exists:monev_programs,id',
+            'kegiatan' => 'required|exists:monev_kegiatans,id',
+            'subkegiatan' => 'required|exists:monev_subkegiatans,id',
+            'indikator_keluaran' => 'required|string',
+            'target_volume' => 'required|string',
+            'satuan' => 'required|string',
             'tahun' => 'required|numeric',
             'lembaga_penanggung_jawab' => 'required',
         ]);
@@ -466,7 +466,7 @@ class AdminController extends Controller
         if ($request->lembaga_penanggung_jawab === 'lainnya' && $request->other_lembaga) {
             $lembaga = $request->other_lembaga;
             
-            // Optionally save the new lembaga to database
+            // Save the new lembaga to database
             $instansiId = DB::table('monev_instansis')->insertGetId([
                 'instansi' => $lembaga,
                 'created_at' => now(),
@@ -479,20 +479,44 @@ class AdminController extends Controller
                 ->value('id');
         }
 
-        // Save the kegiatan data
-        DB::table('monev_indikator_keluarans')->insert([
-            'id_komponen' => $request->komponen,
-            'id_program' => $request->program,
-            'id_kegiatan' => $request->kegiatan,
-            'id_subkegiatan' => $request->subkegiatan,
-            'indikator_keluaran' => $request->indikator_keluaran,
-            'target' => $request->target_volume,
-            'satuan' => $request->satuan,
-            'tahun' => $request->tahun,
-            'id_instansi' => $instansiId,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // Insert to monev_indikator_keluarans first
+    $keluaranId = DB::table('monev_indikator_keluarans')->insertGetId([
+        'indikator_keluaran' => $request->indikator_keluaran,
+        'target' => $request->target_volume,
+        'satuan' => $request->satuan,
+        'tahun' => $request->tahun,
+        'id_komponen' => $request->komponen,  
+        'id_program' => $request->program,    
+        'id_kegiatan' => $request->kegiatan,  
+        'id_subkegiatan' => $request->subkegiatan, 
+        'id_instansi' => $instansiId,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    // Then insert to list_indikator_keluarans
+    DB::table('list_indikator_keluarans')->insert([
+        'id_keluaran' => $keluaranId,
+        'indikator_keluaran' => $request->indikator_keluaran,
+        'target' => $request->target_volume,
+        'satuan' => $request->satuan,
+        'id_komponen' => $request->komponen,
+        'id_program' => $request->program,
+        'id_kegiatan' => $request->kegiatan,
+        'id_subkegiatan' => $request->subkegiatan,
+        'id_instansi' => $instansiId,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+        // // Insert default capaian with value 0
+        // DB::table('monev_capaians')->insert([
+        //     'id_keluaran' => $keluaranId,
+        //     'sumber_pembiayaan' => null,
+        //     'status' => 0,
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        // ]);
 
         return redirect()->route('admin.kegiatan')->with('success', 'Kegiatan berhasil ditambahkan');
     }
