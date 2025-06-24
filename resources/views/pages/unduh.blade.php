@@ -78,6 +78,14 @@
                 <td>Kumpulan Materi Pelatihan Penyuluh Pengelolaan GAP Sawit Berkelanjutan</td>
                 <td><a href="https://drive.google.com/drive/folders/1jVKNnR-ZGTS5ihX4g89GR3SxAz12ghQi" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Klik disini</a></td>
             </tr>
+            <tr>
+                <td>Matriks Pelaksanaan Kegiatan RAD KSB</td>
+                <td><a href="https://drive.google.com/file/d/1hiCohqJXuBxHx-4bL-4Q2xMbCRvqTUXK/view?usp=sharing" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Klik disini</a></td>
+            </tr>
+            <tr>
+                <td>Standar Operasional Prosedur (SOP) Monitoring, Evaluasi, dan Pelaporan RAD KSB</td>
+                <td><a href="https://drive.google.com/file/d/1hiCohqJXuBxHx-4bL-4Q2xMbCRvqTUXK/view?usp=sharing" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Klik disini</a></td>
+            </tr>
         </table>
         <!-- <h2 style="padding-bottom:20px;">Kebijakan Pengelolaan Sawit</h2>
         <div class="container-fluid">

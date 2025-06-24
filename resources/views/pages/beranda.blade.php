@@ -371,6 +371,11 @@
             <div id="map" style="">
                 <div class="loading">Memuat data peta...</div>
             </div>
+            <h2 style="padding-bottom:20px;">StoryMap Kelapa Sawit Berkelanjutan</h2>
+            <iframe src="https://storymaps.arcgis.com/stories/98e32ecb2192427090d37358c80f23c4" frameborder="0" style="width:100%; height:500px;"></iframe>
+            <a href="https://storymaps.arcgis.com/stories/98e32ecb2192427090d37358c80f23c4" target="_blank" class="storymap-preview">
+                <div>Tautan menuju StoryMap</div>
+            </a>
         </div>
         <div class="row" style="padding-top: 50px;">
             <div>
