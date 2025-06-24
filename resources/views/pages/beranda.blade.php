@@ -124,6 +124,63 @@
                 margin-bottom: 20px;
             }
         }
+        .chart-container {
+        position: relative;
+        height: 300px; 
+        min-height: 300px;
+        width: 100%;
+        }
+        
+        .card {
+            min-height: 400px;
+        }
+
+        .card-body {
+            padding-bottom: 20px;
+        }
+
+        .card-header h4 a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .card-header h4 a.collapsed i.fa-chevron-down {
+            transform: rotate(-90deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .card-header h4 a:not(.collapsed) i.fa-chevron-down {
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+
+        /* Style untuk icon toggle */
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Rotasi icon ketika card expanded */
+        [aria-expanded="true"] .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        [data-toggle="collapse"] .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        [data-toggle="collapse"][aria-expanded="true"] .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Warna teks dan icon */
+        .card-header a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .card-header a:hover {
+            color: #f8f9fa;
+        }
     </style>
 @stop
 
@@ -240,7 +297,76 @@
                 <li>Komponen E: Dukungan percepatan pelaksanaan sertifikasi ISPO dan peningkatan akses pasar produk kelapa
                     sawit (6 indikator)</li>
             </ul>
-            <canvas id="grafikKomponen"></canvas>
+            <canvas id="grafikKomponen" style="display: none;"></canvas>
+            <p>Setiap grafik capaian tahunan dari lima komponen utama penguatan sektor perkebunan kelapa sawit menampilkan:</p>
+            <ul>
+                <li>Progres peningkatan sistem informasi, koordinasi lintas pihak, dan infrastruktur pendukung perkebunan.
+                </li>
+                <li>Capaian pelatihan, pendampingan, dan penguatan kelembagaan pekebun.
+                </li>
+                <li>Upaya perlindungan ekosistem dan pengurangan emisi dengan pengelolaan sawit berkelanjutan.
+                </li>
+                <li>Perkembangan pelaksanaan kemitraan, penyelesaian sengketa, dan penguatan tata kelola perkebunan sawit.
+                </li>
+                <li>Tingkat sosialisasi, pendampingan sertifikasi ISPO, dan penguatan akses pasar sawit berkelanjutan.
+                </li>
+            </ul>
+            <div class="card card-primary">
+                <div class="card-header" style="background:#80B441;">
+                    <h4 class="card-title w-100">
+                        <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapse-komponen-grafik" aria-expanded="false">
+                            <i class="fas fa-chart-line mr-2"></i>Grafik Capaian Indikator per Tahun
+                            <i class="fas fa-chevron-down float-right toggle-icon"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse-komponen-grafik" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach($componentData as $komponen => $data)
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas id="chartKomponen{{ $loop->index }}"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>Sedangkan di bawah ini adalah grafik capaian 15 indikator kunci dari 5 komponen strategis dalam rangka mencapai pengelolaan perkebunan kelapa sawit yang berkelanjutan di Kabupaten Labuhanbatu Utara: </p>
+            <div class="card card-primary">
+                <div class="card-header" style="background:#80B441;">
+                    <h4 class="card-title w-100">
+                        <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapse-indikator-grafik" aria-expanded="false">
+                            <i class="fas fa-chart-line me-2"></i>Grafik Capaian Indikator per Tahun
+                            <i class="fas fa-chevron-down float-right toggle-icon"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse-indikator-grafik" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach($indikatorData as $indikator => $data)
+                            <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                                <div class="card w-100" style="height: 250px;">
+                                    <div class="card-header">
+                                        <h5 class="card-title">{{ $indikator }}</h5>
+                                    </div>
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="chart-container flex-grow-1">
+                                            <canvas id="chartIndikator{{ $loop->index }}" height="200"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
             <h2 style="padding-bottom:20px;">Peta Intervensi Kelapa Sawit Berkelanjutan</h2>
             <div id="map" style="">
                 <div class="loading">Memuat data peta...</div>
@@ -259,6 +385,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 @stop
 
 @section('js')
@@ -277,10 +405,10 @@
     const barChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: {!! json_encode($data->pluck('komponen')) !!},
+            labels: {!! json_encode($grafik->pluck('komponen')) !!},
             datasets: [{
-                label: '',
-                data: {!! json_encode($data->pluck('persentase')) !!},
+                label: 'Persentase Capaian',
+                data: {!! json_encode($grafik->pluck('persentase')) !!},
                 backgroundColor: [
                     '#4e79a7', // Komponen 1
                     '#f28e2b', // Komponen 2
@@ -303,7 +431,7 @@
                     },
                     title: {
                         display: true,
-                        text: 'Persentase (%)', // X-axis label
+                        text: 'Capaian (%)', // X-axis label
                         font: {
                             size: 16 // X-axis label font size
                         }
@@ -330,22 +458,157 @@
             plugins: {
                 legend: {
                     display: false // Hides the legend
-                }
-                {{-- title: {
-                    display: true,
-                    text: 'Judul Grafik Anda', // Chart title
-                    font: {
-                        size: 18 // Title font size
-                    },
-                    padding: {
-                        top: 10,
-                        bottom: 30
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + '%';
+                        }
                     }
-                } --}}
+                }
             }
         }
     });
 
+    // Chart for 5 Komponen
+    document.addEventListener('DOMContentLoaded', function() {
+        @foreach($componentData as $komponen => $data)
+        const ctx{{ $loop->index }} = document.getElementById('chartKomponen{{ $loop->index }}').getContext('2d');
+        const chart{{ $loop->index }} = new Chart(ctx{{ $loop->index }}, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($data->pluck('tahun')) !!},
+                datasets: [{
+                    label: 'Persentase Capaian',
+                    data: {!! json_encode($data->pluck('persentase')) !!},
+                    backgroundColor: '#4e79a7',
+                    borderColor: '#4e79a7',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Capaian (%)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tahun'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Komponen {{ $komponen }}'
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        @endforeach
+    });
+
+    // Chart for Indikator Kunci
+    document.addEventListener('DOMContentLoaded', function() {
+        @foreach($indikatorData as $indikator => $data)
+        const ctx{{ $loop->index }} = document.getElementById('chartIndikator{{ $loop->index }}').getContext('2d');
+        new Chart(ctx{{ $loop->index }}, {
+            type: 'line',
+            data: {
+                labels: @json($data['labels']),
+                datasets: [{
+                    label: 'Persentase Capaian',
+                    data: @json($data['data']),
+                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                            stepSize: 10,
+                            callback: function(value) {
+                                return value;
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Capaian (%)',
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tahun',
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false 
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + '%';
+                            }
+                        }
+                    }
+                },
+                elements: {
+                    point: {
+                        radius: 4,
+                        hoverRadius: 6,
+                        backgroundColor: 'white',
+                        borderWidth: 2
+                    }
+                }
+            }
+        });
+        @endforeach
+        
+        {{-- Jika ingin section terbuka secara default, tambahkan: --}}
+        $('#collapse-indikator-grafik').collapse('show');
+    });
+    
     // Interactive Map Script
     document.addEventListener('DOMContentLoaded', function() {
         try {

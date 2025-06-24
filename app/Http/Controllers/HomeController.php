@@ -7,22 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    // public function index(Request $request)
-    // {
-    //     $keluaran_table = DB::select('
-    //     SELECT monev_programs.program, monev_kegiatans.kegiatan, monev_subkegiatans.subkegiatan, 
-    //            monev_indikator_keluarans.indikator_keluaran, monev_indikator_keluarans.target
-    //     FROM monev_indikator_keluarans
-    //     LEFT JOIN monev_programs ON monev_indikator_keluarans.id_program = monev_programs.id
-    //     LEFT JOIN monev_kegiatans ON monev_indikator_keluarans.id_kegiatan = monev_kegiatans.id
-    //     LEFT JOIN monev_subkegiatans ON monev_indikator_keluarans.id_subkegiatan = monev_subkegiatans.id
-    //     LIMIT 10
-    // ');
-        
-    //     return view('pages.beranda', ['keluaran_tables' => $keluaran_table]);
-        
-    // }
-
     public function index(Request $request)
     {
         // Get the selected year from request
@@ -49,9 +33,7 @@ class HomeController extends Controller
                 'monev_indikator_keluarans.capaian',
                 'monev_indikator_keluarans.tahun'
             );
-            // ->paginate(5); // Use pagination
 
-        // Apply year filter if a year is selected
         if ($tahun) {
             $keluaran_table->where('monev_capaians.tahun', $tahun);
         }
@@ -78,11 +60,65 @@ class HomeController extends Controller
             ];
         })->values();
 
+        // Get component data per year
+        $components = DB::table('monev_komponens')->pluck('komponen', 'id');
+        $componentData = [];
+
+        foreach ($components as $id => $komponen) {
+            $data = DB::table('monev_indikator_keluarans')
+                ->select(
+                    'tahun',
+                    DB::raw('CASE WHEN SUM(target) > 0 THEN 
+                        (SUM(capaian) / SUM(target)) * 100 ELSE 0 END AS persentase')
+                )
+                ->where('id_komponen', $id)
+                ->groupBy('tahun')
+                ->orderBy('tahun')
+                ->get();
+
+            $componentData[$komponen] = $data;
+        }
+
+        // Data untuk grafik indikator per tahun
+        $indikators = DB::table('monev_indikators')
+        ->select(
+            'id',
+            'indikator',
+            'tahun',
+            'capaian',
+            'target',
+            DB::raw('CASE WHEN target > 0 THEN (capaian / target) * 100 ELSE 0 END AS persentase')
+        )
+        ->orderBy('indikator')
+        ->orderBy('tahun')
+        ->get();
+
+    // Kelompokkan data per indikator
+    $indikatorData = [];
+    foreach ($indikators as $item) {
+        if (!isset($indikatorData[$item->indikator])) {
+            $indikatorData[$item->indikator] = [
+                'labels' => [],
+                'data' => []
+            ];
+        }
+        
+        $indikatorData[$item->indikator]['labels'][] = $item->tahun;
+        $indikatorData[$item->indikator]['data'][] = $item->persentase;
+    }
+
+        // dd($data);
+        // dd($componentData);
+        // dd($indicators);
+        // dd($indikatorData);
+
         return view('pages.beranda', [
             'keluaran_tables' => $keluaran_table,
             'tahun_list' => $tahun_list,
             'selected_tahun' => $tahun,
-            'data' => $grouped
+            'grafik' => $grouped,
+            'componentData' => $componentData,
+            'indikatorData' => $indikatorData
         ]);
     }
 

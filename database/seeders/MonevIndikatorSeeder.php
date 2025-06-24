@@ -21,6 +21,7 @@ class MonevIndikatorSeeder extends Seeder
         DB::table('monev_indikators')->insert(array (
             0 => array (
                 'id' => 1, 
+                'id_indikator' => 1, 
                 'indikator' => 'Tersedianya basis data spasial dan non spasial kelapa sawit',
                 'id_komponen' => 1, 
                 'id_instansi' => 10,
@@ -34,6 +35,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             1 => array (
                 'id' => 2, 
+                'id_indikator' => 2, 
                 'indikator' => 'Tersedianya Informasi Geospasial Tematik tutupan lahan kelapa sawit',
                 'id_komponen' => 1, 
                 'id_instansi' => 10,
@@ -47,6 +49,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             2 => array (
                 'id' => 3, 
+                'id_indikator' => 3, 
                 'indikator' => 'Jumlah paket pembangunan, rehabilitasi, dan pemeliharaan jalan usaha tani',
                 'id_komponen' => 1, 
                 'id_instansi' => 7,
@@ -60,6 +63,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             3 => array (
                 'id' => 4, 
+                'id_indikator' => 4, 
                 'indikator' => 'Jumlah kegiatan penyuluhan penggunaan benih bersertifikat',
                 'id_komponen' => 2, 
                 'id_instansi' => 10,
@@ -73,6 +77,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             4 => array (
                 'id' => 5, 
+                'id_indikator' => 5, 
                 'indikator' => 'Jumlah BPP penerima manfaat sarana dan prasarana penyuluhan pertanian',
                 'id_komponen' => 2, 
                 'id_instansi' => 10,
@@ -86,6 +91,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             5 => array (
                 'id' => 6, 
+                'id_indikator' => 6, 
                 'indikator' => 'Jumlah pelaku usaha yang dibina',
                 'id_komponen' => 2, 
                 'id_instansi' => 10,
@@ -99,6 +105,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             6 => array (
                 'id' => 7, 
+                'id_indikator' => 7, 
                 'indikator' => 'Jumlah Badan Usaha Milik Petani yang terbentuk',
                 'id_komponen' => 2, 
                 'id_instansi' => 10,
@@ -112,6 +119,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             7 => array (
                 'id' => 8, 
+                'id_indikator' => 8, 
                 'indikator' => 'Jumlah kegiatan penyuluhan dan kampanye lingkungan',
                 'id_komponen' => 3, 
                 'id_instansi' => 6,
@@ -125,6 +133,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             8 => array (
                 'id' => 9, 
+                'id_indikator' => 9, 
                 'indikator' => 'Jumlah kasus yang ditangani',
                 'id_komponen' => 3, 
                 'id_instansi' => 6,
@@ -138,6 +147,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             9 => array (
                 'id' => 10, 
+                'id_indikator' => 10, 
                 'indikator' => 'Luas agroforestri sawit',
                 'id_komponen' => 3, 
                 'id_instansi' => 6,
@@ -151,6 +161,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             10 => array (
                 'id' => 11, 
+                'id_indikator' => 11, 
                 'indikator' => 'Jumlah dokumen pengendalian dan pemanfaatan ruang yang sesuai',
                 'id_komponen' => 4, 
                 'id_instansi' => 7,
@@ -164,6 +175,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             11 => array (
                 'id' => 12, 
+                'id_indikator' => 12, 
                 'indikator' => 'Persentase perusahaan yang menerapak tata kelola kerja yang layak',
                 'id_komponen' => 4, 
                 'id_instansi' => 4,
@@ -177,8 +189,8 @@ class MonevIndikatorSeeder extends Seeder
             ),
             12 => array (
                 'id' => 13, 
+                'id_indikator' => 13, 
                 'indikator' => 'Jumlah kegiatan pengembangan kapasitas terkait ISPO',
-
                 'id_komponen' => 5, 
                 'id_instansi' => 10,
                 'target' => 11, 
@@ -191,6 +203,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             13 => array (
                 'id' => 14, 
+                'id_indikator' => 14, 
                 'indikator' => 'Jumlah lembaga pekebun yang tersertifikasi ISPO',
                 'id_komponen' => 5, 
                 'id_instansi' => 10,
@@ -204,6 +217,7 @@ class MonevIndikatorSeeder extends Seeder
             ),
             14 => array (
                 'id' => 15, 
+                'id_indikator' => 15, 
                 'indikator' => 'Jumlah STD-B yang diterbitkan Dinas kabupaten yang dalam pemenuhan persyaratan ISPO',
                 'id_komponen' => 5, 
                 'id_instansi' => 10,

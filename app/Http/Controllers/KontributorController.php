@@ -181,86 +181,90 @@ class KontributorController extends Controller
     }
 
     public function storeIndikator(Request $request)
-    {
-        $user = auth()->user();
-    
-        // Check if user ID is 99
-        if ($user->id_instansi == 99) {
+{
+    $user = auth()->user();
+
+    // Check if user ID is 99
+    if ($user->id_instansi == 99) {
+        return redirect()->back()
+            ->with('error', 'Anda tidak memiliki izin untuk memperbarui indikator ini.');
+    }
+
+    $request->validate([
+        'indikator' => 'required|exists:monev_indikators,id',
+        'tahun' => 'required|digits:4|integer',
+        'capaian' => 'required|numeric',
+        'dokumen' => 'nullable|file|mimes:pdf,xlsx,xls,doc,docx,zip|max:5120',
+    ]);
+
+    DB::beginTransaction();
+    try {
+        $indikatorId = $request->indikator;
+
+        // Check submission limit for this indikator_id and tahun
+        $submissionCount = DB::table('monev_indikator_submissions')
+            ->where('indikator_id', $indikatorId)
+            ->where('user_id', $user->id)
+            ->where('tahun', $request->tahun)
+            ->count();
+
+        if ($submissionCount >= 2) {
             return redirect()->back()
-                ->with('error', 'Anda tidak memiliki izin untuk memperbarui indikator ini.');
+                ->withInput()
+                ->with('error', 'Anda hanya bisa menginput 2 kali per indikator per tahun.');
         }
 
-        $request->validate([
-            'indikator' => 'required|exists:monev_indikators,id',
-            'tahun' => 'required|digits:4|integer',
-            'capaian' => 'required|numeric',
-            'dokumen' => 'nullable|file|mimes:pdf,xlsx,xls,doc,docx,zip|max:5120',
-        ]);
+        // Handle file upload
+        $nama_file = null;
+        if ($request->hasFile('dokumen')) {
+            $nama_file = $request->file('dokumen')->store('dokumen', 'public');
+        }
 
-        DB::beginTransaction();
-        try {
-            $indikatorId = $request->indikator;
+        // Get base indikator data
+        $baseIndikator = DB::table('monev_indikators')->where('id', $indikatorId)->first();
 
-            // Check submission limit
-            $submissionCount = DB::table('monev_indikator_submissions')
-                ->where('indikator_id', $indikatorId)
-                ->where('user_id', $user->id)
-                ->count();
+        // Check if record exists for this year and indikator
+        $existingRecord = DB::table('monev_indikators')
+            ->where('id', $indikatorId)
+            ->where('tahun', $request->tahun)
+            ->first();
 
-            if ($submissionCount >= 2) {
-                return redirect()->back()
-                    ->withInput()
-                    ->with('error', 'Anda hanya bisa menginput 2 kali per indikator.');
-            }
-
-            // Handle file upload
-            $nama_file = null;
-            if ($request->hasFile('dokumen')) {
-                $nama_file = $request->file('dokumen')->store('dokumen', 'public');
-            }
-
-            // Get base indikator data
-            $baseIndikator = DB::table('monev_indikators')->where('id', $indikatorId)->first();
-
-            // Check if record exists for this year
-            $existingRecord = DB::table('monev_indikators')
-                ->where('indikator', $baseIndikator->indikator)
-                ->where('tahun', $request->tahun)
-                ->first();
-
-            if (!$existingRecord) {
-                // Create new record for this year
-                $newIndikatorId = DB::table('monev_indikators')->insertGetId([
-                    'indikator' => $baseIndikator->indikator,
-                    'id_komponen' => $baseIndikator->id_komponen,
-                    'id_instansi' => $baseIndikator->id_instansi,
-                    'target' => $baseIndikator->target,
-                    'satuan' => $baseIndikator->satuan,
-                    'tahun' => $request->tahun,
-                    'capaian' => $request->capaian,
-                    'dokumen_pendukung' => $nama_file,
-                    'jenis_dokumen' => $baseIndikator->jenis_dokumen,
-                    'status' => 0,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-                
-                $indikatorId = $newIndikatorId;
-            }
-
-            // Create submission record
-            DB::table('monev_indikator_submissions')->insert([
-                'indikator_id' => $indikatorId,
-                'user_id' => $user->id,
+        if (!$existingRecord) {
+            // Create new record for this year
+            $newIndikatorId = DB::table('monev_indikators')->insertGetId([
+                'indikator' => $baseIndikator->indikator,
+                'id_indikator' => $indikatorId,
+                'id_komponen' => $baseIndikator->id_komponen,
+                'id_instansi' => $baseIndikator->id_instansi,
+                'target' => $baseIndikator->target,
+                'satuan' => $baseIndikator->satuan,
                 'tahun' => $request->tahun,
                 'capaian' => $request->capaian,
                 'dokumen_pendukung' => $nama_file,
+                'jenis_dokumen' => $baseIndikator->jenis_dokumen,
                 'status' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+            
+            // Use the original indikatorId for submission, not the new one
+            // $indikatorId tetap menggunakan yang dari form
+        }
 
-            // Update main table
+        // Create submission record - menggunakan indikator_id dari form
+        DB::table('monev_indikator_submissions')->insert([
+            'indikator_id' => $indikatorId, // Selalu gunakan ID dari form
+            'user_id' => $user->id,
+            'tahun' => $request->tahun,
+            'capaian' => $request->capaian,
+            'dokumen_pendukung' => $nama_file,
+            'status' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Update main table jika record sudah ada untuk tahun ini
+        if ($existingRecord) {
             DB::table('monev_indikators')
                 ->where('id', $indikatorId)
                 ->update([
@@ -268,19 +272,20 @@ class KontributorController extends Controller
                     'dokumen_pendukung' => $nama_file,
                     'updated_at' => now(),
                 ]);
-
-            DB::commit();
-
-            return redirect()->route('kontributor')
-                ->withFragment('#b')
-                ->with('status', 'Capaian indikator berhasil disimpan.');
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->route('kontributor')
-                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
+
+        DB::commit();
+
+        return redirect()->route('kontributor')
+            ->withFragment('#b')
+            ->with('status', 'Capaian indikator berhasil disimpan.');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->route('kontributor')
+            ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
     
     public function getIndikators(Request $request)
     {

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('indikator_id')->constrained('monev_indikators');
             $table->foreignId('user_id')->constrained('users');
             $table->year('tahun');
-            $table->integer('capaian');
+            $table->integer('capaian')->default(0);
             $table->string('dokumen_pendukung')->nullable();
             $table->tinyInteger('status')->default(0); // 0=pending, 1=approved, 2=rejected
             $table->timestamps();

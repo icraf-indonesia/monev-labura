@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('monev_indikators', function (Blueprint $table) {
             $table->id();
             $table->string('indikator')->nullable();
+            $table->foreignId('id_indikator');
             $table->foreignId('id_komponen');
             $table->foreignId('id_instansi');
             $table->string('target')->nullable();
