@@ -298,19 +298,6 @@
                     sawit (6 indikator)</li>
             </ul>
             <canvas id="grafikKomponen" style="display: none;"></canvas>
-            <p>Setiap grafik capaian tahunan dari lima komponen utama penguatan sektor perkebunan kelapa sawit menampilkan:</p>
-            <ul>
-                <li>Progres peningkatan sistem informasi, koordinasi lintas pihak, dan infrastruktur pendukung perkebunan.
-                </li>
-                <li>Capaian pelatihan, pendampingan, dan penguatan kelembagaan pekebun.
-                </li>
-                <li>Upaya perlindungan ekosistem dan pengurangan emisi dengan pengelolaan sawit berkelanjutan.
-                </li>
-                <li>Perkembangan pelaksanaan kemitraan, penyelesaian sengketa, dan penguatan tata kelola perkebunan sawit.
-                </li>
-                <li>Tingkat sosialisasi, pendampingan sertifikasi ISPO, dan penguatan akses pasar sawit berkelanjutan.
-                </li>
-            </ul>
             <div class="card card-primary">
                 <div class="card-header" style="background:#80B441;">
                     <h4 class="card-title w-100">
@@ -321,7 +308,20 @@
                     </h4>
                 </div>
                 <div id="collapse-komponen-grafik" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
+                    <p>Grafik capaian tahunan dari lima komponen penguatan perkebunan, menampilkan:</p>
+                    <ul>
+                        <li>Peningkatan penggunaan data dan sistem informasi, koordinasi lintas pihak, dan inftastruktur pendukung perkebunan
+                        </li>
+                        <li>Capaian pelatihan, pendampingan, dan penguatan kelembagaan pekebun.
+                        </li>
+                        <li>Upaya perlindungan ekosistem dan pengurangan emisi dengan pengelolaan sawit berkelanjutan.
+                        </li>
+                        <li>Perkembangan pelaksanaan kemitraan, penyelesaian sengketa, dan penguatan tata kelola perkebunan sawit.
+                        </li>
+                        <li>Tingkat sosialisasi, pendampingan sertifikasi ISPO, dan penguatan akses pasar sawit berkelanjutan.
+                        </li>
+                    </ul>
+                            <div class="card-body">
                         <div class="row">
                             @foreach($componentData as $komponen => $data)
                             <div class="col-md-6">
@@ -336,7 +336,6 @@
                     </div>
                 </div>
             </div>
-            <p>Sedangkan di bawah ini adalah grafik capaian 15 indikator kunci dari 5 komponen strategis dalam rangka mencapai pengelolaan perkebunan kelapa sawit yang berkelanjutan di Kabupaten Labuhanbatu Utara: </p>
             <div class="card card-primary">
                 <div class="card-header" style="background:#80B441;">
                     <h4 class="card-title w-100">
@@ -347,6 +346,7 @@
                     </h4>
                 </div>
                 <div id="collapse-indikator-grafik" class="collapse" data-parent="#accordion">
+                    <p>Berikut merupakan grafik capaian 15 indikator kunci dari 5 komponen dalam rangka mencapai pengelolaan perkebunan sawit yang berkelanjutan di Kabupaten Labuhanbatu Utara</p>
                     <div class="card-body">
                         <div class="row">
                             @foreach($indikatorData as $indikator => $data)
@@ -371,7 +371,7 @@
             <div id="map" style="">
                 <div class="loading">Memuat data peta...</div>
             </div>
-            <h2 style="padding-bottom:20px;">StoryMap Kelapa Sawit Berkelanjutan</h2>
+            <h2 style="padding-bottom:20px;">Ketahui lebih lanjut tentang RAD KSB</h2>
             <iframe src="https://storymaps.arcgis.com/stories/98e32ecb2192427090d37358c80f23c4" frameborder="0" style="width:100%; height:500px;"></iframe>
             <a href="https://storymaps.arcgis.com/stories/98e32ecb2192427090d37358c80f23c4" target="_blank" class="storymap-preview">
                 <div>Tautan menuju StoryMap</div>
